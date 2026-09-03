@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ lugar.nombre }} | Descubre Coquimbo{% endblock %}
+
+{% block content %}
+<!-- BREADCRUMB VITOUR -->
+<nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb small fw-medium">
+        <li class="breadcrumb-item"><a href="{% url 'lugares:lista_lugares' %}" class="text-decoration-none text-muted"><i class="bi bi-house-door-fill me-1"></i> Tours</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'lugares:lista_lugares' %}?categoria={{ lugar.categoria|urlencode }}" class="text-decoration-none text-muted">{{ lugar.categoria }}</a></li>
+        <li class="breadcrumb-item active text-dark fw-bold" aria-current="page">{{ lugar.nombre }}</li>
+    </ol>
+</nav>
+
+<div class="row g-4 mb-5">
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="col-lg-8">
+        <div class="detail-container-stitch">
+            <img src="{% static lugar.imagen %}" alt="{{ lugar.nombre }}" class="detail-cover">
+            
+            <div class="d-flex flex-wrap align-items-center gap-3 mb-3">
+                <span class="card-tag card-tag-turismo fs-6 mb-0">{{ lugar.categoria }}</span>
+                <span class="text-secondary small fw-medium">
+                    <i class="bi bi-geo-alt-fill text-danger"></i> Comuna de {{ lugar.ciudad }}
+                </span>
+                <span class="badge bg-warning text-dark fw-bold px-2 py-1" style="border-radius: 8px;">
+                    <i class="bi bi-star-fill"></i> 4.9 (120 valoraciones de viajeros)
+                </span>
+            </div>
+            
+            <h1 class="fw-extrabold text-dark mb-3" style="font-family: var(--font-display); font-size: 2.3rem; letter-spacing: -0.7px;">
+                {{ lugar.nombre }}
+            </h1>
+            
+            <div class="text-secondary mb-4" style="line-height: 1.8; font-size: 1.05rem;">
+                <p>{{ lugar.descripcion_larga }}</p>
+            </div>
+
+            <div class="row g-3 pt-2">
+                <div class="col-md-6">
+                    <div class="feature-pill-box">
+                        <div class="feature-pill-title">
+                            <i class="bi bi-signpost-split-fill text-primary me-1"></i> Ruta & Cómo Llegar
+                        </div>
+                        <p class="text-secondary small mb-0">{{ lugar.como_llegar }}</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="feature-pill-box">
+                        <div class="feature-pill-title">
+                            <i class="bi bi-lightbulb-fill text-warning me-1"></i> Consejos de Viajero
+                        </div>
+                        <p class="text-secondary small mb-0">{{ lugar.recomendaciones }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PANEL LATERAL VITOUR -->
+    <div class="col-lg-4">
+        <!-- Tarjeta de Especificaciones y Booking -->
+        <div class="sidebar-panel-stitch">
+            <h5 class="fw-bold text-dark border-bottom pb-3 mb-3" style="font-family: var(--font-display);">
+                <i class="bi bi-info-circle-fill text-primary me-1"></i> Ficha del Tour
+            </h5>
+            
+            <div class="mb-3">
+                <span class="text-muted small d-block mb-1">Tarifa de Acceso:</span>
+                <span class="fs-5 fw-bold text-success">{{ lugar.precio }}</span>
+            </div>
+            
+            <div class="mb-3">
+                <span class="text-muted small d-block mb-1">Horarios de Visita:</span>
+                <span class="fw-semibold text-dark small d-flex align-items-center gap-2">
+                    <i class="bi bi-clock-history text-secondary"></i> {{ lugar.horario }}
+                </span>
+            </div>
+
+            <div class="mb-3">
+                <span class="text-muted small d-block mb-1">Coordenadas GPS:</span>
+                <code class="small text-secondary bg-light px-2 py-1 rounded border d-inline-block">
+                    <i class="bi bi-compass me-1"></i> {{ lugar.lat }}, {{ lugar.lon }}
+                </code>
+            </div>
+
+            <hr class="my-3 text-muted">
+
+            <div class="d-grid gap-2">
+                <a href="{% url 'lugares:lista_lugares' %}" class="btn btn-outline-secondary rounded-pill py-2 fw-semibold">
+                    <i class="bi bi-arrow-left me-1"></i> Volver al Listado de Tours
+                </a>
+                <a href="{% url 'gastronomia:lista_platos' %}" class="btn-stitch-action btn-action-gastro justify-content-center py-2">
+                    <span>Ver Gastronomía Típica</span>
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Otros Destinos Recomendados -->
+        <div class="sidebar-panel-stitch">
+            <h6 class="fw-bold text-dark mb-3" style="font-family: var(--font-display);">
+                <i class="bi bi-stars text-warning me-1"></i> Otros Tours Recomendados
+            </h6>
+            <div class="d-flex flex-column gap-3">
+                {% for rec in recomendados %}
+                <div class="d-flex align-items-center gap-3">
+                    <img src="{% static rec.imagen %}" alt="{{ rec.nombre }}" class="rounded-3 shadow-sm" style="width: 70px; height: 70px; object-fit: cover; border: 1px solid var(--border-card);">
+                    <div>
+                        <a href="{% url 'lugares:detalle_lugar' rec.id %}" class="text-dark fw-bold text-decoration-none small d-block mb-1" style="line-height: 1.3;">
+                            {{ rec.nombre }}
+                        </a>
+                        <span class="small text-muted d-block">
+                            <i class="bi bi-geo-alt-fill text-danger me-1"></i> {{ rec.ciudad }}
+                        </span>
+                        <span class="small fw-semibold text-success">{{ rec.precio }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

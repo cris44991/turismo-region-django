@@ -1,0 +1,35 @@
+======================================================================
+  VITOUR COQUIMBO - GUÍA DE INICIO RÁPIDO
+======================================================================
+
+¿CÓMO ABRIR Y EJECUTAR EL PROYECTO?
+----------------------------------------------------------------------
+1. Dale doble clic al archivo:
+    INICIAR_PROYECTO.bat (o iniciar.bat)
+
+2. El archivo se encargará de todo automáticamente:
+   - Verificará que tengas Python instalado.
+   - Creará un entorno virtual aislado (.venv).
+   - Instalará las dependencias necesarias (Django y Requests).
+   - Iniciará el servidor local.
+   - Abrirá automáticamente tu navegador en http://127.0.0.1:8000/
+
+----------------------------------------------------------------------
+REQUISITO ÚNICO:
+----------------------------------------------------------------------
+Tener Python 3.10 o superior instalado en la computadora.
+Si no lo tienes, descárgalo gratis desde: https://www.python.org/
+(Al instalarlo en Windows, recuerda marcar la casilla:
+ "Add python.exe to PATH").
+
+----------------------------------------------------------------------
+RUTAS DISPONIBLES:
+----------------------------------------------------------------------
+- Inicio / Destinos Turísticos: http://127.0.0.1:8000/
+- Sabores & Gastronomía:        http://127.0.0.1:8000/gastronomia/
+
+----------------------------------------------------------------------
+¿CÓMO CERRAR LA APLICACIÓN?
+----------------------------------------------------------------------
+Simplemente cierra la ventana de la consola negra o presiona Ctrl + C.
+======================================================================

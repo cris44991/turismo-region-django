@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ plato.nombre }} | Descubre Coquimbo{% endblock %}
+
+{% block content %}
+<!-- BREADCRUMB VITOUR GASTRONOMÍA -->
+<nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb small fw-medium">
+        <li class="breadcrumb-item"><a href="{% url 'gastronomia:lista_platos' %}" class="text-decoration-none text-muted"><i class="bi bi-cup-hot-fill me-1"></i> Gastronomía</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'gastronomia:lista_platos' %}?categoria={{ plato.categoria|urlencode }}" class="text-decoration-none text-muted">{{ plato.categoria }}</a></li>
+        <li class="breadcrumb-item active text-dark fw-bold" aria-current="page">{{ plato.nombre }}</li>
+    </ol>
+</nav>
+
+<div class="row g-4 mb-5">
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="col-lg-8">
+        <div class="detail-container-stitch">
+            <img src="{% static plato.imagen %}" alt="{{ plato.nombre }}" class="detail-cover">
+            
+            <div class="d-flex flex-wrap align-items-center gap-3 mb-3">
+                <span class="card-tag card-tag-gastro fs-6 mb-0">{{ plato.categoria }}</span>
+                <span class="text-secondary small fw-medium">
+                    <i class="bi bi-clock-history text-warning"></i> Preparación: {{ plato.tiempo_preparacion }}
+                </span>
+                <span class="badge bg-warning text-dark fw-bold px-2 py-1" style="border-radius: 8px;">
+                    <i class="bi bi-star-fill"></i> Receta Patrimonial
+                </span>
+            </div>
+            
+            <h1 class="fw-extrabold text-dark mb-3" style="font-family: var(--font-display); font-size: 2.3rem; letter-spacing: -0.7px;">
+                {{ plato.nombre }}
+            </h1>
+            
+            <p class="text-secondary mb-4" style="line-height: 1.8; font-size: 1.05rem;">
+                {{ plato.descripcion_larga }}
+            </p>
+
+            <!-- INGREDIENTES -->
+            <div class="feature-pill-box mb-4">
+                <div class="feature-pill-title" style="color: #ea580c;">
+                    <i class="bi bi-basket2-fill me-1"></i> Ingredientes de Origen
+                </div>
+                <ul class="list-unstyled mb-0 pt-2" style="font-size: 0.95rem;">
+                    {% for ing in plato.ingredientes %}
+                    <li class="py-2 text-secondary border-bottom border-light d-flex align-items-center">
+                        <span class="text-success me-2 fw-bold"><i class="bi bi-check2-circle"></i></span>
+                        <span>{{ ing }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- PASO A PASO -->
+            <div class="mb-4">
+                <h5 class="fw-bold text-dark text-uppercase small tracking-wide mb-3" style="font-family: var(--font-display);">
+                    <i class="bi bi-list-ol text-primary me-1"></i> Instrucciones de Preparación Paso a Paso
+                </h5>
+                <ol class="list-group list-group-numbered border-0">
+                    {% for paso in plato.preparacion %}
+                    <li class="list-group-item px-0 py-2 border-0 text-secondary" style="line-height: 1.7; font-size: 0.98rem;">
+                        {{ paso }}
+                    </li>
+                    {% endfor %}
+                </ol>
+            </div>
+
+            <!-- MARIDAJE -->
+            <div class="feature-pill-box" style="border-left: 4px solid var(--vitour-primary); background: #fff8f5;">
+                <div class="feature-pill-title" style="color: var(--vitour-primary);">
+                    <i class="bi bi-wine me-1"></i> Maridaje Sugerido del Valle
+                </div>
+                <p class="text-secondary small mb-0" style="font-size: 0.92rem; line-height: 1.6;">{{ plato.maridaje }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PANEL LATERAL VITOUR -->
+    <div class="col-lg-4">
+        <!-- Ficha Resumen -->
+        <div class="sidebar-panel-stitch">
+            <h5 class="fw-bold text-dark border-bottom pb-3 mb-3" style="font-family: var(--font-display);">
+                <i class="bi bi-clipboard2-check-fill text-warning me-1"></i> Ficha de la Receta
+            </h5>
+            
+            <div class="mb-3">
+                <span class="text-muted small d-block mb-1">Tiempo Estimado:</span>
+                <span class="fw-semibold text-dark small d-flex align-items-center gap-2">
+                    <i class="bi bi-clock-history text-secondary"></i> {{ plato.tiempo_preparacion }}
+                </span>
+            </div>
+            
+            <div class="mb-3">
+                <span class="text-muted small d-block mb-1">Grado de Dificultad:</span>
+                <span class="fw-bold text-danger small">
+                    <i class="bi bi-speedometer2 me-1"></i> {{ plato.dificultad }}
+                </span>
+            </div>
+
+            <div class="mb-3">
+                <span class="text-muted small d-block mb-1">Rendimiento:</span>
+                <span class="fw-semibold text-dark small">
+                    <i class="bi bi-people-fill text-primary me-1"></i> {{ plato.porciones }} personas
+                </span>
+            </div>
+
+            <hr class="my-3 text-muted">
+
+            <div class="d-grid gap-2">
+                <a href="{% url 'gastronomia:lista_platos' %}" class="btn btn-outline-secondary rounded-pill py-2 fw-semibold">
+                    <i class="bi bi-arrow-left me-1"></i> Volver al Catálogo Gastronómico
+                </a>
+                <a href="{% url 'lugares:lista_lugares' %}" class="btn-stitch-action btn-action-turismo justify-content-center py-2">
+                    <span>Explorar Destinos &rarr;</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Otras Recetas -->
+        <div class="sidebar-panel-stitch">
+            <h6 class="fw-bold text-dark mb-3" style="font-family: var(--font-display);">
+                <i class="bi bi-stars text-warning me-1"></i> Otras Preparaciones Típicas
+            </h6>
+            <div class="d-flex flex-column gap-3">
+                {% for otro in otros_platos %}
+                <div class="d-flex align-items-center gap-3">
+                    <img src="{% static otro.imagen %}" alt="{{ otro.nombre }}" class="rounded-3 shadow-sm" style="width: 70px; height: 70px; object-fit: cover; border: 1px solid var(--border-card);">
+                    <div>
+                        <a href="{% url 'gastronomia:detalle_plato' otro.id %}" class="text-dark fw-bold text-decoration-none small d-block mb-1" style="line-height: 1.3;">
+                            {{ otro.nombre }}
+                        </a>
+                        <span class="small text-muted d-block">{{ otro.categoria }}</span>
+                        <span class="small text-warning fw-semibold">⏱️ {{ otro.tiempo_preparacion }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

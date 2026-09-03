@@ -1,0 +1,289 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Destinos Turísticos | Descubre Coquimbo{% endblock %}
+
+{% block content %}
+<!-- HERO VITOUR SHOWCASE -->
+<div class="hero-vitour">
+    <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+            <div class="hero-tag">
+                <i class="bi bi-compass-fill"></i> Explora el Paraíso del Norte Chico · Chile
+            </div>
+            <h1 class="hero-title">
+                Tours, Aventura & <span class="hero-title-highlight">Experiencias</span> en Coquimbo
+            </h1>
+            <p class="hero-desc">
+                Desde las costas y caletas de La Serena hasta los cielos astronómicos del Valle de Elqui y la reserva marina de Punta de Choros. Reserva tu próxima expedición inolvidable.
+            </p>
+        </div>
+        
+        <!-- WIDGET DE CLIMA EN VIVO (Requests / Open-Meteo) -->
+        <div class="col-lg-5">
+            <div class="glass-widget">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="glass-widget-title">
+                        <span class="live-indicator"></span> Estación Meteorológica
+                    </span>
+                    <span class="badge bg-white bg-opacity-10 text-light small px-2 py-1">En Vivo</span>
+                </div>
+                <div class="fw-bold text-white fs-6 mb-1">{{ clima.ciudad }}</div>
+                <div class="d-flex align-items-baseline gap-3 my-2">
+                    <span class="glass-widget-temp">{{ clima.temperatura }}</span>
+                    <span class="text-light fs-6 fw-medium">{{ clima.condicion }}</span>
+                </div>
+                <div class="d-flex justify-content-between pt-2 border-top border-white border-opacity-10 text-light small opacity-75">
+                    <span><i class="bi bi-droplet-fill text-info me-1"></i> Humedad: <strong class="text-white">{{ clima.humedad }}</strong></span>
+                    <span><i class="bi bi-wind text-info me-1"></i> Viento: <strong class="text-white">{{ clima.viento }}</strong></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- VITOUR FLOATING SEARCH CONSOLE (Barra de Búsqueda Flotante) -->
+<div class="vitour-search-wrapper">
+    <div class="vitour-search-card">
+        <form method="get" action="{% url 'lugares:lista_lugares' %}" class="row g-3 align-items-end">
+            <!-- Campo 1: Destino / Comuna -->
+            <div class="col-lg-4 col-md-6">
+                <div class="search-field-box">
+                    <label class="search-field-label">
+                        <i class="bi bi-geo-alt-fill text-danger me-1"></i> Destino o Comuna
+                    </label>
+                    <input type="text" name="q" value="{{ busqueda }}" class="form-control vitour-input" placeholder="Ej: La Serena, Vicuña, Valle de Elqui...">
+                </div>
+            </div>
+            
+            <!-- Campo 2: Categoría / Tipo de Tour -->
+            <div class="col-lg-4 col-md-6">
+                <div class="search-field-box">
+                    <label class="search-field-label">
+                        <i class="bi bi-tag-fill text-warning me-1"></i> Tipo de Experiencia
+                    </label>
+                    <select name="categoria" class="form-select vitour-select" onchange="this.form.submit()">
+                        <option value="">Todas las Categorías ({{ total_lugares }})</option>
+                        {% for cat in categorias %}
+                            <option value="{{ cat }}" {% if categoria_activa == cat %}selected{% endif %}>{{ cat }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Campo 3: Botón de Búsqueda ViTour -->
+            <div class="col-lg-4 col-md-12">
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-vitour-search flex-grow-1">
+                        <i class="bi bi-search me-1"></i> Buscar Tours
+                    </button>
+                    {% if busqueda or categoria_activa %}
+                        <a href="{% url 'lugares:lista_lugares' %}" class="btn btn-outline-secondary d-flex align-items-center justify-content-center px-3" title="Limpiar filtros" style="border-radius: 12px;">
+                            <i class="bi bi-x-lg"></i>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- VITOUR CATEGORY PILLS BAR -->
+<div class="vitour-category-bar">
+    <a href="{% url 'lugares:lista_lugares' %}" class="filter-pill {% if not categoria_activa %}active-turismo{% endif %}">
+        <i class="bi bi-grid-fill"></i> Todos los Destinos ({{ total_lugares }})
+    </a>
+    {% for cat in categorias %}
+        <a href="{% url 'lugares:lista_lugares' %}?categoria={{ cat|urlencode }}" class="filter-pill {% if categoria_activa == cat %}active-turismo{% endif %}">
+            {% if "Observatorio" in cat %}
+                <i class="bi bi-stars"></i>
+            {% elif "Valles" in cat %}
+                <i class="bi bi-tree-fill"></i>
+            {% elif "Playas" in cat %}
+                <i class="bi bi-water"></i>
+            {% elif "Monumento" in cat %}
+                <i class="bi bi-bank"></i>
+            {% else %}
+                <i class="bi bi-signpost-2"></i>
+            {% endif %}
+            {{ cat }}
+        </a>
+    {% endfor %}
+</div>
+
+<!-- ENCABEZADO DE RESULTADOS -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <span class="text-uppercase small fw-bold text-muted" style="letter-spacing: 1px;">Catálogo de Expediciones</span>
+        <h3 class="fw-bold mb-0 text-dark" style="font-family: var(--font-display);">
+            {% if categoria_activa %}{{ categoria_activa }}{% else %}Tours & Atractivos Disponibles{% endif %}
+        </h3>
+    </div>
+    <span class="badge bg-light text-secondary border px-3 py-2 fw-semibold" style="border-radius: 12px;">
+        {{ total_mostrados }} tours encontrados
+    </span>
+</div>
+
+<!-- GRILLA DE DESTINOS VITOUR -->
+{% if lugares %}
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
+    {% for lugar in lugares %}
+    <div class="col">
+        <article class="card-stitch">
+            <div class="card-img-container">
+                <img src="{% static lugar.imagen %}" alt="{{ lugar.nombre }}" loading="lazy">
+                
+                <!-- Badge Flotante Izquierdo: Rating / Imperdible -->
+                {% if lugar.destacado %}
+                    <span class="badge-featured">
+                        <i class="bi bi-star-fill"></i> 4.9 · Imperdible
+                    </span>
+                {% else %}
+                    <span class="badge-featured" style="background: rgba(10, 17, 40, 0.85); color: #ffffff; border-color: rgba(255, 255, 255, 0.2);">
+                        <i class="bi bi-award-fill text-warning"></i> Recomendado
+                    </span>
+                {% endif %}
+                
+                <!-- Badge Flotante Derecho: Ubicación -->
+                <span class="badge-floating">
+                    <i class="bi bi-geo-alt-fill text-danger"></i> {{ lugar.ciudad }}
+                </span>
+            </div>
+            
+            <div class="card-body-stitch">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="card-tag card-tag-turismo">{{ lugar.categoria }}</span>
+                    <span class="text-muted small fw-semibold">
+                        <i class="bi bi-shield-check text-success"></i> Verificado
+                    </span>
+                </div>
+                
+                <a href="{% url 'lugares:detalle_lugar' lugar.id %}" class="card-title-stitch">
+                    {{ lugar.nombre }}
+                </a>
+                
+                <p class="card-text-stitch">
+                    {{ lugar.descripcion_corta }}
+                </p>
+                
+                <!-- Meta Info Row ViTour -->
+                <div class="card-meta-row">
+                    <span class="card-meta-item">
+                        <i class="bi bi-clock-history text-primary"></i> {{ lugar.horario|truncatechars:20 }}
+                    </span>
+                    <span class="card-meta-item">
+                        <i class="bi bi-compass text-warning"></i> Guía Libre
+                    </span>
+                </div>
+                
+                <!-- Footer Card ViTour -->
+                <div class="card-footer-stitch">
+                    <div class="price-box">
+                        <span class="price-label">Tarifa de Acceso</span>
+                        <span class="price-tag">{{ lugar.precio }}</span>
+                    </div>
+                    <a href="{% url 'lugares:detalle_lugar' lugar.id %}" class="btn-stitch-action btn-action-turismo">
+                        <span>Ver Tour</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="text-center py-5 bg-white rounded-4 border shadow-sm my-4">
+    <div class="mb-3 text-warning" style="font-size: 2.5rem;">
+        <i class="bi bi-search"></i>
+    </div>
+    <h5 class="fw-bold text-dark mb-1">No se encontraron tours turísticos</h5>
+    <p class="text-muted small mb-3">Intenta con otro término de búsqueda o selecciona otra categoría.</p>
+    <a href="{% url 'lugares:lista_lugares' %}" class="btn btn-sm btn-action-turismo btn-stitch-action">Ver Todos los Destinos</a>
+</div>
+{% endif %}
+
+<!-- SECCIÓN BENEFICIOS VITOUR ("Por qué reservar en la IV Región") -->
+<section id="beneficios" class="my-5 pt-3">
+    <div class="text-center mb-5">
+        <span class="text-uppercase small fw-bold text-danger" style="letter-spacing: 1.5px;">Experiencia Garantizada</span>
+        <h2 class="fw-bold text-dark mt-1" style="font-family: var(--font-display); font-size: 2.2rem;">
+            ¿Por qué explorar la Región de Coquimbo?
+        </h2>
+        <p class="text-secondary mx-auto" style="max-width: 600px; font-size: 0.95rem;">
+            Un destino multifacético con naturaleza virgen, patrimonio astronómico y la calidez del pueblo elquino.
+        </p>
+    </div>
+    
+    <div class="row g-4">
+        <div class="col-lg-3 col-md-6">
+            <div class="benefit-card">
+                <div class="benefit-icon-wrapper">
+                    <i class="bi bi-stars"></i>
+                </div>
+                <h5 class="benefit-title">Capital Astronómica</h5>
+                <p class="benefit-desc">
+                    El 70% de la observación astronómica mundial se concentra aquí con más de 300 noches despejadas al año.
+                </p>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="benefit-card">
+                <div class="benefit-icon-wrapper">
+                    <i class="bi bi-cup-straw"></i>
+                </div>
+                <h5 class="benefit-title">Ruta del Pisco</h5>
+                <p class="benefit-desc">
+                    Cuna de la denominación de origen más antigua de América. Visita destilerías patrimoniales y viñedos de altura.
+                </p>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="benefit-card">
+                <div class="benefit-icon-wrapper">
+                    <i class="bi bi-water"></i>
+                </div>
+                <h5 class="benefit-title">Santuario de Humboldt</h5>
+                <p class="benefit-desc">
+                    Hogar de pingüinos, delfines nariz de botella y ballenas en una de las reservas marinas más ricas del planeta.
+                </p>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="benefit-card">
+                <div class="benefit-icon-wrapper">
+                    <i class="bi bi-sun-fill"></i>
+                </div>
+                <h5 class="benefit-title">Clima Privilegiado</h5>
+                <p class="benefit-desc">
+                    Temperaturas templadas durante todo el año, amplias ciclovías costeras y playas para relajarse en familia.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- VITOUR CALL TO ACTION BANNER -->
+<div class="vitour-cta-banner">
+    <div class="row align-items-center g-4">
+        <div class="col-lg-8">
+            <span class="badge bg-white text-danger fw-bold text-uppercase px-3 py-1 mb-2" style="font-size: 0.75rem;">
+                ✦ Experiencia Gourmet Regional
+            </span>
+            <h2 class="fw-bold mb-2" style="font-family: var(--font-display);">
+                ¿Quieres descubrir los sabores auténticos del Elqui y la Costa?
+            </h2>
+            <p class="mb-0 text-white text-opacity-85" style="font-size: 1.02rem;">
+                Prueba las machas a la parmesana, el tradicional pisco sour serenense y postres de papaya elquina.
+            </p>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+            <a href="{% url 'gastronomia:lista_platos' %}" class="btn btn-light btn-lg px-4 fw-bold shadow-lg" style="border-radius: 9999px; color: #ff5722;">
+                <span>Ver Gastronomía</span>
+                <i class="bi bi-arrow-right ms-2"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

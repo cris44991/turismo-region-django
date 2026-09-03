@@ -1,0 +1,144 @@
+[
+  {
+    "id": 1,
+    "nombre": "Machas a la Parmesana",
+    "categoria": "Platos Marinos",
+    "descripcion_corta": "Exquisito plato costero con machas gratinadas en mantequilla, vino blanco y queso parmesano.",
+    "descripcion_larga": "Uno de los clásicos indiscutidos de las caletas y restaurantes de La Serena y Coquimbo. Las machas frescas son preparadas en su propia concha, bañadas con un toque de vino blanco, mantequilla y cubiertas con queso parmesano derretido al horno.",
+    "tiempo_preparacion": "20 minutos",
+    "dificultad": "Fácil",
+    "porciones": 4,
+    "ingredientes": [
+      "24 machas frescas en su concha",
+      "150 g de queso parmesano rallado",
+      "50 g de mantequilla",
+      "1/2 taza de vino blanco (Sauvignon Blanc)",
+      "Sal, pimienta y gotas de limón al gusto"
+    ],
+    "preparacion": [
+      "Lavar muy bien las machas y retirar impurezas de sus conchas.",
+      "Disponer las conchas con las lenguas de macha sobre una bandeja para horno.",
+      "Agregar a cada concha una pizca de sal, pimienta, unas gotas de vino blanco y un trocito de mantequilla.",
+      "Cubrir generosamente con queso parmesano rallado.",
+      "Llevar a horno precalentado a 200°C en modo gratinador durante 6 a 8 minutos hasta dorar.",
+      "Servir de inmediato acompañadas de gajos de limón."
+    ],
+    "maridaje": "Vino blanco Sauvignon Blanc o Chardonnay bien frío.",
+    "destacado": true,
+    "imagen": "img/gastronomia/machas.jpg"
+  },
+  {
+    "id": 2,
+    "nombre": "Papayas al Jugo Serenenses",
+    "categoria": "Dulces y Postres",
+    "descripcion_corta": "El postre tradicional por excelencia del valle y la ciudad colonial.",
+    "descripcion_larga": "La papaya chilena (Vasconcellea pubescens) es el fruto emblema de La Serena. Debido a su acidez natural no se consume cruda, sino cocida en un almíbar suave aromatizado, logrando una textura tierna y un sabor dulce inconfundible.",
+    "tiempo_preparacion": "45 minutos",
+    "dificultad": "Media",
+    "porciones": 6,
+    "ingredientes": [
+      "1 kg de papayas frescas peladas y sin semillas",
+      "500 g de azúcar",
+      "1 litro de agua",
+      "1 rama de canela",
+      "Clavos de olor (opcional)",
+      "Crema chantilly para acompañar"
+    ],
+    "preparacion": [
+      "Cortar las papayas peladas en mitades o tiras gruesas.",
+      "En una olla grande, preparar el almíbar calentando el agua con el azúcar y la canela.",
+      "Una vez disuelta el azúcar, incorporar las papayas y cocinar a fuego medio durante 30-35 minutos.",
+      "Dejar enfriar en su propio almíbar antes de refrigerar.",
+      "Servir frías en copas con un poco de almíbar y una cucharada de crema chantilly."
+    ],
+    "maridaje": "Licor de papaya artesanal o infusión de hierbas silvestres.",
+    "destacado": true,
+    "imagen": "img/gastronomia/papayas.jpg"
+  },
+  {
+    "id": 3,
+    "nombre": "Pisco Sour Elquino Artesanal",
+    "categoria": "Bebidas y Licores Típicos",
+    "descripcion_corta": "Cóctel insignia preparado con pisco destilado en el corazón del Valle de Elqui.",
+    "descripcion_larga": "Preparado con pisco transparente o añejado de 40° producido bajo el sol del Valle de Elqui, jugo de limón de pica recién exprimido, azúcar flor y clara de huevo batida que aporta una espuma cremosa y aromática.",
+    "tiempo_preparacion": "10 minutos",
+    "dificultad": "Fácil",
+    "porciones": 2,
+    "ingredientes": [
+      "3 medidas de Pisco chileno del Valle de Elqui (35° o 40°)",
+      "1 medida de jugo natural de limón de pica",
+      "1 medida de jarabe de goma o azúcar flor",
+      "1/2 clara de huevo",
+      "Cubos de hielo",
+      "Gotas de amargo de angostura"
+    ],
+    "preparacion": [
+      "En una coctelera o licuadora, colocar abundante hielo.",
+      "Agregar el pisco elquino, el jugo de limón recién exprimido y el jarabe de goma.",
+      "Añadir la media clara de huevo para la textura.",
+      "Agitar enérgicamente durante 15 a 20 segundos.",
+      "Servir colado en copas frías y decorar con 2 o 3 gotas de amargo de angostura sobre la espuma."
+    ],
+    "maridaje": "Aperitivo perfecto para empanaditas de marisco o tablas de queso de cabra.",
+    "destacado": true,
+    "imagen": "img/gastronomia/pisco_sour.jpg"
+  },
+  {
+    "id": 4,
+    "nombre": "Queso de Cabra Tradicional del Elqui",
+    "categoria": "Productos Típicos",
+    "descripcion_corta": "Queso artesanal madurado o fresco, elaborado por crianceros de los valles transversales.",
+    "descripcion_larga": "Elaborado con métodos tradicionales heredados por generaciones de crianceros caprinos del Valle del Elqui y Limarí. Destaca por su sabor intenso, toques salinos y versatilidad gastronómica.",
+    "tiempo_preparacion": "Listo para servir",
+    "dificultad": "Fácil",
+    "porciones": 6,
+    "ingredientes": [
+      "300 g de queso de cabra artesanal",
+      "Miel de palma o miel de ulmo",
+      "Nueces y frutos secos del valle",
+      "Aceite de oliva virgen extra y orégano seco",
+      "Pan amasado caliente"
+    ],
+    "preparacion": [
+      "Cortar el queso de cabra en cubos o láminas gruesas.",
+      "Disponer sobre una tabla rústica de madera.",
+      "Bañar una parte con hilo de miel y frutos secos para contraste agridulce.",
+      "Espolvorear otra porción con orégano y un toque de aceite de oliva.",
+      "Acompañar con pan amasado recién salido del horno."
+    ],
+    "maridaje": "Vino Carmenere o Syrah del Valle del Elqui.",
+    "destacado": false,
+    "imagen": "img/gastronomia/queso_cabra.jpg"
+  },
+  {
+    "id": 5,
+    "nombre": "Caldillo de Congrio Costero",
+    "categoria": "Platos Marinos",
+    "descripcion_corta": "Sustancioso y reconfortante caldo marinero inmortalizado en la poesía chilena.",
+    "descripcion_larga": "Preparado en las caletas de Coquimbo y Peñuelas con congrio dorado o colorado fresco, cebolla caramelizada, tomate, pimientos, papas, vino blanco y un toque de crema y cilantro fresco.",
+    "tiempo_preparacion": "50 minutos",
+    "dificultad": "Media",
+    "porciones": 4,
+    "ingredientes": [
+      "4 medallones gruesos de congrio fresco",
+      "1 cebolla grande en pluma",
+      "2 tomates maduros pelados y picados",
+      "1 pimiento rojo en tiras",
+      "4 papas medianas cortadas en rodajas",
+      "1 taza de caldo de pescado concentrado",
+      "1/2 taza de vino blanco",
+      "Cilantro fresco y crema (opcional)"
+    ],
+    "preparacion": [
+      "En una paila o cacerola grande sofreír la cebolla, el pimiento y los tomates con ajo y orégano.",
+      "Incorporar las papas y verter el vino blanco junto con el caldo de pescado.",
+      "Cocinar tapado a fuego suave hasta que las papas estén tiernas.",
+      "Colocar suavemente los medallones de congrio sobre la cama de verduras.",
+      "Cocinar por 10 minutos más sin revolver para no romper el pescado.",
+      "Servir bien caliente en vasijas de greda decorado con cilantro picado."
+    ],
+    "maridaje": "Vino blanco Sauvignon Blanc o vino tinto Pinot Noir joven.",
+    "destacado": false,
+    "imagen": "img/gastronomia/caldillo.jpg"
+  }
+]

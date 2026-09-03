@@ -1,0 +1,220 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Gastronomía Regional | Descubre Coquimbo{% endblock %}
+
+{% block content %}
+<!-- HERO VITOUR GASTRONOMÍA -->
+<div class="hero-vitour" style="background: radial-gradient(circle at 85% 20%, rgba(234, 88, 12, 0.35) 0%, transparent 45%), radial-gradient(circle at 15% 85%, rgba(255, 87, 34, 0.2) 0%, transparent 45%), linear-gradient(135deg, #130a1c 0%, #220d2e 50%, #0d0714 100%);">
+    <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+            <div class="hero-tag" style="color: #fb923c; background-color: rgba(251, 146, 60, 0.15); border-color: rgba(251, 146, 60, 0.35);">
+                <i class="bi bi-cup-hot-fill"></i> Sabores con Denominación de Origen · IV Región
+            </div>
+            <h1 class="hero-title">
+                Patrimonio & <span class="hero-title-highlight" style="background: linear-gradient(135deg, #fb923c 0%, #fed7aa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Rutas Gastronómicas</span>
+            </h1>
+            <p class="hero-desc">
+                Las mejores recetas y maridajes de la Región de Coquimbo: mariscos frescos del Océano Pacífico, papayas serenenses, queso de cabra artesanal y el tradicional pisco elquino.
+            </p>
+        </div>
+        <div class="col-lg-5">
+            <div class="glass-widget" style="border-color: rgba(251, 146, 60, 0.25);">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="glass-widget-title" style="color: #fed7aa;">
+                        Tradición Culinaria
+                    </span>
+                    <span class="badge bg-warning text-dark small px-2 py-1 fw-bold">Recetario Sernatur</span>
+                </div>
+                <div class="text-white fw-bold fs-6 mb-2">Identidad del Norte Chico</div>
+                <p class="small text-light opacity-75 mb-0" style="font-size: 0.88rem; line-height: 1.6;">
+                    Platos emblemáticos que combinan el patrimonio costero de Coquimbo con la fertilidad y frutos del Valle del Elqui y Limarí.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- VITOUR FLOATING SEARCH CONSOLE GASTRONOMÍA -->
+<div class="vitour-search-wrapper">
+    <div class="vitour-search-card">
+        <form method="get" action="{% url 'gastronomia:lista_platos' %}" class="row g-3 align-items-end">
+            <!-- Campo 1: Buscar Plato o Ingrediente -->
+            <div class="col-lg-4 col-md-6">
+                <div class="search-field-box">
+                    <label class="search-field-label">
+                        <i class="bi bi-search text-warning me-1"></i> Plato o Ingrediente
+                    </label>
+                    <input type="text" name="q" value="{{ busqueda }}" class="form-control vitour-input" placeholder="Ej: Machas, Pisco, Papaya, Cabra...">
+                </div>
+            </div>
+            
+            <!-- Campo 2: Categoría Culinaria -->
+            <div class="col-lg-4 col-md-6">
+                <div class="search-field-box">
+                    <label class="search-field-label">
+                        <i class="bi bi-filter-circle-fill text-danger me-1"></i> Categoría de Plato
+                    </label>
+                    <select name="categoria" class="form-select vitour-select" onchange="this.form.submit()">
+                        <option value="">Todas las Especialidades ({{ total_platos }})</option>
+                        {% for cat in categorias %}
+                            <option value="{{ cat }}" {% if categoria_activa == cat %}selected{% endif %}>{{ cat }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Campo 3: Botón de Búsqueda -->
+            <div class="col-lg-4 col-md-12">
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-vitour-search flex-grow-1" style="background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);">
+                        <i class="bi bi-search me-1"></i> Buscar Recetas
+                    </button>
+                    {% if busqueda or categoria_activa %}
+                        <a href="{% url 'gastronomia:lista_platos' %}" class="btn btn-outline-secondary d-flex align-items-center justify-content-center px-3" title="Limpiar filtros" style="border-radius: 12px;">
+                            <i class="bi bi-x-lg"></i>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- VITOUR CATEGORY PILLS BAR -->
+<div class="vitour-category-bar">
+    <a href="{% url 'gastronomia:lista_platos' %}" class="filter-pill {% if not categoria_activa %}active-gastro{% endif %}">
+        <i class="bi bi-grid-fill"></i> Todos los Platos ({{ total_platos }})
+    </a>
+    {% for cat in categorias %}
+        <a href="{% url 'gastronomia:lista_platos' %}?categoria={{ cat|urlencode }}" class="filter-pill {% if categoria_activa == cat %}active-gastro{% endif %}">
+            {% if "Coctelería" in cat %}
+                <i class="bi bi-cup-straw"></i>
+            {% elif "Marinos" in cat %}
+                <i class="bi bi-water"></i>
+            {% elif "Postres" in cat %}
+                <i class="bi bi-egg-fried"></i>
+            {% else %}
+                <i class="bi bi-basket-fill"></i>
+            {% endif %}
+            {{ cat }}
+        </a>
+    {% endfor %}
+</div>
+
+<!-- ENCABEZADO DE RESULTADOS -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <span class="text-uppercase small fw-bold text-muted" style="letter-spacing: 1px;">Experiencias Culinarias</span>
+        <h3 class="fw-bold mb-0 text-dark" style="font-family: var(--font-display);">
+            {% if categoria_activa %}{{ categoria_activa }}{% else %}Preparaciones Tradicionales{% endif %}
+        </h3>
+    </div>
+    <span class="badge bg-light text-secondary border px-3 py-2 fw-semibold" style="border-radius: 12px;">
+        {{ total_mostrados }} recetas disponibles
+    </span>
+</div>
+
+<!-- GRILLA DE PLATOS VITOUR -->
+{% if platos %}
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
+    {% for plato in platos %}
+    <div class="col">
+        <article class="card-stitch">
+            <div class="card-img-container">
+                <img src="{% static plato.imagen %}" alt="{{ plato.nombre }}" loading="lazy">
+                
+                <!-- Badge Flotante Izquierdo -->
+                {% if plato.destacado %}
+                    <span class="badge-featured" style="background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); box-shadow: 0 4px 14px rgba(234, 88, 12, 0.4);">
+                        <i class="bi bi-star-fill"></i> Receta Clásica
+                    </span>
+                {% else %}
+                    <span class="badge-featured" style="background: rgba(10, 17, 40, 0.85); color: #ffffff; border-color: rgba(255, 255, 255, 0.2);">
+                        <i class="bi bi-check-circle-fill text-warning"></i> Tradición
+                    </span>
+                {% endif %}
+                
+                <!-- Badge Flotante Derecho -->
+                <span class="badge-floating">
+                    <i class="bi bi-clock-history"></i> {{ plato.tiempo_preparacion }}
+                </span>
+            </div>
+            
+            <div class="card-body-stitch">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="card-tag card-tag-gastro">{{ plato.categoria }}</span>
+                    <span class="text-muted small fw-semibold">
+                        <i class="bi bi-people-fill text-primary"></i> {{ plato.porciones }} personas
+                    </span>
+                </div>
+                
+                <a href="{% url 'gastronomia:detalle_plato' plato.id %}" class="card-title-stitch">
+                    {{ plato.nombre }}
+                </a>
+                
+                <p class="card-text-stitch">
+                    {{ plato.descripcion_corta }}
+                </p>
+                
+                <!-- Meta Info Row ViTour -->
+                <div class="card-meta-row">
+                    <span class="card-meta-item">
+                        <i class="bi bi-speedometer2 text-danger"></i> Dificultad: <strong>{{ plato.dificultad }}</strong>
+                    </span>
+                    <span class="card-meta-item">
+                        <i class="bi bi-award text-success"></i> 100% Regional
+                    </span>
+                </div>
+                
+                <!-- Footer Card ViTour -->
+                <div class="card-footer-stitch">
+                    <div class="price-box">
+                        <span class="price-label">Rendimiento</span>
+                        <span class="price-tag" style="color: #ea580c;">{{ plato.porciones }} Porciones</span>
+                    </div>
+                    <a href="{% url 'gastronomia:detalle_plato' plato.id %}" class="btn-stitch-action btn-action-gastro">
+                        <span>Ver Receta</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="text-center py-5 bg-white rounded-4 border shadow-sm my-4">
+    <div class="mb-3 text-warning" style="font-size: 2.5rem;">
+        <i class="bi bi-search"></i>
+    </div>
+    <h5 class="fw-bold text-dark mb-1">No se encontraron preparaciones</h5>
+    <p class="text-muted small mb-3">Intenta con otro término o selecciona otra categoría de platos.</p>
+    <a href="{% url 'gastronomia:lista_platos' %}" class="btn btn-sm btn-action-gastro btn-stitch-action">Ver Todas las Recetas</a>
+</div>
+{% endif %}
+
+<!-- VITOUR CALL TO ACTION BANNER TO TOURS -->
+<div class="vitour-cta-banner" style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); box-shadow: 0 20px 40px -10px rgba(2, 132, 199, 0.35);">
+    <div class="row align-items-center g-4">
+        <div class="col-lg-8">
+            <span class="badge bg-white text-primary fw-bold text-uppercase px-3 py-1 mb-2" style="font-size: 0.75rem;">
+                ✦ Expediciones & Tours en la Región
+            </span>
+            <h2 class="fw-bold mb-2" style="font-family: var(--font-display);">
+                ¿Deseas visitar los lugares donde nacen estos sabores?
+            </h2>
+            <p class="mb-0 text-white text-opacity-85" style="font-size: 1.02rem;">
+                Conoce las destilerías de Pisco Elqui, los observatorios de Vicuña y las caletas de mariscos en La Serena y Coquimbo.
+            </p>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+            <a href="{% url 'lugares:lista_lugares' %}" class="btn btn-light btn-lg px-4 fw-bold shadow-lg" style="border-radius: 9999px; color: #0284c7;">
+                <span>Explorar Destinos</span>
+                <i class="bi bi-arrow-right ms-2"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
