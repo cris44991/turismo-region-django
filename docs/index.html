@@ -1,0 +1,742 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destinos Turísticos | Descubre Coquimbo</title>
+    
+    <!-- Google Fonts Premium (Outfit & Plus Jakarta Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- Bootstrap 5 Local -->
+    <link rel="stylesheet" href="/turismo-region-django/static/vendor/bootstrap/css/bootstrap.min.css">
+    
+    <!-- ViTour + Stitch UI System -->
+    <link rel="stylesheet" href="/turismo-region-django/static/css/styles.css">
+</head>
+<body>
+
+    <!-- VITOUR TOPBAR -->
+    <div class="vitour-topbar d-none d-md-block">
+        <div class="container d-flex justify-content-between align-items-center py-2">
+            <div class="d-flex align-items-center gap-4 text-secondary" style="font-size: 0.82rem;">
+                <span><i class="bi bi-clock-fill text-warning me-1"></i> Atención: 09:00 - 20:00 hrs</span>
+                <span><i class="bi bi-envelope-fill text-warning me-1"></i> contacto@vitourcoquimbo.cl</span>
+                <span><i class="bi bi-geo-alt-fill text-warning me-1"></i> IV Región de Coquimbo, Chile</span>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <span class="badge bg-dark bg-opacity-75 text-light border border-secondary border-opacity-25 px-2 py-1" style="font-size: 0.72rem;">
+                    <i class="bi bi-shield-check text-success me-1"></i> Guía Oficial Sernatur 2026
+                </span>
+                <div class="d-flex gap-2">
+                    <a href="#" class="topbar-social-link"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="topbar-social-link"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="topbar-social-link"><i class="bi bi-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VITOUR NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-stitch sticky-top">
+        <div class="container">
+            <a class="navbar-brand brand-logo-text" href="/turismo-region-django/lugares/">
+                <span class="brand-logo-icon"><i class="bi bi-compass-fill"></i></span>
+                <div class="d-flex flex-column">
+                    <span class="brand-name">ViTour <span class="brand-name-accent">Coquimbo</span></span>
+                    <span class="brand-subtitle">Travel & Tour Booking</span>
+                </div>
+                <span class="brand-badge ms-2">IV Región</span>
+            </a>
+            
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarStitch" aria-controls="navbarStitch" aria-expanded="false" aria-label="Navegación">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarStitch">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-1">
+                    <li class="nav-item">
+                        <a class="nav-link nav-pill-stitch active-turismo" href="/turismo-region-django/lugares/">
+                            <i class="bi bi-map-fill me-1"></i> Destinos & Tours
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-pill-stitch " href="/turismo-region-django/gastronomia/">
+                            <i class="bi bi-cup-hot-fill me-1"></i> Sabores & Gastronomía
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-pill-stitch" href="#beneficios">
+                            <i class="bi bi-stars me-1"></i> Experiencias
+                        </a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center gap-2">
+                    <a href="/turismo-region-django/lugares/" class="btn-vitour-booking">
+                        <span>Explorar Tours</span>
+                        <i class="bi bi-arrow-right-short fs-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="py-4">
+        <div class="container">
+            
+<!-- HERO VITOUR SHOWCASE -->
+<div class="hero-vitour">
+    <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+            <div class="hero-tag">
+                <i class="bi bi-compass-fill"></i> Explora el Paraíso del Norte Chico · Chile
+            </div>
+            <h1 class="hero-title">
+                Tours, Aventura & <span class="hero-title-highlight">Experiencias</span> en Coquimbo
+            </h1>
+            <p class="hero-desc">
+                Desde las costas y caletas de La Serena hasta los cielos astronómicos del Valle de Elqui y la reserva marina de Punta de Choros. Reserva tu próxima expedición inolvidable.
+            </p>
+        </div>
+        
+        <!-- WIDGET DE CLIMA EN VIVO (Requests / Open-Meteo) -->
+        <div class="col-lg-5">
+            <div class="glass-widget">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="glass-widget-title">
+                        <span class="live-indicator"></span> Estación Meteorológica
+                    </span>
+                    <span class="badge bg-white bg-opacity-10 text-light small px-2 py-1">En Vivo</span>
+                </div>
+                <div class="fw-bold text-white fs-6 mb-1">La Serena y Valle de Elqui</div>
+                <div class="d-flex align-items-baseline gap-3 my-2">
+                    <span class="glass-widget-temp">15.8°C</span>
+                    <span class="text-light fs-6 fw-medium">Despejado ☀️</span>
+                </div>
+                <div class="d-flex justify-content-between pt-2 border-top border-white border-opacity-10 text-light small opacity-75">
+                    <span><i class="bi bi-droplet-fill text-info me-1"></i> Humedad: <strong class="text-white">84%</strong></span>
+                    <span><i class="bi bi-wind text-info me-1"></i> Viento: <strong class="text-white">6.5 km/h</strong></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- VITOUR FLOATING SEARCH CONSOLE (Barra de Búsqueda Flotante) -->
+<div class="vitour-search-wrapper">
+    <div class="vitour-search-card">
+        <form method="get" action="/lugares/" class="row g-3 align-items-end">
+            <!-- Campo 1: Destino / Comuna -->
+            <div class="col-lg-4 col-md-6">
+                <div class="search-field-box">
+                    <label class="search-field-label">
+                        <i class="bi bi-geo-alt-fill text-danger me-1"></i> Destino o Comuna
+                    </label>
+                    <input type="text" name="q" value="" class="form-control vitour-input" placeholder="Ej: La Serena, Vicuña, Valle de Elqui...">
+                </div>
+            </div>
+            
+            <!-- Campo 2: Categoría / Tipo de Tour -->
+            <div class="col-lg-4 col-md-6">
+                <div class="search-field-box">
+                    <label class="search-field-label">
+                        <i class="bi bi-tag-fill text-warning me-1"></i> Tipo de Experiencia
+                    </label>
+                    <select name="categoria" class="form-select vitour-select" onchange="this.form.submit()">
+                        <option value="">Todas las Categorías (6)</option>
+                        
+                            <option value="Monumentos Históricos" >Monumentos Históricos</option>
+                        
+                            <option value="Observatorios y Ciencia" >Observatorios y Ciencia</option>
+                        
+                            <option value="Playas y Borde Costero" >Playas y Borde Costero</option>
+                        
+                            <option value="Valles y Naturaleza" >Valles y Naturaleza</option>
+                        
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Campo 3: Botón de Búsqueda ViTour -->
+            <div class="col-lg-4 col-md-12">
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-vitour-search flex-grow-1">
+                        <i class="bi bi-search me-1"></i> Buscar Tours
+                    </button>
+                    
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- VITOUR CATEGORY PILLS BAR -->
+<div class="vitour-category-bar">
+    <a href="/turismo-region-django/lugares/" class="filter-pill active-turismo">
+        <i class="bi bi-grid-fill"></i> Todos los Destinos (6)
+    </a>
+    
+        <a href="/turismo-region-django/lugares/?categoria=Monumentos%20Hist%C3%B3ricos" class="filter-pill ">
+            
+                <i class="bi bi-bank"></i>
+            
+            Monumentos Históricos
+        </a>
+    
+        <a href="/turismo-region-django/lugares/?categoria=Observatorios%20y%20Ciencia" class="filter-pill ">
+            
+                <i class="bi bi-stars"></i>
+            
+            Observatorios y Ciencia
+        </a>
+    
+        <a href="/turismo-region-django/lugares/?categoria=Playas%20y%20Borde%20Costero" class="filter-pill ">
+            
+                <i class="bi bi-water"></i>
+            
+            Playas y Borde Costero
+        </a>
+    
+        <a href="/turismo-region-django/lugares/?categoria=Valles%20y%20Naturaleza" class="filter-pill ">
+            
+                <i class="bi bi-tree-fill"></i>
+            
+            Valles y Naturaleza
+        </a>
+    
+</div>
+
+<!-- ENCABEZADO DE RESULTADOS -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <span class="text-uppercase small fw-bold text-muted" style="letter-spacing: 1px;">Catálogo de Expediciones</span>
+        <h3 class="fw-bold mb-0 text-dark" style="font-family: var(--font-display);">
+            Tours & Atractivos Disponibles
+        </h3>
+    </div>
+    <span class="badge bg-light text-secondary border px-3 py-2 fw-semibold" style="border-radius: 12px;">
+        6 tours encontrados
+    </span>
+</div>
+
+<!-- GRILLA DE DESTINOS VITOUR -->
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
+    
+    <div class="col">
+        <article class="card-stitch">
+            <div class="card-img-container">
+                <img src="/turismo-region-django/static/img/lugares/faro.jpg" alt="Faro Monumental de La Serena" loading="lazy">
+                
+                <!-- Badge Flotante Izquierdo: Rating / Imperdible -->
+                
+                    <span class="badge-featured">
+                        <i class="bi bi-star-fill"></i> 4.9 · Imperdible
+                    </span>
+                
+                
+                <!-- Badge Flotante Derecho: Ubicación -->
+                <span class="badge-floating">
+                    <i class="bi bi-geo-alt-fill text-danger"></i> La Serena
+                </span>
+            </div>
+            
+            <div class="card-body-stitch">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="card-tag card-tag-turismo">Monumentos Históricos</span>
+                    <span class="text-muted small fw-semibold">
+                        <i class="bi bi-shield-check text-success"></i> Verificado
+                    </span>
+                </div>
+                
+                <a href="/turismo-region-django/lugares/1/" class="card-title-stitch">
+                    Faro Monumental de La Serena
+                </a>
+                
+                <p class="card-text-stitch">
+                    Ícono arquitectónico y postal emblemática de la ciudad de La Serena.
+                </p>
+                
+                <!-- Meta Info Row ViTour -->
+                <div class="card-meta-row">
+                    <span class="card-meta-item">
+                        <i class="bi bi-clock-history text-primary"></i> Lunes a Domingo: 10…
+                    </span>
+                    <span class="card-meta-item">
+                        <i class="bi bi-compass text-warning"></i> Guía Libre
+                    </span>
+                </div>
+                
+                <!-- Footer Card ViTour -->
+                <div class="card-footer-stitch">
+                    <div class="price-box">
+                        <span class="price-label">Tarifa de Acceso</span>
+                        <span class="price-tag">Entrada Liberada</span>
+                    </div>
+                    <a href="/turismo-region-django/lugares/1/" class="btn-stitch-action btn-action-turismo">
+                        <span>Ver Tour</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="col">
+        <article class="card-stitch">
+            <div class="card-img-container">
+                <img src="/turismo-region-django/static/img/lugares/valle_elqui.jpg" alt="Valle de Elqui y Pisco Elqui" loading="lazy">
+                
+                <!-- Badge Flotante Izquierdo: Rating / Imperdible -->
+                
+                    <span class="badge-featured">
+                        <i class="bi bi-star-fill"></i> 4.9 · Imperdible
+                    </span>
+                
+                
+                <!-- Badge Flotante Derecho: Ubicación -->
+                <span class="badge-floating">
+                    <i class="bi bi-geo-alt-fill text-danger"></i> Paihuano / Vicuña
+                </span>
+            </div>
+            
+            <div class="card-body-stitch">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="card-tag card-tag-turismo">Valles y Naturaleza</span>
+                    <span class="text-muted small fw-semibold">
+                        <i class="bi bi-shield-check text-success"></i> Verificado
+                    </span>
+                </div>
+                
+                <a href="/turismo-region-django/lugares/2/" class="card-title-stitch">
+                    Valle de Elqui y Pisco Elqui
+                </a>
+                
+                <p class="card-text-stitch">
+                    Místico valle de cielos despejados, viñedos, artesanía y energía única.
+                </p>
+                
+                <!-- Meta Info Row ViTour -->
+                <div class="card-meta-row">
+                    <span class="card-meta-item">
+                        <i class="bi bi-clock-history text-primary"></i> Abierto todo el año
+                    </span>
+                    <span class="card-meta-item">
+                        <i class="bi bi-compass text-warning"></i> Guía Libre
+                    </span>
+                </div>
+                
+                <!-- Footer Card ViTour -->
+                <div class="card-footer-stitch">
+                    <div class="price-box">
+                        <span class="price-label">Tarifa de Acceso</span>
+                        <span class="price-tag">Acceso libre al valle (Tours y destilerías con costo particular)</span>
+                    </div>
+                    <a href="/turismo-region-django/lugares/2/" class="btn-stitch-action btn-action-turismo">
+                        <span>Ver Tour</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="col">
+        <article class="card-stitch">
+            <div class="card-img-container">
+                <img src="/turismo-region-django/static/img/lugares/mamalluca.jpg" alt="Observatorio Astronómico Mamalluca" loading="lazy">
+                
+                <!-- Badge Flotante Izquierdo: Rating / Imperdible -->
+                
+                    <span class="badge-featured">
+                        <i class="bi bi-star-fill"></i> 4.9 · Imperdible
+                    </span>
+                
+                
+                <!-- Badge Flotante Derecho: Ubicación -->
+                <span class="badge-floating">
+                    <i class="bi bi-geo-alt-fill text-danger"></i> Vicuña
+                </span>
+            </div>
+            
+            <div class="card-body-stitch">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="card-tag card-tag-turismo">Observatorios y Ciencia</span>
+                    <span class="text-muted small fw-semibold">
+                        <i class="bi bi-shield-check text-success"></i> Verificado
+                    </span>
+                </div>
+                
+                <a href="/turismo-region-django/lugares/3/" class="card-title-stitch">
+                    Observatorio Astronómico Mamalluca
+                </a>
+                
+                <p class="card-text-stitch">
+                    Uno de los centros astronómicos turísticos más importantes del hemisferio sur.
+                </p>
+                
+                <!-- Meta Info Row ViTour -->
+                <div class="card-meta-row">
+                    <span class="card-meta-item">
+                        <i class="bi bi-clock-history text-primary"></i> Tours nocturnos con…
+                    </span>
+                    <span class="card-meta-item">
+                        <i class="bi bi-compass text-warning"></i> Guía Libre
+                    </span>
+                </div>
+                
+                <!-- Footer Card ViTour -->
+                <div class="card-footer-stitch">
+                    <div class="price-box">
+                        <span class="price-label">Tarifa de Acceso</span>
+                        <span class="price-tag">$12.000 adultos / $6.000 niños y tercera edad</span>
+                    </div>
+                    <a href="/turismo-region-django/lugares/3/" class="btn-stitch-action btn-action-turismo">
+                        <span>Ver Tour</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="col">
+        <article class="card-stitch">
+            <div class="card-img-container">
+                <img src="/turismo-region-django/static/img/lugares/cuatro_esquinas.jpg" alt="Playa Cuatro Esquinas &amp; Av. del Mar" loading="lazy">
+                
+                <!-- Badge Flotante Izquierdo: Rating / Imperdible -->
+                
+                    <span class="badge-featured" style="background: rgba(10, 17, 40, 0.85); color: #ffffff; border-color: rgba(255, 255, 255, 0.2);">
+                        <i class="bi bi-award-fill text-warning"></i> Recomendado
+                    </span>
+                
+                
+                <!-- Badge Flotante Derecho: Ubicación -->
+                <span class="badge-floating">
+                    <i class="bi bi-geo-alt-fill text-danger"></i> La Serena
+                </span>
+            </div>
+            
+            <div class="card-body-stitch">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="card-tag card-tag-turismo">Playas y Borde Costero</span>
+                    <span class="text-muted small fw-semibold">
+                        <i class="bi bi-shield-check text-success"></i> Verificado
+                    </span>
+                </div>
+                
+                <a href="/turismo-region-django/lugares/4/" class="card-title-stitch">
+                    Playa Cuatro Esquinas &amp; Av. del Mar
+                </a>
+                
+                <p class="card-text-stitch">
+                    Extensa playa con gastronomía marina, ciclovías y deportes acuáticos.
+                </p>
+                
+                <!-- Meta Info Row ViTour -->
+                <div class="card-meta-row">
+                    <span class="card-meta-item">
+                        <i class="bi bi-clock-history text-primary"></i> Acceso 24 horas
+                    </span>
+                    <span class="card-meta-item">
+                        <i class="bi bi-compass text-warning"></i> Guía Libre
+                    </span>
+                </div>
+                
+                <!-- Footer Card ViTour -->
+                <div class="card-footer-stitch">
+                    <div class="price-box">
+                        <span class="price-label">Tarifa de Acceso</span>
+                        <span class="price-tag">Entrada Liberada</span>
+                    </div>
+                    <a href="/turismo-region-django/lugares/4/" class="btn-stitch-action btn-action-turismo">
+                        <span>Ver Tour</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="col">
+        <article class="card-stitch">
+            <div class="card-img-container">
+                <img src="/turismo-region-django/static/img/lugares/cruz_milenio.jpg" alt="Cruz del Tercer Milenio" loading="lazy">
+                
+                <!-- Badge Flotante Izquierdo: Rating / Imperdible -->
+                
+                    <span class="badge-featured" style="background: rgba(10, 17, 40, 0.85); color: #ffffff; border-color: rgba(255, 255, 255, 0.2);">
+                        <i class="bi bi-award-fill text-warning"></i> Recomendado
+                    </span>
+                
+                
+                <!-- Badge Flotante Derecho: Ubicación -->
+                <span class="badge-floating">
+                    <i class="bi bi-geo-alt-fill text-danger"></i> Coquimbo
+                </span>
+            </div>
+            
+            <div class="card-body-stitch">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="card-tag card-tag-turismo">Monumentos Históricos</span>
+                    <span class="text-muted small fw-semibold">
+                        <i class="bi bi-shield-check text-success"></i> Verificado
+                    </span>
+                </div>
+                
+                <a href="/turismo-region-django/lugares/5/" class="card-title-stitch">
+                    Cruz del Tercer Milenio
+                </a>
+                
+                <p class="card-text-stitch">
+                    Monumento conmemorativo de 93 metros con mirador panorámico de 360° a toda la bahía.
+                </p>
+                
+                <!-- Meta Info Row ViTour -->
+                <div class="card-meta-row">
+                    <span class="card-meta-item">
+                        <i class="bi bi-clock-history text-primary"></i> Martes a Domingo: 0…
+                    </span>
+                    <span class="card-meta-item">
+                        <i class="bi bi-compass text-warning"></i> Guía Libre
+                    </span>
+                </div>
+                
+                <!-- Footer Card ViTour -->
+                <div class="card-footer-stitch">
+                    <div class="price-box">
+                        <span class="price-label">Tarifa de Acceso</span>
+                        <span class="price-tag">$3.000 adultos / $1.500 niños y adultos mayores</span>
+                    </div>
+                    <a href="/turismo-region-django/lugares/5/" class="btn-stitch-action btn-action-turismo">
+                        <span>Ver Tour</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="col">
+        <article class="card-stitch">
+            <div class="card-img-container">
+                <img src="/turismo-region-django/static/img/lugares/pinguinos.jpg" alt="Reserva Nacional Pingüino de Humboldt" loading="lazy">
+                
+                <!-- Badge Flotante Izquierdo: Rating / Imperdible -->
+                
+                    <span class="badge-featured">
+                        <i class="bi bi-star-fill"></i> 4.9 · Imperdible
+                    </span>
+                
+                
+                <!-- Badge Flotante Derecho: Ubicación -->
+                <span class="badge-floating">
+                    <i class="bi bi-geo-alt-fill text-danger"></i> Punta de Choros
+                </span>
+            </div>
+            
+            <div class="card-body-stitch">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="card-tag card-tag-turismo">Valles y Naturaleza</span>
+                    <span class="text-muted small fw-semibold">
+                        <i class="bi bi-shield-check text-success"></i> Verificado
+                    </span>
+                </div>
+                
+                <a href="/turismo-region-django/lugares/6/" class="card-title-stitch">
+                    Reserva Nacional Pingüino de Humboldt
+                </a>
+                
+                <p class="card-text-stitch">
+                    Santuario marino hogar de pingüinos, delfines nariz de botella y ballenas.
+                </p>
+                
+                <!-- Meta Info Row ViTour -->
+                <div class="card-meta-row">
+                    <span class="card-meta-item">
+                        <i class="bi bi-clock-history text-primary"></i> Zarpas de embarcaci…
+                    </span>
+                    <span class="card-meta-item">
+                        <i class="bi bi-compass text-warning"></i> Guía Libre
+                    </span>
+                </div>
+                
+                <!-- Footer Card ViTour -->
+                <div class="card-footer-stitch">
+                    <div class="price-box">
+                        <span class="price-label">Tarifa de Acceso</span>
+                        <span class="price-tag">Navegación: $15.000 aprox. / Entrada CONAF: $5.000</span>
+                    </div>
+                    <a href="/turismo-region-django/lugares/6/" class="btn-stitch-action btn-action-turismo">
+                        <span>Ver Tour</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+</div>
+
+
+<!-- SECCIÓN BENEFICIOS VITOUR ("Por qué reservar en la IV Región") -->
+<section id="beneficios" class="my-5 pt-3">
+    <div class="text-center mb-5">
+        <span class="text-uppercase small fw-bold text-danger" style="letter-spacing: 1.5px;">Experiencia Garantizada</span>
+        <h2 class="fw-bold text-dark mt-1" style="font-family: var(--font-display); font-size: 2.2rem;">
+            ¿Por qué explorar la Región de Coquimbo?
+        </h2>
+        <p class="text-secondary mx-auto" style="max-width: 600px; font-size: 0.95rem;">
+            Un destino multifacético con naturaleza virgen, patrimonio astronómico y la calidez del pueblo elquino.
+        </p>
+    </div>
+    
+    <div class="row g-4">
+        <div class="col-lg-3 col-md-6">
+            <div class="benefit-card">
+                <div class="benefit-icon-wrapper">
+                    <i class="bi bi-stars"></i>
+                </div>
+                <h5 class="benefit-title">Capital Astronómica</h5>
+                <p class="benefit-desc">
+                    El 70% de la observación astronómica mundial se concentra aquí con más de 300 noches despejadas al año.
+                </p>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="benefit-card">
+                <div class="benefit-icon-wrapper">
+                    <i class="bi bi-cup-straw"></i>
+                </div>
+                <h5 class="benefit-title">Ruta del Pisco</h5>
+                <p class="benefit-desc">
+                    Cuna de la denominación de origen más antigua de América. Visita destilerías patrimoniales y viñedos de altura.
+                </p>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="benefit-card">
+                <div class="benefit-icon-wrapper">
+                    <i class="bi bi-water"></i>
+                </div>
+                <h5 class="benefit-title">Santuario de Humboldt</h5>
+                <p class="benefit-desc">
+                    Hogar de pingüinos, delfines nariz de botella y ballenas en una de las reservas marinas más ricas del planeta.
+                </p>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="benefit-card">
+                <div class="benefit-icon-wrapper">
+                    <i class="bi bi-sun-fill"></i>
+                </div>
+                <h5 class="benefit-title">Clima Privilegiado</h5>
+                <p class="benefit-desc">
+                    Temperaturas templadas durante todo el año, amplias ciclovías costeras y playas para relajarse en familia.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- VITOUR CALL TO ACTION BANNER -->
+<div class="vitour-cta-banner">
+    <div class="row align-items-center g-4">
+        <div class="col-lg-8">
+            <span class="badge bg-white text-danger fw-bold text-uppercase px-3 py-1 mb-2" style="font-size: 0.75rem;">
+                ✦ Experiencia Gourmet Regional
+            </span>
+            <h2 class="fw-bold mb-2" style="font-family: var(--font-display);">
+                ¿Quieres descubrir los sabores auténticos del Elqui y la Costa?
+            </h2>
+            <p class="mb-0 text-white text-opacity-85" style="font-size: 1.02rem;">
+                Prueba las machas a la parmesana, el tradicional pisco sour serenense y postres de papaya elquina.
+            </p>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+            <a href="/turismo-region-django/gastronomia/" class="btn btn-light btn-lg px-4 fw-bold shadow-lg" style="border-radius: 9999px; color: #ff5722;">
+                <span>Ver Gastronomía</span>
+                <i class="bi bi-arrow-right ms-2"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </main>
+
+    <!-- VITOUR RICH FOOTER -->
+    <footer class="footer-stitch mt-auto">
+        <div class="container">
+            <div class="row g-4 mb-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <span class="brand-logo-icon" style="width: 34px; height: 34px; font-size: 1.1rem;">
+                            <i class="bi bi-compass-fill"></i>
+                        </span>
+                        <span class="brand-name text-white fs-5">ViTour <span class="brand-name-accent">Coquimbo</span></span>
+                    </div>
+                    <p class="text-secondary small mb-3" style="line-height: 1.7;">
+                        Plataforma de difusión de experiencias turísticas, astroturismo en observatorios certificados, catas de pisco en el Valle de Elqui y turismo sustentable en la IV Región de Coquimbo.
+                    </p>
+                    <div class="d-flex gap-3 text-secondary fs-5">
+                        <a href="#" class="topbar-social-link"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="topbar-social-link"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="topbar-social-link"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="topbar-social-link"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h6 class="footer-title">Destinos Top</h6>
+                    <ul class="footer-links">
+                        <li><a href="/turismo-region-django/lugares/?q=Valle+de+Elqui"><i class="bi bi-chevron-right small me-1"></i> Valle de Elqui</a></li>
+                        <li><a href="/turismo-region-django/lugares/?q=Mamalluca"><i class="bi bi-chevron-right small me-1"></i> Obs. Mamalluca</a></li>
+                        <li><a href="/turismo-region-django/lugares/?q=Punta+de+Choros"><i class="bi bi-chevron-right small me-1"></i> Punta de Choros</a></li>
+                        <li><a href="/turismo-region-django/lugares/?q=Faro"><i class="bi bi-chevron-right small me-1"></i> Faro Monumental</a></li>
+                        <li><a href="/turismo-region-django/lugares/?q=Cruz"><i class="bi bi-chevron-right small me-1"></i> Cruz del Milenio</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h6 class="footer-title">Sabores de Origen</h6>
+                    <ul class="footer-links">
+                        <li><a href="/turismo-region-django/gastronomia/?categoria=Cocteler%C3%ADa+Tradicional"><i class="bi bi-chevron-right small me-1"></i> Pisco Sour Elquino</a></li>
+                        <li><a href="/turismo-region-django/gastronomia/?categoria=Platos+Marinos"><i class="bi bi-chevron-right small me-1"></i> Machas Parmesana</a></li>
+                        <li><a href="/turismo-region-django/gastronomia/?categoria=Postres+T%C3%ADpicos"><i class="bi bi-chevron-right small me-1"></i> Papayas al Jugo</a></li>
+                        <li><a href="/turismo-region-django/gastronomia/?categoria=Entradas+y+Aperitivos"><i class="bi bi-chevron-right small me-1"></i> Queso de Cabra</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <h6 class="footer-title">Newsletter de Viajes</h6>
+                    <p class="text-secondary small mb-3">Suscríbete para recibir guías exclusivas, pronósticos de astroturismo y novedades de temporada.</p>
+                    <form onsubmit="event.preventDefault();" class="d-flex gap-2">
+                        <input type="email" class="form-control vitour-input py-2" placeholder="Ingresa tu correo..." required>
+                        <button type="submit" class="btn btn-vitour-booking px-3" style="border-radius: 12px;">
+                            <i class="bi bi-send-fill"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center gap-2 small text-secondary">
+                <span>&copy; 2026 <strong>ViTour Coquimbo</strong>. Todos los derechos reservados.</span>
+                <span>Inspirado en ViTour Travel Booking Template &middot; Diseñado para la IV Región</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 Local JS -->
+    <script src="/turismo-region-django/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

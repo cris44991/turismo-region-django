@@ -1,0 +1,616 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gastronomía Regional | Descubre Coquimbo</title>
+    
+    <!-- Google Fonts Premium (Outfit & Plus Jakarta Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- Bootstrap 5 Local -->
+    <link rel="stylesheet" href="/turismo-region-django/static/vendor/bootstrap/css/bootstrap.min.css">
+    
+    <!-- ViTour + Stitch UI System -->
+    <link rel="stylesheet" href="/turismo-region-django/static/css/styles.css">
+</head>
+<body>
+
+    <!-- VITOUR TOPBAR -->
+    <div class="vitour-topbar d-none d-md-block">
+        <div class="container d-flex justify-content-between align-items-center py-2">
+            <div class="d-flex align-items-center gap-4 text-secondary" style="font-size: 0.82rem;">
+                <span><i class="bi bi-clock-fill text-warning me-1"></i> Atención: 09:00 - 20:00 hrs</span>
+                <span><i class="bi bi-envelope-fill text-warning me-1"></i> contacto@vitourcoquimbo.cl</span>
+                <span><i class="bi bi-geo-alt-fill text-warning me-1"></i> IV Región de Coquimbo, Chile</span>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <span class="badge bg-dark bg-opacity-75 text-light border border-secondary border-opacity-25 px-2 py-1" style="font-size: 0.72rem;">
+                    <i class="bi bi-shield-check text-success me-1"></i> Guía Oficial Sernatur 2026
+                </span>
+                <div class="d-flex gap-2">
+                    <a href="#" class="topbar-social-link"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="topbar-social-link"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="topbar-social-link"><i class="bi bi-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VITOUR NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-stitch sticky-top">
+        <div class="container">
+            <a class="navbar-brand brand-logo-text" href="/turismo-region-django/lugares/">
+                <span class="brand-logo-icon"><i class="bi bi-compass-fill"></i></span>
+                <div class="d-flex flex-column">
+                    <span class="brand-name">ViTour <span class="brand-name-accent">Coquimbo</span></span>
+                    <span class="brand-subtitle">Travel & Tour Booking</span>
+                </div>
+                <span class="brand-badge ms-2">IV Región</span>
+            </a>
+            
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarStitch" aria-controls="navbarStitch" aria-expanded="false" aria-label="Navegación">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarStitch">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-1">
+                    <li class="nav-item">
+                        <a class="nav-link nav-pill-stitch " href="/turismo-region-django/lugares/">
+                            <i class="bi bi-map-fill me-1"></i> Destinos & Tours
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-pill-stitch active-gastro" href="/turismo-region-django/gastronomia/">
+                            <i class="bi bi-cup-hot-fill me-1"></i> Sabores & Gastronomía
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-pill-stitch" href="#beneficios">
+                            <i class="bi bi-stars me-1"></i> Experiencias
+                        </a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center gap-2">
+                    <a href="/turismo-region-django/lugares/" class="btn-vitour-booking">
+                        <span>Explorar Tours</span>
+                        <i class="bi bi-arrow-right-short fs-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="py-4">
+        <div class="container">
+            
+<!-- HERO VITOUR GASTRONOMÍA -->
+<div class="hero-vitour" style="background: radial-gradient(circle at 85% 20%, rgba(234, 88, 12, 0.35) 0%, transparent 45%), radial-gradient(circle at 15% 85%, rgba(255, 87, 34, 0.2) 0%, transparent 45%), linear-gradient(135deg, #130a1c 0%, #220d2e 50%, #0d0714 100%);">
+    <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+            <div class="hero-tag" style="color: #fb923c; background-color: rgba(251, 146, 60, 0.15); border-color: rgba(251, 146, 60, 0.35);">
+                <i class="bi bi-cup-hot-fill"></i> Sabores con Denominación de Origen · IV Región
+            </div>
+            <h1 class="hero-title">
+                Patrimonio & <span class="hero-title-highlight" style="background: linear-gradient(135deg, #fb923c 0%, #fed7aa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Rutas Gastronómicas</span>
+            </h1>
+            <p class="hero-desc">
+                Las mejores recetas y maridajes de la Región de Coquimbo: mariscos frescos del Océano Pacífico, papayas serenenses, queso de cabra artesanal y el tradicional pisco elquino.
+            </p>
+        </div>
+        <div class="col-lg-5">
+            <div class="glass-widget" style="border-color: rgba(251, 146, 60, 0.25);">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="glass-widget-title" style="color: #fed7aa;">
+                        Tradición Culinaria
+                    </span>
+                    <span class="badge bg-warning text-dark small px-2 py-1 fw-bold">Recetario Sernatur</span>
+                </div>
+                <div class="text-white fw-bold fs-6 mb-2">Identidad del Norte Chico</div>
+                <p class="small text-light opacity-75 mb-0" style="font-size: 0.88rem; line-height: 1.6;">
+                    Platos emblemáticos que combinan el patrimonio costero de Coquimbo con la fertilidad y frutos del Valle del Elqui y Limarí.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- VITOUR FLOATING SEARCH CONSOLE GASTRONOMÍA -->
+<div class="vitour-search-wrapper">
+    <div class="vitour-search-card">
+        <form method="get" action="/gastronomia/" class="row g-3 align-items-end">
+            <!-- Campo 1: Buscar Plato o Ingrediente -->
+            <div class="col-lg-4 col-md-6">
+                <div class="search-field-box">
+                    <label class="search-field-label">
+                        <i class="bi bi-search text-warning me-1"></i> Plato o Ingrediente
+                    </label>
+                    <input type="text" name="q" value="" class="form-control vitour-input" placeholder="Ej: Machas, Pisco, Papaya, Cabra...">
+                </div>
+            </div>
+            
+            <!-- Campo 2: Categoría Culinaria -->
+            <div class="col-lg-4 col-md-6">
+                <div class="search-field-box">
+                    <label class="search-field-label">
+                        <i class="bi bi-filter-circle-fill text-danger me-1"></i> Categoría de Plato
+                    </label>
+                    <select name="categoria" class="form-select vitour-select" onchange="this.form.submit()">
+                        <option value="">Todas las Especialidades (5)</option>
+                        
+                            <option value="Bebidas y Licores Típicos" >Bebidas y Licores Típicos</option>
+                        
+                            <option value="Dulces y Postres" >Dulces y Postres</option>
+                        
+                            <option value="Platos Marinos" >Platos Marinos</option>
+                        
+                            <option value="Productos Típicos" >Productos Típicos</option>
+                        
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Campo 3: Botón de Búsqueda -->
+            <div class="col-lg-4 col-md-12">
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-vitour-search flex-grow-1" style="background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);">
+                        <i class="bi bi-search me-1"></i> Buscar Recetas
+                    </button>
+                    
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- VITOUR CATEGORY PILLS BAR -->
+<div class="vitour-category-bar">
+    <a href="/turismo-region-django/gastronomia/" class="filter-pill active-gastro">
+        <i class="bi bi-grid-fill"></i> Todos los Platos (5)
+    </a>
+    
+        <a href="/turismo-region-django/gastronomia/?categoria=Bebidas%20y%20Licores%20T%C3%ADpicos" class="filter-pill ">
+            
+                <i class="bi bi-basket-fill"></i>
+            
+            Bebidas y Licores Típicos
+        </a>
+    
+        <a href="/turismo-region-django/gastronomia/?categoria=Dulces%20y%20Postres" class="filter-pill ">
+            
+                <i class="bi bi-egg-fried"></i>
+            
+            Dulces y Postres
+        </a>
+    
+        <a href="/turismo-region-django/gastronomia/?categoria=Platos%20Marinos" class="filter-pill ">
+            
+                <i class="bi bi-water"></i>
+            
+            Platos Marinos
+        </a>
+    
+        <a href="/turismo-region-django/gastronomia/?categoria=Productos%20T%C3%ADpicos" class="filter-pill ">
+            
+                <i class="bi bi-basket-fill"></i>
+            
+            Productos Típicos
+        </a>
+    
+</div>
+
+<!-- ENCABEZADO DE RESULTADOS -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <span class="text-uppercase small fw-bold text-muted" style="letter-spacing: 1px;">Experiencias Culinarias</span>
+        <h3 class="fw-bold mb-0 text-dark" style="font-family: var(--font-display);">
+            Preparaciones Tradicionales
+        </h3>
+    </div>
+    <span class="badge bg-light text-secondary border px-3 py-2 fw-semibold" style="border-radius: 12px;">
+        5 recetas disponibles
+    </span>
+</div>
+
+<!-- GRILLA DE PLATOS VITOUR -->
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
+    
+    <div class="col">
+        <article class="card-stitch">
+            <div class="card-img-container">
+                <img src="/turismo-region-django/static/img/gastronomia/machas.jpg" alt="Machas a la Parmesana" loading="lazy">
+                
+                <!-- Badge Flotante Izquierdo -->
+                
+                    <span class="badge-featured" style="background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); box-shadow: 0 4px 14px rgba(234, 88, 12, 0.4);">
+                        <i class="bi bi-star-fill"></i> Receta Clásica
+                    </span>
+                
+                
+                <!-- Badge Flotante Derecho -->
+                <span class="badge-floating">
+                    <i class="bi bi-clock-history"></i> 20 minutos
+                </span>
+            </div>
+            
+            <div class="card-body-stitch">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="card-tag card-tag-gastro">Platos Marinos</span>
+                    <span class="text-muted small fw-semibold">
+                        <i class="bi bi-people-fill text-primary"></i> 4 personas
+                    </span>
+                </div>
+                
+                <a href="/turismo-region-django/gastronomia/1/" class="card-title-stitch">
+                    Machas a la Parmesana
+                </a>
+                
+                <p class="card-text-stitch">
+                    Exquisito plato costero con machas gratinadas en mantequilla, vino blanco y queso parmesano.
+                </p>
+                
+                <!-- Meta Info Row ViTour -->
+                <div class="card-meta-row">
+                    <span class="card-meta-item">
+                        <i class="bi bi-speedometer2 text-danger"></i> Dificultad: <strong>Fácil</strong>
+                    </span>
+                    <span class="card-meta-item">
+                        <i class="bi bi-award text-success"></i> 100% Regional
+                    </span>
+                </div>
+                
+                <!-- Footer Card ViTour -->
+                <div class="card-footer-stitch">
+                    <div class="price-box">
+                        <span class="price-label">Rendimiento</span>
+                        <span class="price-tag" style="color: #ea580c;">4 Porciones</span>
+                    </div>
+                    <a href="/turismo-region-django/gastronomia/1/" class="btn-stitch-action btn-action-gastro">
+                        <span>Ver Receta</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="col">
+        <article class="card-stitch">
+            <div class="card-img-container">
+                <img src="/turismo-region-django/static/img/gastronomia/papayas.jpg" alt="Papayas al Jugo Serenenses" loading="lazy">
+                
+                <!-- Badge Flotante Izquierdo -->
+                
+                    <span class="badge-featured" style="background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); box-shadow: 0 4px 14px rgba(234, 88, 12, 0.4);">
+                        <i class="bi bi-star-fill"></i> Receta Clásica
+                    </span>
+                
+                
+                <!-- Badge Flotante Derecho -->
+                <span class="badge-floating">
+                    <i class="bi bi-clock-history"></i> 45 minutos
+                </span>
+            </div>
+            
+            <div class="card-body-stitch">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="card-tag card-tag-gastro">Dulces y Postres</span>
+                    <span class="text-muted small fw-semibold">
+                        <i class="bi bi-people-fill text-primary"></i> 6 personas
+                    </span>
+                </div>
+                
+                <a href="/turismo-region-django/gastronomia/2/" class="card-title-stitch">
+                    Papayas al Jugo Serenenses
+                </a>
+                
+                <p class="card-text-stitch">
+                    El postre tradicional por excelencia del valle y la ciudad colonial.
+                </p>
+                
+                <!-- Meta Info Row ViTour -->
+                <div class="card-meta-row">
+                    <span class="card-meta-item">
+                        <i class="bi bi-speedometer2 text-danger"></i> Dificultad: <strong>Media</strong>
+                    </span>
+                    <span class="card-meta-item">
+                        <i class="bi bi-award text-success"></i> 100% Regional
+                    </span>
+                </div>
+                
+                <!-- Footer Card ViTour -->
+                <div class="card-footer-stitch">
+                    <div class="price-box">
+                        <span class="price-label">Rendimiento</span>
+                        <span class="price-tag" style="color: #ea580c;">6 Porciones</span>
+                    </div>
+                    <a href="/turismo-region-django/gastronomia/2/" class="btn-stitch-action btn-action-gastro">
+                        <span>Ver Receta</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="col">
+        <article class="card-stitch">
+            <div class="card-img-container">
+                <img src="/turismo-region-django/static/img/gastronomia/pisco_sour.jpg" alt="Pisco Sour Elquino Artesanal" loading="lazy">
+                
+                <!-- Badge Flotante Izquierdo -->
+                
+                    <span class="badge-featured" style="background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); box-shadow: 0 4px 14px rgba(234, 88, 12, 0.4);">
+                        <i class="bi bi-star-fill"></i> Receta Clásica
+                    </span>
+                
+                
+                <!-- Badge Flotante Derecho -->
+                <span class="badge-floating">
+                    <i class="bi bi-clock-history"></i> 10 minutos
+                </span>
+            </div>
+            
+            <div class="card-body-stitch">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="card-tag card-tag-gastro">Bebidas y Licores Típicos</span>
+                    <span class="text-muted small fw-semibold">
+                        <i class="bi bi-people-fill text-primary"></i> 2 personas
+                    </span>
+                </div>
+                
+                <a href="/turismo-region-django/gastronomia/3/" class="card-title-stitch">
+                    Pisco Sour Elquino Artesanal
+                </a>
+                
+                <p class="card-text-stitch">
+                    Cóctel insignia preparado con pisco destilado en el corazón del Valle de Elqui.
+                </p>
+                
+                <!-- Meta Info Row ViTour -->
+                <div class="card-meta-row">
+                    <span class="card-meta-item">
+                        <i class="bi bi-speedometer2 text-danger"></i> Dificultad: <strong>Fácil</strong>
+                    </span>
+                    <span class="card-meta-item">
+                        <i class="bi bi-award text-success"></i> 100% Regional
+                    </span>
+                </div>
+                
+                <!-- Footer Card ViTour -->
+                <div class="card-footer-stitch">
+                    <div class="price-box">
+                        <span class="price-label">Rendimiento</span>
+                        <span class="price-tag" style="color: #ea580c;">2 Porciones</span>
+                    </div>
+                    <a href="/turismo-region-django/gastronomia/3/" class="btn-stitch-action btn-action-gastro">
+                        <span>Ver Receta</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="col">
+        <article class="card-stitch">
+            <div class="card-img-container">
+                <img src="/turismo-region-django/static/img/gastronomia/queso_cabra.jpg" alt="Queso de Cabra Tradicional del Elqui" loading="lazy">
+                
+                <!-- Badge Flotante Izquierdo -->
+                
+                    <span class="badge-featured" style="background: rgba(10, 17, 40, 0.85); color: #ffffff; border-color: rgba(255, 255, 255, 0.2);">
+                        <i class="bi bi-check-circle-fill text-warning"></i> Tradición
+                    </span>
+                
+                
+                <!-- Badge Flotante Derecho -->
+                <span class="badge-floating">
+                    <i class="bi bi-clock-history"></i> Listo para servir
+                </span>
+            </div>
+            
+            <div class="card-body-stitch">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="card-tag card-tag-gastro">Productos Típicos</span>
+                    <span class="text-muted small fw-semibold">
+                        <i class="bi bi-people-fill text-primary"></i> 6 personas
+                    </span>
+                </div>
+                
+                <a href="/turismo-region-django/gastronomia/4/" class="card-title-stitch">
+                    Queso de Cabra Tradicional del Elqui
+                </a>
+                
+                <p class="card-text-stitch">
+                    Queso artesanal madurado o fresco, elaborado por crianceros de los valles transversales.
+                </p>
+                
+                <!-- Meta Info Row ViTour -->
+                <div class="card-meta-row">
+                    <span class="card-meta-item">
+                        <i class="bi bi-speedometer2 text-danger"></i> Dificultad: <strong>Fácil</strong>
+                    </span>
+                    <span class="card-meta-item">
+                        <i class="bi bi-award text-success"></i> 100% Regional
+                    </span>
+                </div>
+                
+                <!-- Footer Card ViTour -->
+                <div class="card-footer-stitch">
+                    <div class="price-box">
+                        <span class="price-label">Rendimiento</span>
+                        <span class="price-tag" style="color: #ea580c;">6 Porciones</span>
+                    </div>
+                    <a href="/turismo-region-django/gastronomia/4/" class="btn-stitch-action btn-action-gastro">
+                        <span>Ver Receta</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <div class="col">
+        <article class="card-stitch">
+            <div class="card-img-container">
+                <img src="/turismo-region-django/static/img/gastronomia/caldillo.jpg" alt="Caldillo de Congrio Costero" loading="lazy">
+                
+                <!-- Badge Flotante Izquierdo -->
+                
+                    <span class="badge-featured" style="background: rgba(10, 17, 40, 0.85); color: #ffffff; border-color: rgba(255, 255, 255, 0.2);">
+                        <i class="bi bi-check-circle-fill text-warning"></i> Tradición
+                    </span>
+                
+                
+                <!-- Badge Flotante Derecho -->
+                <span class="badge-floating">
+                    <i class="bi bi-clock-history"></i> 50 minutos
+                </span>
+            </div>
+            
+            <div class="card-body-stitch">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="card-tag card-tag-gastro">Platos Marinos</span>
+                    <span class="text-muted small fw-semibold">
+                        <i class="bi bi-people-fill text-primary"></i> 4 personas
+                    </span>
+                </div>
+                
+                <a href="/turismo-region-django/gastronomia/5/" class="card-title-stitch">
+                    Caldillo de Congrio Costero
+                </a>
+                
+                <p class="card-text-stitch">
+                    Sustancioso y reconfortante caldo marinero inmortalizado en la poesía chilena.
+                </p>
+                
+                <!-- Meta Info Row ViTour -->
+                <div class="card-meta-row">
+                    <span class="card-meta-item">
+                        <i class="bi bi-speedometer2 text-danger"></i> Dificultad: <strong>Media</strong>
+                    </span>
+                    <span class="card-meta-item">
+                        <i class="bi bi-award text-success"></i> 100% Regional
+                    </span>
+                </div>
+                
+                <!-- Footer Card ViTour -->
+                <div class="card-footer-stitch">
+                    <div class="price-box">
+                        <span class="price-label">Rendimiento</span>
+                        <span class="price-tag" style="color: #ea580c;">4 Porciones</span>
+                    </div>
+                    <a href="/turismo-region-django/gastronomia/5/" class="btn-stitch-action btn-action-gastro">
+                        <span>Ver Receta</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+</div>
+
+
+<!-- VITOUR CALL TO ACTION BANNER TO TOURS -->
+<div class="vitour-cta-banner" style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); box-shadow: 0 20px 40px -10px rgba(2, 132, 199, 0.35);">
+    <div class="row align-items-center g-4">
+        <div class="col-lg-8">
+            <span class="badge bg-white text-primary fw-bold text-uppercase px-3 py-1 mb-2" style="font-size: 0.75rem;">
+                ✦ Expediciones & Tours en la Región
+            </span>
+            <h2 class="fw-bold mb-2" style="font-family: var(--font-display);">
+                ¿Deseas visitar los lugares donde nacen estos sabores?
+            </h2>
+            <p class="mb-0 text-white text-opacity-85" style="font-size: 1.02rem;">
+                Conoce las destilerías de Pisco Elqui, los observatorios de Vicuña y las caletas de mariscos en La Serena y Coquimbo.
+            </p>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+            <a href="/turismo-region-django/lugares/" class="btn btn-light btn-lg px-4 fw-bold shadow-lg" style="border-radius: 9999px; color: #0284c7;">
+                <span>Explorar Destinos</span>
+                <i class="bi bi-arrow-right ms-2"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </main>
+
+    <!-- VITOUR RICH FOOTER -->
+    <footer class="footer-stitch mt-auto">
+        <div class="container">
+            <div class="row g-4 mb-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <span class="brand-logo-icon" style="width: 34px; height: 34px; font-size: 1.1rem;">
+                            <i class="bi bi-compass-fill"></i>
+                        </span>
+                        <span class="brand-name text-white fs-5">ViTour <span class="brand-name-accent">Coquimbo</span></span>
+                    </div>
+                    <p class="text-secondary small mb-3" style="line-height: 1.7;">
+                        Plataforma de difusión de experiencias turísticas, astroturismo en observatorios certificados, catas de pisco en el Valle de Elqui y turismo sustentable en la IV Región de Coquimbo.
+                    </p>
+                    <div class="d-flex gap-3 text-secondary fs-5">
+                        <a href="#" class="topbar-social-link"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="topbar-social-link"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="topbar-social-link"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="topbar-social-link"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h6 class="footer-title">Destinos Top</h6>
+                    <ul class="footer-links">
+                        <li><a href="/turismo-region-django/lugares/?q=Valle+de+Elqui"><i class="bi bi-chevron-right small me-1"></i> Valle de Elqui</a></li>
+                        <li><a href="/turismo-region-django/lugares/?q=Mamalluca"><i class="bi bi-chevron-right small me-1"></i> Obs. Mamalluca</a></li>
+                        <li><a href="/turismo-region-django/lugares/?q=Punta+de+Choros"><i class="bi bi-chevron-right small me-1"></i> Punta de Choros</a></li>
+                        <li><a href="/turismo-region-django/lugares/?q=Faro"><i class="bi bi-chevron-right small me-1"></i> Faro Monumental</a></li>
+                        <li><a href="/turismo-region-django/lugares/?q=Cruz"><i class="bi bi-chevron-right small me-1"></i> Cruz del Milenio</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h6 class="footer-title">Sabores de Origen</h6>
+                    <ul class="footer-links">
+                        <li><a href="/turismo-region-django/gastronomia/?categoria=Cocteler%C3%ADa+Tradicional"><i class="bi bi-chevron-right small me-1"></i> Pisco Sour Elquino</a></li>
+                        <li><a href="/turismo-region-django/gastronomia/?categoria=Platos+Marinos"><i class="bi bi-chevron-right small me-1"></i> Machas Parmesana</a></li>
+                        <li><a href="/turismo-region-django/gastronomia/?categoria=Postres+T%C3%ADpicos"><i class="bi bi-chevron-right small me-1"></i> Papayas al Jugo</a></li>
+                        <li><a href="/turismo-region-django/gastronomia/?categoria=Entradas+y+Aperitivos"><i class="bi bi-chevron-right small me-1"></i> Queso de Cabra</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <h6 class="footer-title">Newsletter de Viajes</h6>
+                    <p class="text-secondary small mb-3">Suscríbete para recibir guías exclusivas, pronósticos de astroturismo y novedades de temporada.</p>
+                    <form onsubmit="event.preventDefault();" class="d-flex gap-2">
+                        <input type="email" class="form-control vitour-input py-2" placeholder="Ingresa tu correo..." required>
+                        <button type="submit" class="btn btn-vitour-booking px-3" style="border-radius: 12px;">
+                            <i class="bi bi-send-fill"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center gap-2 small text-secondary">
+                <span>&copy; 2026 <strong>ViTour Coquimbo</strong>. Todos los derechos reservados.</span>
+                <span>Inspirado en ViTour Travel Booking Template &middot; Diseñado para la IV Región</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 Local JS -->
+    <script src="/turismo-region-django/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
