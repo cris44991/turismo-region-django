@@ -112,16 +112,22 @@
 </div>
 
 <!-- ENCABEZADO DE RESULTADOS -->
-<div class="d-flex justify-content-between align-items-center mb-4" data-aos="fade-up">
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4" data-aos="fade-up">
     <div>
         <span class="text-uppercase small fw-bold text-muted" style="letter-spacing: 1px;">Catálogo de Expediciones</span>
         <h3 class="fw-bold mb-0 text-dark" style="font-family: var(--font-display);">
             {% if categoria_activa %}{{ categoria_activa }}{% else %}Tours & Atractivos Disponibles{% endif %}
         </h3>
     </div>
-    <span class="badge bg-light text-secondary border px-3 py-2 fw-semibold" style="border-radius: 12px;">
-        {{ total_mostrados }} tours encontrados
-    </span>
+    <div class="d-flex align-items-center gap-2">
+        <!-- Botón Agregar (Requisito Evaluación Sumativa #2) -->
+        <a href="#" class="btn btn-primary d-inline-flex align-items-center gap-2 px-3 py-2 fw-semibold shadow-sm text-white" style="border-radius: 12px; background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); border: none;">
+            <i class="bi bi-plus-circle-fill"></i> Agregar Lugar
+        </a>
+        <span class="badge bg-light text-secondary border px-3 py-2 fw-semibold" style="border-radius: 12px;">
+            {{ total_mostrados }} tours encontrados
+        </span>
+    </div>
 </div>
 
 <!-- GRILLA DE DESTINOS VITOUR -->
@@ -185,6 +191,16 @@
                     <a href="{% url 'lugares:detalle_lugar' lugar.id %}" class="btn-stitch-action btn-action-turismo">
                         <span>Ver Tour</span>
                         <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Botones CRUD evaluación (Requisito Evaluación Sumativa #2) -->
+                <div class="mt-3 pt-2 border-top border-light-subtle d-flex justify-content-end gap-2">
+                    <a href="#" class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center gap-1" style="font-size: 0.78rem; border-radius: 8px;" title="Modificar destino">
+                        <i class="bi bi-pencil-square text-warning"></i> Modificar
+                    </a>
+                    <a href="#" class="btn btn-sm btn-outline-danger d-inline-flex align-items-center gap-1" style="font-size: 0.78rem; border-radius: 8px;" title="Eliminar destino">
+                        <i class="bi bi-trash-fill"></i> Eliminar
                     </a>
                 </div>
             </div>

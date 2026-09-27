@@ -3581,11 +3581,9 @@ body.logout #content {
     position: absolute !important;
     inset: 0 !important;
     pointer-events: none !important;
-    background: radial-gradient(
-        350px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
-        rgba(234, 88, 12, 0.10),
-        transparent 70%
-    ) !important;
+    background: radial-gradient(350px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
+            rgba(234, 88, 12, 0.10),
+            transparent 70%) !important;
     opacity: var(--spotlight-opacity, 0) !important;
     transition: opacity 0.25s ease !important;
     z-index: 1 !important;
@@ -3650,9 +3648,20 @@ body.logout #content {
 }
 
 @keyframes pulseRing {
-    0% { transform: scale(0.9); opacity: 0.8; }
-    50% { transform: scale(1.1); opacity: 0.3; }
-    100% { transform: scale(0.9); opacity: 0.8; }
+    0% {
+        transform: scale(0.9);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.3;
+    }
+
+    100% {
+        transform: scale(0.9);
+        opacity: 0.8;
+    }
 }
 
 /* Headings */
@@ -3968,35 +3977,27 @@ input[type="submit"]:active,
 }
 
 .kpi-card.kpi-card-cyan::before {
-    background: radial-gradient(
-        280px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
-        rgba(6, 182, 212, 0.16),
-        transparent 70%
-    ) !important;
+    background: radial-gradient(280px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
+            rgba(6, 182, 212, 0.16),
+            transparent 70%) !important;
 }
 
 .kpi-card.kpi-card-orange::before {
-    background: radial-gradient(
-        280px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
-        rgba(234, 88, 12, 0.16),
-        transparent 70%
-    ) !important;
+    background: radial-gradient(280px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
+            rgba(234, 88, 12, 0.16),
+            transparent 70%) !important;
 }
 
 .kpi-card.kpi-card-purple::before {
-    background: radial-gradient(
-        280px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
-        rgba(139, 92, 246, 0.16),
-        transparent 70%
-    ) !important;
+    background: radial-gradient(280px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
+            rgba(139, 92, 246, 0.16),
+            transparent 70%) !important;
 }
 
 .kpi-card.kpi-card-green::before {
-    background: radial-gradient(
-        280px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
-        rgba(16, 185, 129, 0.16),
-        transparent 70%
-    ) !important;
+    background: radial-gradient(280px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
+            rgba(16, 185, 129, 0.16),
+            transparent 70%) !important;
 }
 
 /* Make sure KPI content sits above spotlight */
@@ -4027,6 +4028,7 @@ input[type="submit"]:active,
     0% {
         background-position: 200% 0;
     }
+
     100% {
         background-position: -200% 0;
     }
@@ -4048,9 +4050,11 @@ input[type="submit"]:active,
     0% {
         box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
     }
+
     70% {
         box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
     }
+
     100% {
         box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
     }
@@ -4075,8 +4079,8 @@ input[type="submit"]:active,
    ========================================================================== */
 
 body.vitour-password-done-body #content-title,
-body.vitour-password-done-body #content > h1,
-body.vitour-password-done-body > #container > #content > h1 {
+body.vitour-password-done-body #content>h1,
+body.vitour-password-done-body>#container>#content>h1 {
     display: none !important;
 }
 
@@ -4144,11 +4148,9 @@ body.vitour-password-done-body > #container > #content > h1 {
     position: absolute !important;
     inset: 0 !important;
     pointer-events: none !important;
-    background: radial-gradient(
-        350px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
-        rgba(16, 185, 129, 0.10),
-        transparent 70%
-    ) !important;
+    background: radial-gradient(350px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
+            rgba(16, 185, 129, 0.10),
+            transparent 70%) !important;
     opacity: var(--spotlight-opacity, 0) !important;
     transition: opacity 0.25s ease !important;
     z-index: 1 !important;
@@ -5091,6 +5093,7 @@ body.vitour-dashboard .user-ghost-logout:hover {
     .kpi-metrics-grid {
         grid-template-columns: repeat(2, 1fr) !important;
     }
+
     .dash-columns-wrapper {
         grid-template-columns: 1fr !important;
     }
@@ -5101,10 +5104,12 @@ body.vitour-dashboard .user-ghost-logout:hover {
         flex-direction: column !important;
         align-items: flex-start !important;
     }
+
     .dash-banner-right {
         align-items: flex-start !important;
         width: 100% !important;
     }
+
     .kpi-metrics-grid {
         grid-template-columns: 1fr !important;
     }
@@ -5226,7 +5231,7 @@ body.dashboard,
 body.vitour-dashboard,
 body.dashboard #container,
 body.vitour-dashboard #container {
-    background: 
+    background:
         linear-gradient(rgba(20, 9, 28, 0.75), rgba(11, 4, 16, 0.85)),
         url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=2000&q=80') no-repeat center center fixed !important;
     background-size: cover !important;
@@ -5480,9 +5485,9 @@ div.breadcrumbs a:hover {
 
 /* 3. TARJETA PRINCIPAL DEL FORMULARIO (GLASS CARD) */
 form .module,
-.change-form form > div,
-.change-form #content-main > form > div,
-#password-change-form > div {
+.change-form form>div,
+.change-form #content-main>form>div,
+#password-change-form>div {
     background: rgba(35, 15, 50, 0.45) !important;
     backdrop-filter: blur(28px) saturate(180%) !important;
     -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
@@ -6073,7 +6078,7 @@ a.inline-deletelink:hover {
 }
 
 .search-form input[type="submit"],
-#searchbar + input[type="submit"],
+#searchbar+input[type="submit"],
 #toolbar form input[type="submit"] {
     background: linear-gradient(135deg, #9333ea 0%, #7e22ce 100%) !important;
     border: 1px solid rgba(255, 255, 255, 0.25) !important;
@@ -6088,7 +6093,7 @@ a.inline-deletelink:hover {
 }
 
 .search-form input[type="submit"]:hover,
-#searchbar + input[type="submit"]:hover,
+#searchbar+input[type="submit"]:hover,
 #toolbar form input[type="submit"]:hover {
     background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%) !important;
     transform: translateY(-1px) !important;
@@ -6554,7 +6559,7 @@ body div.breadcrumbs a:hover {
 #changelist-filter li.selected a,
 #changelist-filter .selected,
 #changelist-filter .selected a,
-#changelist-filter li.selected > a,
+#changelist-filter li.selected>a,
 #changelist-filter ul li.selected a {
     background: rgba(147, 51, 234, 0.35) !important;
     background-color: rgba(147, 51, 234, 0.35) !important;
@@ -6709,9 +6714,9 @@ ul.object-tools a:hover,
 }
 
 /* Barra de Búsqueda Translúcida (Search Toolbar) */
-#changelist-search > div,
-#changelist-search form > div,
-#toolbar #changelist-search > div {
+#changelist-search>div,
+#changelist-search form>div,
+#toolbar #changelist-search>div {
     background: rgba(35, 15, 50, 0.55) !important;
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
@@ -6923,7 +6928,7 @@ div.selector .selector-available h2 {
 /* 1. Ruta de navegación / Breadcrumbs */
 div.breadcrumbs,
 nav[aria-label="Breadcrumbs"],
-nav > ol.breadcrumbs,
+nav>ol.breadcrumbs,
 ol.breadcrumbs,
 .breadcrumbs,
 #breadcrumbs {
@@ -6957,15 +6962,15 @@ ol.breadcrumbs li a:hover {
 }
 
 /* Texto final no clickeable (ítem actual del breadcrumb) */
-.breadcrumbs > span:last-child,
+.breadcrumbs>span:last-child,
 .breadcrumbs ol li:last-child,
 div.breadcrumbs {
     color: #f8fafc !important;
 }
 
 /* 2. Títulos principales (H1) en todas las vistas de administración */
-#content > h1,
-#content-main > h1,
+#content>h1,
+#content-main>h1,
 #content h1,
 #content-main h1,
 .change-list #content h1,
@@ -6991,7 +6996,7 @@ body.change-list #header,
 body.change-form #header,
 body.dashboard #header,
 body.vitour-dashboard #header,
-#container > #header {
+#container>#header {
     background: rgba(25, 12, 35, 0.6) !important;
     background-color: rgba(25, 12, 35, 0.6) !important;
     backdrop-filter: blur(24px) saturate(190%) !important;
@@ -7011,7 +7016,7 @@ header#header #site-name a,
 }
 
 /* 2. Alineación y armonía visual de Breadcrumbs (Ruta de navegación) */
-#container > nav,
+#container>nav,
 nav[aria-label="Guía-rastro"],
 nav[aria-label="Breadcrumbs"],
 nav[aria-label*="rastro"],
@@ -7055,8 +7060,8 @@ ol.breadcrumbs li,
 }
 
 /* Separador elegante '›' con tono violeta suave */
-ol.breadcrumbs li + li::before,
-.breadcrumbs li + li::before {
+ol.breadcrumbs li+li::before,
+.breadcrumbs li+li::before {
     content: "›" !important;
     display: inline-block !important;
     margin-right: 8px !important;
@@ -7234,7 +7239,7 @@ body.vitour-split-login .btn-split-orange:active {
 /* 1. Fondo ambiental unificado para la pantalla de logout */
 body.vitour-logout-body,
 body.logout {
-    background: 
+    background:
         linear-gradient(rgba(20, 9, 28, 0.75), rgba(11, 4, 16, 0.85)),
         url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=2000&q=80') no-repeat center center fixed !important;
     background-size: cover !important;
@@ -7675,7 +7680,7 @@ div.titles h2,
 body.change-form .titles h2,
 .change-form .titles h2,
 .change-form h2.subheading,
-#content > h2 {
+#content>h2 {
     color: #e9d5ff !important;
     font-size: 1.15rem !important;
     font-weight: 600 !important;
@@ -7699,9 +7704,9 @@ fieldset h2 {
 .form-row.field-password .readonly,
 .field-password .readonly,
 .field-password .readonly-password-hash,
-.form-row.field-password > div > div:not(.help),
-.form-row.field-password .help + div,
-.field-password .help + div,
+.form-row.field-password>div>div:not(.help),
+.form-row.field-password .help+div,
+.field-password .help+div,
 .change-form div#id_password,
 .field-password div#id_password,
 div#id_password,
@@ -7854,7 +7859,7 @@ div#id_password,
 .form-row.field-date_joined,
 .field-last_login,
 .field-date_joined,
-.form-row:has(.field-last_login):has(.field-date_joined) > div,
+.form-row:has(.field-last_login):has(.field-date_joined)>div,
 fieldset:has(.field-last_login) .field-last_login,
 fieldset:has(.field-date_joined) .field-date_joined,
 .change-form .field-last_login,
@@ -8191,12 +8196,13 @@ body.vitour-dashboard .recent-actions-card,
 
 /* Responsive para pantallas medianas y móviles */
 @media (max-width: 1080px) {
+
     body.dashboard .dash-columns-wrapper,
     body.vitour-dashboard .dash-columns-wrapper,
     .dash-columns-wrapper {
         grid-template-columns: 1fr !important;
     }
-    
+
     .dash-columns-wrapper #content-main,
     .dash-content-main,
     .dash-columns-wrapper #content-related,
@@ -8242,12 +8248,12 @@ body.vitour-dashboard .recent-actions-card,
 }
 
 /* Inlines Header H2 / H3 */
-.inline-group > h2,
-.inline-related > h2,
+.inline-group>h2,
+.inline-related>h2,
 .inline-related h2,
 .inline-related h3,
-.tabular fieldset.module > h2,
-.inline-group fieldset.module > h2 {
+.tabular fieldset.module>h2,
+.inline-group fieldset.module>h2 {
     background: rgba(45, 18, 65, 0.75) !important;
     background-color: rgba(45, 18, 65, 0.75) !important;
     color: #f3e8ff !important;
@@ -8483,7 +8489,7 @@ a.inline-deletelink:hover {
 }
 
 /* Django 5: .changelist-form-container is the main left-side container holding #toolbar and #changelist-form */
-#changelist > .changelist-form-container {
+#changelist>.changelist-form-container {
     order: 1 !important;
     flex: 1 1 0% !important;
     min-width: 0 !important;
@@ -8507,7 +8513,7 @@ a.inline-deletelink:hover {
 }
 
 /* Django 6: inner wrapper div holding toolbar & table form */
-#changelist .changelist-form-container > div:not(#toolbar) {
+#changelist .changelist-form-container>div:not(#toolbar) {
     order: 1 !important;
     flex: 1 1 0% !important;
     min-width: 0 !important;
@@ -8548,7 +8554,7 @@ a.inline-deletelink:hover {
 #changelist-filter,
 search#changelist-filter,
 nav#changelist-filter,
-#changelist > #changelist-filter,
+#changelist>#changelist-filter,
 #changelist .changelist-form-container #changelist-filter,
 #changelist .changelist-form-container search#changelist-filter {
     order: 2 !important;
@@ -8565,7 +8571,7 @@ nav#changelist-filter,
 }
 
 /* When no filters exist, ensure full width for form */
-#changelist:not(.filtered) > .changelist-form-container,
+#changelist:not(.filtered)>.changelist-form-container,
 #changelist:not(.filtered) #changelist-form {
     width: 100% !important;
     max-width: 100% !important;
@@ -8578,28 +8584,28 @@ nav#changelist-filter,
         flex-direction: column !important;
         gap: 20px !important;
     }
-    
-    #changelist > .changelist-form-container,
+
+    #changelist>.changelist-form-container,
     #changelist .changelist-form-container {
         flex-direction: column !important;
         gap: 20px !important;
         width: 100% !important;
         max-width: 100% !important;
     }
-    
-    #changelist > .changelist-form-container,
-    #changelist .changelist-form-container > div,
-    #changelist .changelist-form-container > #changelist-form,
+
+    #changelist>.changelist-form-container,
+    #changelist .changelist-form-container>div,
+    #changelist .changelist-form-container>#changelist-form,
     #changelist #changelist-form {
         max-width: 100% !important;
         width: 100% !important;
         order: 2 !important;
     }
-    
+
     #changelist-filter,
     search#changelist-filter,
     nav#changelist-filter,
-    #changelist > #changelist-filter,
+    #changelist>#changelist-filter,
     #changelist .changelist-form-container #changelist-filter,
     #changelist .changelist-form-container search#changelist-filter {
         width: 100% !important;
@@ -8725,6 +8731,7 @@ ol.breadcrumbs li a:hover,
         opacity: 0;
         transform: scale(0.96);
     }
+
     to {
         opacity: 1;
         transform: scale(1);
@@ -8735,8 +8742,8 @@ body.delete-confirmation #content,
 body.delete-selected-confirmation #content,
 body.delete-confirmation .delete-confirmation,
 body.delete-selected-confirmation .delete-confirmation,
-body.delete-confirmation div.breadcrumbs + div,
-body.delete-selected-confirmation div.breadcrumbs + div {
+body.delete-confirmation div.breadcrumbs+div,
+body.delete-selected-confirmation div.breadcrumbs+div {
     max-width: 780px !important;
     margin: 36px auto !important;
     background: rgba(30, 16, 53, 0.85) !important;
@@ -8754,8 +8761,8 @@ body.delete-selected-confirmation div.breadcrumbs + div {
 }
 
 /* Title */
-body.delete-confirmation #content > h1,
-body.delete-selected-confirmation #content > h1,
+body.delete-confirmation #content>h1,
+body.delete-selected-confirmation #content>h1,
 body.delete-confirmation h1,
 body.delete-selected-confirmation h1 {
     font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif !important;
@@ -8768,8 +8775,8 @@ body.delete-selected-confirmation h1 {
 }
 
 /* Warning Banner */
-body.delete-confirmation #content > p,
-body.delete-selected-confirmation #content > p,
+body.delete-confirmation #content>p,
+body.delete-selected-confirmation #content>p,
 body.delete-confirmation p.warning,
 body.delete-selected-confirmation p.warning {
     background: rgba(239, 68, 68, 0.14) !important;
@@ -8802,8 +8809,8 @@ body.delete-selected-confirmation h2 {
 }
 
 /* Object Lists (Nested Deletable Objects & Summary) */
-body.delete-confirmation #content > ul,
-body.delete-selected-confirmation #content > ul,
+body.delete-confirmation #content>ul,
+body.delete-selected-confirmation #content>ul,
 body.delete-confirmation #deleted-objects,
 body.delete-selected-confirmation #deleted-objects,
 body.delete-confirmation ul,
@@ -8854,8 +8861,8 @@ body.delete-selected-confirmation form {
     margin-top: 24px !important;
 }
 
-body.delete-confirmation form > div,
-body.delete-selected-confirmation form > div {
+body.delete-confirmation form>div,
+body.delete-selected-confirmation form>div {
     display: flex !important;
     align-items: center !important;
     gap: 14px !important;
