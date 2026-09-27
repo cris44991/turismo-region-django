@@ -1450,7 +1450,8 @@ body .object-tools a.addlink::before,
 #changelist {
     width: 100% !important;
     display: flex !important;
-    flex-direction: row-reverse !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
     gap: 24px !important;
     align-items: flex-start !important;
     background: transparent !important;
@@ -8473,10 +8474,30 @@ a.inline-deletelink:hover {
    -------------------------------------------------------------------------- */
 #changelist {
     width: 100% !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    justify-content: space-between !important;
+    gap: 24px !important;
     box-sizing: border-box !important;
 }
 
-#changelist .changelist-form-container {
+/* Django 5: .changelist-form-container is the main left-side container holding #toolbar and #changelist-form */
+#changelist > .changelist-form-container {
+    order: 1 !important;
+    flex: 1 1 0% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    width: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    box-sizing: border-box !important;
+}
+
+/* Django 6: .changelist-form-container wraps both the filter and the content div */
+#changelist .changelist-form-container:has(> search#changelist-filter),
+#changelist .changelist-form-container:has(> #changelist-filter) {
     display: flex !important;
     flex-direction: row !important;
     align-items: flex-start !important;
@@ -8485,26 +8506,57 @@ a.inline-deletelink:hover {
     box-sizing: border-box !important;
 }
 
-/* Main form & table container takes left side */
-#changelist .changelist-form-container > div,
-#changelist .changelist-form-container > #changelist-form,
-#changelist > #changelist-form {
+/* Django 6: inner wrapper div holding toolbar & table form */
+#changelist .changelist-form-container > div:not(#toolbar) {
     order: 1 !important;
-    flex: 1 1 auto !important;
+    flex: 1 1 0% !important;
     min-width: 0 !important;
-    max-width: calc(100% - 304px) !important;
+    max-width: 100% !important;
+    width: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
     box-sizing: border-box !important;
 }
 
-/* Filter panel anchors firmly to the right side */
+/* Search Toolbar inside changelist */
+#changelist #toolbar {
+    order: 1 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Main form & table container takes left side */
+#changelist #changelist-form {
+    order: 2 !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+#changelist #changelist-form .results,
+#changelist #result_list {
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Filter panel anchors firmly to the right side (Django 5 and Django 6) */
 #changelist-filter,
 search#changelist-filter,
-#changelist .changelist-form-container #changelist-filter {
+nav#changelist-filter,
+#changelist > #changelist-filter,
+#changelist .changelist-form-container #changelist-filter,
+#changelist .changelist-form-container search#changelist-filter {
     order: 2 !important;
     flex: 0 0 280px !important;
     width: 280px !important;
     min-width: 280px !important;
     max-width: 280px !important;
+    margin: 0 !important;
     margin-left: auto !important;
     position: sticky !important;
     top: 24px !important;
@@ -8512,16 +8564,33 @@ search#changelist-filter,
     box-sizing: border-box !important;
 }
 
+/* When no filters exist, ensure full width for form */
+#changelist:not(.filtered) > .changelist-form-container,
+#changelist:not(.filtered) #changelist-form {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 1 1 100% !important;
+}
+
 /* Responsive behavior for smaller displays */
 @media (max-width: 1024px) {
-    #changelist .changelist-form-container {
+    #changelist {
         flex-direction: column !important;
         gap: 20px !important;
     }
     
+    #changelist > .changelist-form-container,
+    #changelist .changelist-form-container {
+        flex-direction: column !important;
+        gap: 20px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    #changelist > .changelist-form-container,
     #changelist .changelist-form-container > div,
     #changelist .changelist-form-container > #changelist-form,
-    #changelist > #changelist-form {
+    #changelist #changelist-form {
         max-width: 100% !important;
         width: 100% !important;
         order: 2 !important;
@@ -8529,7 +8598,10 @@ search#changelist-filter,
     
     #changelist-filter,
     search#changelist-filter,
-    #changelist .changelist-form-container #changelist-filter {
+    nav#changelist-filter,
+    #changelist > #changelist-filter,
+    #changelist .changelist-form-container #changelist-filter,
+    #changelist .changelist-form-container search#changelist-filter {
         width: 100% !important;
         max-width: 100% !important;
         min-width: 100% !important;
