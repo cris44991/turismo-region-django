@@ -1,0 +1,89 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static 'css/admin_custom.css' %}?v=5.0">
+{% endblock %}
+
+{% block bodyclass %}vitour-logout-body logout{% endblock %}
+
+{% block nav-global %}{% endblock %}
+{% block content_title %}{% endblock %}
+{% block breadcrumbs %}{% endblock %}
+{% block header %}{% endblock %}
+{% block nav-sidebar %}{% endblock %}
+{% block toggle-nav-sidebar %}{% endblock %}
+
+{% block content %}
+<div class="logout-page-wrapper">
+    <!-- Ambient glowing backgrounds inspired by React Bits -->
+    <div class="logout-ambient-blob blob-1"></div>
+    <div class="logout-ambient-blob blob-2"></div>
+
+    <!-- Spotlight Card (React Bits inspired interaction) -->
+    <div class="spotlight-card logout-card" id="logoutSpotlightCard">
+        <div class="spotlight-overlay"></div>
+        
+        <!-- Brand Tag -->
+        <div class="logout-brand-tag">
+            <span class="brand-icon">🧭</span>
+            <span>ViTour <strong>Coquimbo</strong></span>
+        </div>
+
+        <!-- Security Icon Badge -->
+        <div class="logout-icon-wrap">
+            <div class="logout-icon-badge">
+                <i class="bi bi-shield-check"></i>
+            </div>
+            <span class="logout-pulse-ring"></span>
+        </div>
+
+        <!-- Message -->
+        <h1 class="logout-title">Sesión finalizada</h1>
+        <p class="logout-subtitle">Has cerrado sesión de forma segura en ViTour Coquimbo.</p>
+
+        <!-- Security Badge Pill -->
+        <div class="logout-security-pill">
+            <i class="bi bi-lock-fill"></i>
+            <span>Tus credenciales y datos están protegidos</span>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="logout-action-box">
+            <a href="{% url 'admin:index' %}" class="btn-logout-relogin">
+                <i class="bi bi-box-arrow-in-right"></i>
+                <span>Iniciar sesión de nuevo</span>
+            </a>
+            <a href="{% url 'lugares:lista_lugares' %}" class="btn-logout-home">
+                <i class="bi bi-compass"></i>
+                <span>Explorar Guía Turística</span>
+            </a>
+        </div>
+
+        <!-- Footer Note -->
+        <div class="logout-card-footer">
+            <p>Plataforma Oficial de Administración &middot; Región de Coquimbo</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const card = document.getElementById('logoutSpotlightCard');
+        if (card) {
+            card.addEventListener('mousemove', function(e) {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--spotlight-x', x + 'px');
+                card.style.setProperty('--spotlight-y', y + 'px');
+                card.style.setProperty('--spotlight-opacity', '1');
+            });
+            card.addEventListener('mouseleave', function() {
+                card.style.setProperty('--spotlight-opacity', '0');
+            });
+        }
+    });
+</script>
+{% endblock %}

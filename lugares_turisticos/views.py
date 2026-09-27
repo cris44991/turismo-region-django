@@ -1,17 +1,7 @@
-import json
-import os
 import requests
-from django.shortcuts import render, Http404
-from django.conf import settings
-
-def cargar_datos_lugares():
-    """Función auxiliar para leer el archivo JSON de lugares turísticos."""
-    ruta_archivo = os.path.join(settings.BASE_DIR, 'data', 'lugares.json')
-    try:
-        with open(ruta_archivo, 'r', encoding='utf-8') as archivo:
-            return json.load(archivo)
-    except (FileNotFoundError, json.JSONDecodeError):
-        return []
+from django.shortcuts import render, get_object_or_404
+from django.db.models import Q
+from .models import Lugar, Categoria, Ciudad
 
 def obtener_clima_la_serena():
     """
@@ -63,34 +53,36 @@ def obtener_clima_la_serena():
 
 def lista_lugares(request):
     """
-    Vista 1: Muestra el listado de destinos turísticos con filtros por categoría y buscador.
+    Vista 1: Muestra el catálogo de destinos turísticos consultando vía Django ORM.
     """
-    todos_lugares = cargar_datos_lugares()
     categoria_seleccionada = request.GET.get('categoria', '').strip()
-    busqueda = request.GET.get('q', '').strip().lower()
+    busqueda = request.GET.get('q', '').strip()
 
-    # Obtener todas las categorías únicas para el filtro
-    categorias = sorted(list(set(l['categoria'] for l in todos_lugares)))
+    # Query base optimizada con relaciones
+    lugares_qs = Lugar.objects.select_related('categoria', 'ciudad').all()
+    total_lugares = Lugar.objects.count()
 
-    # Filtrar según los parámetros recibidos
-    lugares_filtrados = todos_lugares
+    # Obtener todas las categorías para el filtro
+    categorias = Categoria.objects.values_list('nombre', flat=True).order_by('nombre')
+
+    # Filtrar por categoría
     if categoria_seleccionada:
-        lugares_filtrados = [l for l in lugares_filtrados if l['categoria'] == categoria_seleccionada]
+        lugares_qs = lugares_qs.filter(categoria__nombre=categoria_seleccionada)
 
+    # Filtrar por término de búsqueda (nombre, descripción, ciudad)
     if busqueda:
-        lugares_filtrados = [
-            l for l in lugares_filtrados
-            if busqueda in l['nombre'].lower() or busqueda in l['descripcion_corta'].lower() or busqueda in l['ciudad'].lower()
-        ]
+        lugares_qs = lugares_qs.filter(
+            Q(nombre__icontains=busqueda) |
+            Q(descripcion_corta__icontains=busqueda) |
+            Q(ciudad__nombre__icontains=busqueda)
+        ).distinct()
 
-    # Cálculos y estadísticas para el contexto
-    total_lugares = len(todos_lugares)
-    total_mostrados = len(lugares_filtrados)
+    total_mostrados = lugares_qs.count()
     clima = obtener_clima_la_serena()
 
     contexto = {
-        'lugares': lugares_filtrados,
-        'categorias': categorias,
+        'lugares': lugares_qs,
+        'categorias': list(categorias),
         'categoria_activa': categoria_seleccionada,
         'busqueda': busqueda,
         'total_lugares': total_lugares,
@@ -102,16 +94,12 @@ def lista_lugares(request):
 
 def detalle_lugar(request, lugar_id):
     """
-    Vista 2: Muestra la ficha detallada de un atractivo turístico específico.
+    Vista 2: Muestra la ficha detallada de un destino turístico desde la base de datos.
     """
-    todos_lugares = cargar_datos_lugares()
-    lugar = next((l for l in todos_lugares if l['id'] == lugar_id), None)
+    lugar = get_object_or_404(Lugar.objects.select_related('categoria', 'ciudad'), pk=lugar_id)
 
-    if not lugar:
-        raise Http404("El destino turístico solicitado no existe.")
-
-    # Lugares recomendados (de la misma categoría u otros)
-    recomendados = [l for l in todos_lugares if l['id'] != lugar_id][:3]
+    # Lugares recomendados
+    recomendados = Lugar.objects.select_related('categoria', 'ciudad').exclude(pk=lugar_id)[:3]
 
     contexto = {
         'lugar': lugar,

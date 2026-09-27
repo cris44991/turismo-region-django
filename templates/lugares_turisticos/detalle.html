@@ -3,9 +3,18 @@
 
 {% block title %}{{ lugar.nombre }} | Descubre Coquimbo{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+    #mapa-lugar {
+        z-index: 1;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 <!-- BREADCRUMB VITOUR -->
-<nav aria-label="breadcrumb" class="mb-4">
+<nav aria-label="breadcrumb" class="mb-4" data-aos="fade-down">
     <ol class="breadcrumb small fw-medium">
         <li class="breadcrumb-item"><a href="{% url 'lugares:lista_lugares' %}" class="text-decoration-none text-muted"><i class="bi bi-house-door-fill me-1"></i> Tours</a></li>
         <li class="breadcrumb-item"><a href="{% url 'lugares:lista_lugares' %}?categoria={{ lugar.categoria|urlencode }}" class="text-decoration-none text-muted">{{ lugar.categoria }}</a></li>
@@ -15,7 +24,7 @@
 
 <div class="row g-4 mb-5">
     <!-- CONTENIDO PRINCIPAL -->
-    <div class="col-lg-8">
+    <div class="col-lg-8" data-aos="fade-up">
         <div class="detail-container-stitch">
             <img src="{% static lugar.imagen %}" alt="{{ lugar.nombre }}" class="detail-cover">
             
@@ -55,11 +64,22 @@
                     </div>
                 </div>
             </div>
+
+            <!-- MAPA INTERACTIVO LEAFLET.JS -->
+            <div class="feature-pill-box mt-4 p-0 overflow-hidden" style="border-radius: var(--radius-md); border: 1px solid var(--border-card);">
+                <div class="p-3 bg-white border-bottom d-flex justify-content-between align-items-center">
+                    <div class="feature-pill-title mb-0" style="color: var(--vitour-secondary);">
+                        <i class="bi bi-geo-alt-fill text-danger me-1"></i> Ubicación Georreferenciada en el Mapa
+                    </div>
+                    <span class="badge bg-light text-dark border small">GPS: {{ lugar.lat }}, {{ lugar.lon }}</span>
+                </div>
+                <div id="mapa-lugar" style="height: 340px; width: 100%;"></div>
+            </div>
         </div>
     </div>
 
     <!-- PANEL LATERAL VITOUR -->
-    <div class="col-lg-4">
+    <div class="col-lg-4" data-aos="fade-left" data-aos-delay="150">
         <!-- Tarjeta de Especificaciones y Booking -->
         <div class="sidebar-panel-stitch">
             <h5 class="fw-bold text-dark border-bottom pb-3 mb-3" style="font-family: var(--font-display);">
@@ -99,7 +119,7 @@
         </div>
 
         <!-- Otros Destinos Recomendados -->
-        <div class="sidebar-panel-stitch">
+        <div class="sidebar-panel-stitch mt-4">
             <h6 class="fw-bold text-dark mb-3" style="font-family: var(--font-display);">
                 <i class="bi bi-stars text-warning me-1"></i> Otros Tours Recomendados
             </h6>
@@ -122,4 +142,47 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var lat = {{ lugar.lat|stringformat:".4f" }};
+        var lon = {{ lugar.lon|stringformat:".4f" }};
+        if (lat && lon) {
+            var map = L.map('mapa-lugar', {
+                scrollWheelZoom: false
+            }).setView([lat, lon], 13);
+
+            // Proveedor de teselas libre CartoDB Voyager (sin bloqueo 403)
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions" target="_blank">CARTO</a>',
+                subdomains: 'abcd',
+                maxZoom: 19
+            }).addTo(map);
+
+            var customIcon = L.divIcon({
+                className: 'custom-leaflet-marker',
+                html: '<div style="background: #ff5722; color: #fff; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(255,87,34,0.5); border: 2px solid #fff;"><i class=\"bi bi-geo-alt-fill fs-6\"></i></div>',
+                iconSize: [34, 34],
+                iconAnchor: [17, 34],
+                popupAnchor: [0, -34]
+            });
+
+            L.marker([lat, lon], { icon: customIcon }).addTo(map)
+                .bindPopup('<div style="font-family: var(--font-main, sans-serif); font-size: 0.9rem; padding: 4px;"><strong>{{ lugar.nombre|escapejs }}</strong><br><span style="color:#64748b;">{{ lugar.ciudad|escapejs }}</span></div>')
+                .openPopup();
+
+            // Re-renderizado para evitar áreas cortadas o grises
+            setTimeout(function() {
+                map.invalidateSize();
+            }, 300);
+
+            window.addEventListener('resize', function() {
+                map.invalidateSize();
+            });
+        }
+    });
+</script>
 {% endblock %}

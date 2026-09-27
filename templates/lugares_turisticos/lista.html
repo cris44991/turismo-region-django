@@ -8,19 +8,19 @@
 <div class="hero-vitour">
     <div class="row align-items-center g-4">
         <div class="col-lg-7">
-            <div class="hero-tag">
+            <div class="hero-tag" data-aos="fade-down" data-aos-delay="100">
                 <i class="bi bi-compass-fill"></i> Explora el Paraíso del Norte Chico · Chile
             </div>
-            <h1 class="hero-title">
+            <h1 class="hero-title" data-aos="fade-down" data-aos-delay="150">
                 Tours, Aventura & <span class="hero-title-highlight">Experiencias</span> en Coquimbo
             </h1>
-            <p class="hero-desc">
+            <p class="hero-desc" data-aos="fade-up" data-aos-delay="200">
                 Desde las costas y caletas de La Serena hasta los cielos astronómicos del Valle de Elqui y la reserva marina de Punta de Choros. Reserva tu próxima expedición inolvidable.
             </p>
         </div>
         
         <!-- WIDGET DE CLIMA EN VIVO (Requests / Open-Meteo) -->
-        <div class="col-lg-5">
+        <div class="col-lg-5" data-aos="fade-left" data-aos-delay="250">
             <div class="glass-widget">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <span class="glass-widget-title">
@@ -43,7 +43,7 @@
 </div>
 
 <!-- VITOUR FLOATING SEARCH CONSOLE (Barra de Búsqueda Flotante) -->
-<div class="vitour-search-wrapper">
+<div class="vitour-search-wrapper" data-aos="fade-up" data-aos-delay="200">
     <div class="vitour-search-card">
         <form method="get" action="{% url 'lugares:lista_lugares' %}" class="row g-3 align-items-end">
             <!-- Campo 1: Destino / Comuna -->
@@ -89,7 +89,7 @@
 </div>
 
 <!-- VITOUR CATEGORY PILLS BAR -->
-<div class="vitour-category-bar">
+<div class="vitour-category-bar" data-aos="fade-up" data-aos-delay="250">
     <a href="{% url 'lugares:lista_lugares' %}" class="filter-pill {% if not categoria_activa %}active-turismo{% endif %}">
         <i class="bi bi-grid-fill"></i> Todos los Destinos ({{ total_lugares }})
     </a>
@@ -112,7 +112,7 @@
 </div>
 
 <!-- ENCABEZADO DE RESULTADOS -->
-<div class="d-flex justify-content-between align-items-center mb-4">
+<div class="d-flex justify-content-between align-items-center mb-4" data-aos="fade-up">
     <div>
         <span class="text-uppercase small fw-bold text-muted" style="letter-spacing: 1px;">Catálogo de Expediciones</span>
         <h3 class="fw-bold mb-0 text-dark" style="font-family: var(--font-display);">
@@ -128,7 +128,7 @@
 {% if lugares %}
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
     {% for lugar in lugares %}
-    <div class="col">
+    <div class="col" data-aos="fade-up" data-aos-delay="{% cycle '50' '150' '250' %}">
         <article class="card-stitch">
             <div class="card-img-container">
                 <img src="{% static lugar.imagen %}" alt="{{ lugar.nombre }}" loading="lazy">
@@ -205,7 +205,7 @@
 
 <!-- SECCIÓN BENEFICIOS VITOUR ("Por qué reservar en la IV Región") -->
 <section id="beneficios" class="my-5 pt-3">
-    <div class="text-center mb-5">
+    <div class="text-center mb-5" data-aos="fade-up">
         <span class="text-uppercase small fw-bold text-danger" style="letter-spacing: 1.5px;">Experiencia Garantizada</span>
         <h2 class="fw-bold text-dark mt-1" style="font-family: var(--font-display); font-size: 2.2rem;">
             ¿Por qué explorar la Región de Coquimbo?
@@ -216,7 +216,7 @@
     </div>
     
     <div class="row g-4">
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
             <div class="benefit-card">
                 <div class="benefit-icon-wrapper">
                     <i class="bi bi-stars"></i>
@@ -227,7 +227,7 @@
                 </p>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
             <div class="benefit-card">
                 <div class="benefit-icon-wrapper">
                     <i class="bi bi-cup-straw"></i>
@@ -238,7 +238,7 @@
                 </p>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="300">
             <div class="benefit-card">
                 <div class="benefit-icon-wrapper">
                     <i class="bi bi-water"></i>
@@ -249,7 +249,7 @@
                 </p>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="400">
             <div class="benefit-card">
                 <div class="benefit-icon-wrapper">
                     <i class="bi bi-sun-fill"></i>
@@ -264,7 +264,7 @@
 </section>
 
 <!-- VITOUR CALL TO ACTION BANNER -->
-<div class="vitour-cta-banner">
+<div class="vitour-cta-banner" data-aos="zoom-in" data-aos-delay="150">
     <div class="row align-items-center g-4">
         <div class="col-lg-8">
             <span class="badge bg-white text-danger fw-bold text-uppercase px-3 py-1 mb-2" style="font-size: 0.75rem;">

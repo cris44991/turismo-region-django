@@ -1,0 +1,169 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static 'css/admin_custom.css' %}?v=5.1">
+{% endblock %}
+
+{% block bodyclass %}vitour-split-login login{% endblock %}
+
+{% block nav-global %}{% endblock %}
+{% block content_title %}{% endblock %}
+{% block breadcrumbs %}{% endblock %}
+{% block header %}{% endblock %}
+{% block nav-sidebar %}{% endblock %}
+{% block toggle-nav-sidebar %}{% endblock %}
+
+{% block content %}
+<div class="split-login-wrapper">
+    <!-- COLUMNA IZQUIERDA: FORMULARIO BLANCO (50% WIDTH) -->
+    <div class="split-login-form-pane login-left-pane">
+        <div class="split-login-form-inner login-form-wrapper">
+            <!-- Brand Header -->
+            <div class="split-login-brand anim-header">
+                <a href="{% url 'lugares:lista_lugares' %}" class="brand-logo-link">
+                    <span class="brand-icon">🧭</span>
+                    <span class="brand-name">ViTour <strong>Coquimbo</strong></span>
+                </a>
+                <h1 class="login-heading">Iniciar Sesión</h1>
+                <p class="login-subheading">
+                    ¿No tienes acceso de administrador? <a href="{% url 'lugares:lista_lugares' %}"
+                        class="subheading-link">Explorar ViTour</a>
+                </p>
+            </div>
+
+            <!-- Error Alerts -->
+            {% if form.errors and not form.non_field_errors %}
+            <div class="split-alert split-alert-danger">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+                <span>Usuario o contraseña incorrectos. Verifica tus datos.</span>
+            </div>
+            {% endif %}
+
+            {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+            <div class="split-alert split-alert-danger">
+                <i class="bi bi-exclamation-circle-fill"></i>
+                <span>{{ error }}</span>
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            {% if user.is_authenticated %}
+            <div class="split-alert split-alert-info">
+                <i class="bi bi-info-circle-fill"></i>
+                <span>Ya has iniciado sesión como <strong>{{ username }}</strong>.</span>
+            </div>
+            {% endif %}
+
+            <!-- Clean Vertical Form -->
+            <form action="{{ app_path }}" method="post" id="login-form" class="split-form anim-form">{% csrf_token %}
+                <div class="form-group-clean">
+                    <label for="id_username" class="form-label-clean">Nombre de Usuario / Correo</label>
+                    <div class="input-wrap-clean">
+                        <i class="bi bi-person input-prefix-icon"></i>
+                        <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username"
+                            maxlength="150" required id="id_username" class="form-input-clean"
+                            placeholder="admin_vitour">
+                    </div>
+                </div>
+
+                <div class="form-group-clean">
+                    <label for="id_password" class="form-label-clean">Contraseña</label>
+                    <div class="input-wrap-clean">
+                        <i class="bi bi-lock input-prefix-icon"></i>
+                        <input type="password" name="password" autocomplete="current-password" required id="id_password"
+                            class="form-input-clean" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;">
+                        <button type="button" class="btn-toggle-password" id="togglePasswordBtn" tabindex="-1"
+                            aria-label="Mostrar u ocultar contraseña" title="Mostrar contraseña">
+                            <i class="bi bi-eye" id="togglePasswordIcon"></i>
+                        </button>
+                    </div>
+                    <input type="hidden" name="next" value="{{ next }}">
+                </div>
+
+                <div class="form-options-row">
+                    <label class="checkbox-remember">
+                        <input type="checkbox" name="remember" checked>
+                        <span>Recordarme</span>
+                    </label>
+                </div>
+
+                <div class="form-submit-clean anim-btn">
+                    <button type="submit" class="btn-split-orange">
+                        <span>Iniciar Sesión</span>
+                    </button>
+                </div>
+
+                <div class="form-bottom-links">
+                    <a href="{% url 'lugares:lista_lugares' %}" class="link-orange-subtle">&larr; Volver a la Guía
+                        Turística</a>
+                </div>
+            </form>
+
+            <!-- Bottom Copyright Note -->
+            <div class="split-footer-copy anim-footer">
+                <p>Copyright &copy; 2026 ViTour Coquimbo &middot; IV Región de Coquimbo, Chile.<br>Plataforma oficial de
+                    gestión turística y astronómica.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- COLUMNA DERECHA: ILUSTRACIÓN NOCTURNA / ASTROTURISMO (50% WIDTH & 100% HEIGHT) -->
+    <div class="split-login-art-pane" style="background-image: url('{% static 'img/admin_login_artwork.jpg' %}');">
+        <div class="art-gradient-vignette"></div>
+        <div class="art-content-card">
+            <div class="art-badge-tag">
+                <i class="bi bi-stars"></i> Región Estrella de Chile
+            </div>
+            <h2 class="art-headline">Cielos Despejados, Sabores & Aventura</h2>
+            <p class="art-description">
+                Administración de rutas astronómicas, observatorios del Valle de Elqui, playas costeras y patrimonio
+                gastronómico regional.
+            </p>
+            <div class="art-pills-row">
+                <span class="art-pill"><i class="bi bi-moon-stars-fill"></i> Astroturismo</span>
+                <span class="art-pill"><i class="bi bi-cup-hot-fill"></i> Gastronomía IV Región</span>
+                <span class="art-pill"><i class="bi bi-compass-fill"></i> Rutas & Destinos</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const passwordInput = document.getElementById('id_password');
+        const toggleBtn = document.getElementById('togglePasswordBtn');
+        const toggleIcon = document.getElementById('togglePasswordIcon');
+
+        if (passwordInput && toggleBtn && toggleIcon) {
+            function updateVisibility() {
+                if (passwordInput.value.length > 0) {
+                    toggleBtn.style.opacity = '1';
+                } else {
+                    toggleBtn.style.opacity = '0.5';
+                }
+            }
+            passwordInput.addEventListener('input', updateVisibility);
+            passwordInput.addEventListener('focus', updateVisibility);
+
+            toggleBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    toggleIcon.className = 'bi bi-eye-slash';
+                    toggleBtn.setAttribute('title', 'Ocultar contraseña');
+                    toggleBtn.setAttribute('aria-label', 'Ocultar contraseña');
+                } else {
+                    passwordInput.type = 'password';
+                    toggleIcon.className = 'bi bi-eye';
+                    toggleBtn.setAttribute('title', 'Mostrar contraseña');
+                    toggleBtn.setAttribute('aria-label', 'Mostrar contraseña');
+                }
+                passwordInput.focus();
+            });
+        }
+    });
+</script>
+{% endblock %}

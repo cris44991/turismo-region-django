@@ -1,0 +1,286 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static log %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static 'css/admin_custom.css' %}?v=5.2">
+{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+{% block bodyclass %}{{ block.super }} dashboard vitour-dashboard{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+{% block nav-sidebar %}{% endblock %}
+{% block toggle-nav-sidebar %}{% endblock %}
+
+{% block content_title %}
+<!-- DASHBOARD HEADER BANNER & KPI METRICS -->
+<div class="vitour-dashboard-header">
+    <div class="dash-banner-card">
+        <div class="dash-banner-left">
+            <div class="dash-tag-row">
+                <span class="dash-tag-pill"><i class="bi bi-compass-fill"></i> ViTour Coquimbo</span>
+                <span class="dash-status-pill"><span class="status-dot-pulse"></span> Sistema Activo &middot; IV Región</span>
+            </div>
+            <h1 class="dash-title">Panel de Gestión Turística & Gastronómica</h1>
+            <p class="dash-subtitle">Control central de destinos, patrimonio gastronómico y accesos — Región de Coquimbo</p>
+        </div>
+        <div class="dash-banner-right">
+            <div class="dash-date-chip">
+                <i class="bi bi-calendar3"></i> {% now "l, j \d\e F \d\e Y" %}
+            </div>
+            <a href="{% url 'lugares:lista_lugares' %}" target="_blank" class="dash-btn-live">
+                <i class="bi bi-box-arrow-up-right"></i> Ver Portal Web
+            </a>
+        </div>
+    </div>
+
+    <!-- TOP KPI METRIC CARDS (INSPIRADO EN MOCKUP SAAS) -->
+    <div class="kpi-metrics-grid">
+        <!-- Card 1: Lugares & Destinos -->
+        <div class="kpi-card kpi-card-cyan">
+            <div class="kpi-header">
+                <div class="kpi-icon-box kpi-icon-cyan">
+                    <i class="bi bi-geo-alt-fill"></i>
+                </div>
+                <span class="kpi-more"><i class="bi bi-three-dots"></i></span>
+            </div>
+            <div class="kpi-body">
+                <span class="kpi-label">🏖️ Lugares & Destinos</span>
+                <div class="kpi-value-row">
+                    <span class="kpi-number">6 Destinos</span>
+                    <span class="kpi-badge kpi-badge-positive"><i class="bi bi-arrow-up-right"></i> 100% Activo</span>
+                </div>
+                <span class="kpi-subtext">Playas, Valles, Rutas & Patrimonio</span>
+            </div>
+        </div>
+
+        <!-- Card 2: Gastronomía Local -->
+        <div class="kpi-card kpi-card-orange">
+            <div class="kpi-header">
+                <div class="kpi-icon-box kpi-icon-orange">
+                    <i class="bi bi-cup-hot-fill"></i>
+                </div>
+                <span class="kpi-more"><i class="bi bi-three-dots"></i></span>
+            </div>
+            <div class="kpi-body">
+                <span class="kpi-label">🍽️ Gastronomía Local</span>
+                <div class="kpi-value-row">
+                    <span class="kpi-number">5 Platos</span>
+                    <span class="kpi-badge kpi-badge-orange"><i class="bi bi-stars"></i> Tradición</span>
+                </div>
+                <span class="kpi-subtext">Caldillos, Machas & Recetas Típicas</span>
+            </div>
+        </div>
+
+        <!-- Card 3: Astroturismo & Observatorios -->
+        <div class="kpi-card kpi-card-purple">
+            <div class="kpi-header">
+                <div class="kpi-icon-box kpi-icon-purple">
+                    <i class="bi bi-moon-stars-fill"></i>
+                </div>
+                <span class="kpi-more"><i class="bi bi-three-dots"></i></span>
+            </div>
+            <div class="kpi-body">
+                <span class="kpi-label">🔭 Astroturismo & Cielos</span>
+                <div class="kpi-value-row">
+                    <span class="kpi-number">Valle del Elqui</span>
+                    <span class="kpi-badge kpi-badge-purple"><i class="bi bi-star-fill"></i> 300+ Días</span>
+                </div>
+                <span class="kpi-subtext">Mamalluca, Tololo & Observatorios</span>
+            </div>
+        </div>
+
+        <!-- Card 4: Operadores & Seguridad -->
+        <div class="kpi-card kpi-card-green">
+            <div class="kpi-header">
+                <div class="kpi-icon-box kpi-icon-green">
+                    <i class="bi bi-shield-check"></i>
+                </div>
+                <span class="kpi-more"><i class="bi bi-three-dots"></i></span>
+            </div>
+            <div class="kpi-body">
+                <span class="kpi-label">👥 Operadores & Staff</span>
+                <div class="kpi-value-row">
+                    <span class="kpi-number">Superuser</span>
+                    <span class="kpi-badge kpi-badge-positive"><i class="bi bi-check-circle-fill"></i> Autorizado</span>
+                </div>
+                <span class="kpi-subtext">Roles, Usuarios & Control de Datos</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="dash-columns-wrapper">
+    <!-- COLUMNA IZQUIERDA: MÓDULOS DE GESTIÓN (~73%) -->
+    <div id="content-main" class="dash-content-main">
+        <div class="modules-section-header">
+            <h2 class="section-title"><i class="bi bi-grid-1x2-fill"></i> Módulos de Gestión de Contenidos</h2>
+            <span class="section-subtitle">Catálogo de entidades y modelos administrables</span>
+        </div>
+
+        {% if app_list %}
+            <div class="app-modules-stack">
+            {% for app in app_list %}
+                <div class="app-card module app-{{ app.app_label }}">
+                    <div class="app-card-header">
+                        <div class="app-title-group">
+                            <span class="app-icon-badge">
+                                {% if app.app_label == 'gastronomia' %}
+                                    <i class="bi bi-cup-hot-fill text-orange"></i>
+                                {% elif app.app_label == 'lugares_turisticos' %}
+                                    <i class="bi bi-geo-alt-fill text-cyan"></i>
+                                {% elif app.app_label == 'auth' %}
+                                    <i class="bi bi-shield-lock-fill text-purple"></i>
+                                {% else %}
+                                    <i class="bi bi-folder-fill text-slate"></i>
+                                {% endif %}
+                            </span>
+                            <div>
+                                <h3 class="app-name">
+                                    <a href="{{ app.app_url }}" class="section" title="{% blocktranslate with name=app.name %}Models in the {{ name }} application{% endblocktranslate %}">{{ app.name }}</a>
+                                </h3>
+                                <span class="app-model-count">{{ app.models|length }} modelo{% if app.models|length != 1 %}s{% endif %} configurado{% if app.models|length != 1 %}s{% endif %}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="app-card-body">
+                        <table class="dash-models-table">
+                            <tbody>
+                            {% for model in app.models %}
+                                <tr class="model-row model-{{ model.object_name|lower }}">
+                                    <td class="model-name-cell">
+                                        <div class="model-info">
+                                            {% if model.admin_url %}
+                                                <a href="{{ model.admin_url }}" class="model-title-link">{{ model.name }}</a>
+                                            {% else %}
+                                                <span class="model-title-plain">{{ model.name }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                    <td class="model-actions-cell">
+                                        <div class="model-pill-actions">
+                                            {% if model.add_url %}
+                                                <a href="{{ model.add_url }}" class="pill-btn pill-btn-add" title="Añadir nuevo registro">
+                                                    <i class="bi bi-plus-lg"></i> Añadir
+                                                </a>
+                                            {% endif %}
+
+                                            {% if model.admin_url %}
+                                                {% if model.view_only %}
+                                                    <a href="{{ model.admin_url }}" class="pill-btn pill-btn-view" title="Ver registros">
+                                                        <i class="bi bi-eye"></i> Ver
+                                                    </a>
+                                                {% else %}
+                                                    <a href="{{ model.admin_url }}" class="pill-btn pill-btn-edit" title="Modificar registros">
+                                                        <i class="bi bi-pencil-square"></i> Modificar
+                                                    </a>
+                                                {% endif %}
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-notice-card">
+                <i class="bi bi-exclamation-circle fs-3 text-muted"></i>
+                <p>{% translate "You don't have permission to view or edit anything." %}</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- COLUMNA DERECHA: FEED DE ACTIVIDAD RECIENTE (~27%) -->
+    <div id="content-related" class="dash-sidebar">
+        <div class="recent-actions-card module" id="recent-actions-module">
+            <div class="recent-header">
+                <div class="recent-title-row">
+                    <span class="recent-icon-badge"><i class="bi bi-activity"></i></span>
+                    <div>
+                        <h3 class="recent-heading">Actividad Reciente</h3>
+                        <span class="recent-sub">Auditoría en tiempo real</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recent-body">
+                {% get_admin_log 10 as admin_log for_user user %}
+                {% if not admin_log %}
+                    <div class="recent-empty">
+                        <i class="bi bi-clock-history"></i>
+                        <p>No hay acciones registradas recientemente.</p>
+                    </div>
+                {% else %}
+                    <ul class="recent-timeline">
+                    {% for entry in admin_log %}
+                        <li class="timeline-item {% if entry.is_addition %}is-addition{% elif entry.is_change %}is-change{% elif entry.is_deletion %}is-deletion{% endif %}">
+                            <div class="timeline-header-row">
+                                <span class="timeline-chip {% if entry.is_addition %}chip-add{% elif entry.is_change %}chip-change{% elif entry.is_deletion %}chip-delete{% endif %}">
+                                    {% if entry.is_addition %}
+                                        <i class="bi bi-plus-lg"></i> Creado
+                                    {% elif entry.is_change %}
+                                        <i class="bi bi-pencil-fill"></i> Editado
+                                    {% elif entry.is_deletion %}
+                                        <i class="bi bi-trash-fill"></i> Eliminado
+                                    {% endif %}
+                                </span>
+                                <span class="timeline-time" title="{{ entry.action_time|date:'d/m/Y H:i:s' }}">
+                                    <i class="bi bi-clock"></i> {{ entry.action_time|timesince }} atrás
+                                </span>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-title-row">
+                                    {% if entry.is_deletion or not entry.get_admin_url %}
+                                        <span class="timeline-object-name">{{ entry.object_repr }}</span>
+                                    {% else %}
+                                        <a href="{{ entry.get_admin_url }}" class="timeline-object-link">{{ entry.object_repr }}</a>
+                                    {% endif %}
+                                </div>
+                                <div class="timeline-meta">
+                                    <span class="timeline-content-type">{{ entry.content_type.name|capfirst }}</span>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block sidebar %}
+{# Intentionally left empty as sidebar is integrated inside dash-columns-wrapper #}
+{% endblock %}
+
+{% block footer %}
+{{ block.super }}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const spotlightCards = document.querySelectorAll('.kpi-card, .app-card, .dash-banner-card');
+        spotlightCards.forEach(function(card) {
+            card.addEventListener('mousemove', function(e) {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--spotlight-x', x + 'px');
+                card.style.setProperty('--spotlight-y', y + 'px');
+                card.style.setProperty('--spotlight-opacity', '1');
+            });
+            card.addEventListener('mouseleave', function() {
+                card.style.setProperty('--spotlight-opacity', '0');
+            });
+        });
+    });
+</script>
+{% endblock %}
+

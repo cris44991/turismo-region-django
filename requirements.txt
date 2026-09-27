@@ -1,4 +1,12 @@
-django>=5.0,<7.0
+# ViTour Coquimbo - Dependencias del Proyecto Django
+# Evaluación Sumativa #2 - Programación Back End (INACAP)
+# Instalación en AWS EC2: pip install -r requirements.txt
+
+Django>=5.0,<7.0
+PyMySQL>=1.1.0
+python-dotenv>=1.0.0
+python-decouple>=3.8
 requests>=2.28.0
 asgiref>=3.7.0
 sqlparse>=0.5.0
+tzdata>=2024.1

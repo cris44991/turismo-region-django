@@ -1,48 +1,38 @@
-import json
-import os
-from django.shortcuts import render, Http404
-from django.conf import settings
-
-def cargar_datos_gastronomia():
-    """Función auxiliar para leer el archivo JSON de preparaciones gastronómicas."""
-    ruta_archivo = os.path.join(settings.BASE_DIR, 'data', 'gastronomia.json')
-    try:
-        with open(ruta_archivo, 'r', encoding='utf-8') as archivo:
-            return json.load(archivo)
-    except (FileNotFoundError, json.JSONDecodeError):
-        return []
+from django.shortcuts import render, get_object_or_404
+from django.db.models import Q
+from .models import Plato, Categoria, Ingrediente, PasoPreparacion
 
 def lista_platos(request):
     """
-    Vista 1: Muestra el catálogo de gastronomía regional con filtros y buscador.
+    Vista 1: Muestra el catálogo de gastronomía regional consultando vía Django ORM.
     """
-    todos_platos = cargar_datos_gastronomia()
     categoria_seleccionada = request.GET.get('categoria', '').strip()
-    busqueda = request.GET.get('q', '').strip().lower()
+    busqueda = request.GET.get('q', '').strip()
 
-    # Categorías únicas
-    categorias = sorted(list(set(p['categoria'] for p in todos_platos)))
+    # Query base optimizada
+    platos_qs = Plato.objects.select_related('categoria').all()
+    total_platos = Plato.objects.count()
 
-    # Filtrar según parámetros
-    platos_filtrados = todos_platos
+    # Obtener todas las categorías para el filtro
+    categorias = Categoria.objects.values_list('nombre', flat=True).order_by('nombre')
+
+    # Filtrar por categoría
     if categoria_seleccionada:
-        platos_filtrados = [p for p in platos_filtrados if p['categoria'] == categoria_seleccionada]
+        platos_qs = platos_qs.filter(categoria__nombre=categoria_seleccionada)
 
+    # Filtrar por término de búsqueda (nombre, descripción, ingredientes)
     if busqueda:
-        platos_filtrados = [
-            p for p in platos_filtrados
-            if busqueda in p['nombre'].lower() 
-            or busqueda in p['descripcion_corta'].lower()
-            or any(busqueda in ing.lower() for ing in p.get('ingredientes', []))
-        ]
+        platos_qs = platos_qs.filter(
+            Q(nombre__icontains=busqueda) |
+            Q(descripcion_corta__icontains=busqueda) |
+            Q(ingredientes__texto__icontains=busqueda)
+        ).distinct()
 
-    # Estadísticas para el contexto
-    total_platos = len(todos_platos)
-    total_mostrados = len(platos_filtrados)
+    total_mostrados = platos_qs.count()
 
     contexto = {
-        'platos': platos_filtrados,
-        'categorias': categorias,
+        'platos': platos_qs,
+        'categorias': list(categorias),
         'categoria_activa': categoria_seleccionada,
         'busqueda': busqueda,
         'total_platos': total_platos,
@@ -53,16 +43,12 @@ def lista_platos(request):
 
 def detalle_plato(request, plato_id):
     """
-    Vista 2: Muestra la ficha y receta completa de una preparación típica.
+    Vista 2: Muestra la ficha y receta completa de una preparación típica desde la base de datos.
     """
-    todos_platos = cargar_datos_gastronomia()
-    plato = next((p for p in todos_platos if p['id'] == plato_id), None)
-
-    if not plato:
-        raise Http404("La preparación gastronómica solicitada no existe.")
+    plato = get_object_or_404(Plato.objects.select_related('categoria').prefetch_related('ingredientes', 'pasos'), pk=plato_id)
 
     # Otros platos recomendados
-    otros_platos = [p for p in todos_platos if p['id'] != plato_id][:3]
+    otros_platos = Plato.objects.select_related('categoria').exclude(pk=plato_id)[:3]
 
     contexto = {
         'plato': plato,
