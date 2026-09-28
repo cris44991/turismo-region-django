@@ -8514,7 +8514,14 @@ body.vitour-dashboard .recent-actions-card,
     overflow: visible !important;
 }
 
-/* Inlines Header H2 / H3 */
+/* Margen interno para el contenedor de tabla (evita que el contenido toque los bordes de la tarjeta) */
+.tabular.inline-related,
+.inline-group .tabular {
+    padding: 0 1.5rem 1.5rem 1.5rem !important;
+    box-sizing: border-box !important;
+}
+
+/* Inlines Header H2 / H3 que cubre el ancho superior completo de la tarjeta */
 .inline-group > h2,
 .inline-related > h2,
 .inline-related h2,
@@ -8530,7 +8537,7 @@ body.vitour-dashboard .recent-actions-card,
     font-weight: 700 !important;
     letter-spacing: -0.01em !important;
     padding: 16px 24px !important;
-    margin: 0 !important;
+    margin: 0 -1.5rem 1.25rem -1.5rem !important;
     box-shadow: none !important;
 }
 
@@ -8541,7 +8548,7 @@ body.vitour-dashboard .recent-actions-card,
     width: 100% !important;
     background: transparent !important;
     background-color: transparent !important;
-    border-collapse: separate !important;
+    border-collapse: collapse !important;
     border-spacing: 0 !important;
     margin: 0 !important;
     border: none !important;
@@ -8571,18 +8578,22 @@ fieldset.module table thead th {
     font-weight: 700 !important;
     letter-spacing: 0.05em !important;
     text-transform: uppercase !important;
-    padding: 14px 20px !important;
+    padding: 12px 14px !important;
     text-shadow: none !important;
     vertical-align: middle !important;
 }
 
-/* Columna original (oculta/sin espacio) */
+/* Columna original (oculta para no distorsionar el cálculo proporcional de columnas) */
 .tabular thead th.original,
 .inline-group thead th.original,
 .tabular tbody td.original,
-.inline-group tbody td.original {
+.inline-group tbody td.original,
+th.original,
+td.original {
+    display: none !important;
     width: 0 !important;
     max-width: 0 !important;
+    min-width: 0 !important;
     padding: 0 !important;
     margin: 0 !important;
     border: none !important;
@@ -8601,15 +8612,18 @@ fieldset.module table thead th {
 .inline-group thead th.column-orden,
 .tabular tbody td.field-orden,
 .inline-group tbody td.field-orden {
-    width: 170px !important;
-    max-width: 180px !important;
+    width: 140px !important;
+    min-width: 140px !important;
+    max-width: 140px !important;
+    text-align: left !important;
     box-sizing: border-box !important;
+    padding: 12px 14px !important;
 }
 
 .tabular td.field-orden input,
 .inline-group td.field-orden input {
-    width: 100% !important;
-    max-width: 120px !important;
+    width: 90px !important;
+    max-width: 100px !important;
     text-align: center !important;
 }
 
@@ -8619,7 +8633,9 @@ fieldset.module table thead th {
 .tabular tbody td.field-texto,
 .inline-group tbody td.field-texto {
     width: auto !important;
+    text-align: left !important;
     box-sizing: border-box !important;
+    padding: 12px 14px !important;
 }
 
 .tabular td.field-texto input[type="text"],
@@ -8637,23 +8653,21 @@ fieldset.module table thead th {
     line-height: 1.5 !important;
 }
 
-/* Columna '¿ELIMINAR?' - Ancho fijo, centrado y separación del borde derecho */
+/* Columna '¿ELIMINAR?' - Ancho fijo controlado (~100px), centrado horizontal y vertical */
 .tabular thead th:last-child,
 .inline-group thead th:last-child,
 .tabular thead th.column-delete,
 .inline-group thead th.column-delete,
 .tabular th.column-delete,
 .inline-group th.column-delete,
-th.column-delete {
-    width: 110px !important;
-    min-width: 110px !important;
-    max-width: 110px !important;
+th.column-delete,
+.tabular th:last-child {
+    width: 100px !important;
+    min-width: 100px !important;
+    max-width: 100px !important;
     text-align: center !important;
     vertical-align: middle !important;
-    padding-top: 14px !important;
-    padding-bottom: 14px !important;
-    padding-left: 0.5rem !important;
-    padding-right: 1.5rem !important;
+    padding: 12px 6px !important;
     box-sizing: border-box !important;
 }
 
@@ -8661,20 +8675,34 @@ th.column-delete {
 .inline-group tbody td.delete,
 .tabular td.delete,
 .inline-group td.delete,
+.tabular tbody tr td:last-child,
+.inline-group tbody tr td:last-child,
 td.delete {
-    width: 110px !important;
-    min-width: 110px !important;
-    max-width: 110px !important;
+    width: 100px !important;
+    min-width: 100px !important;
+    max-width: 100px !important;
     text-align: center !important;
     vertical-align: middle !important;
-    padding-top: 14px !important;
-    padding-bottom: 14px !important;
-    padding-left: 0.5rem !important;
-    padding-right: 1.5rem !important;
+    padding: 12px 6px !important;
     box-sizing: border-box !important;
 }
 
-/* Centrado del Checkbox de eliminación */
+/* Contenedor flexible interno para centrado perfecto */
+.tabular td.delete > div,
+.inline-group td.delete > div,
+td.delete > div {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 38px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    text-align: center !important;
+}
+
+/* Centrado del Checkbox de eliminación nativo (filas existentes) */
 .tabular td.delete input[type="checkbox"],
 .inline-group td.delete input[type="checkbox"],
 td.delete input[type="checkbox"],
@@ -8685,13 +8713,58 @@ td.delete input {
     display: block !important;
     float: none !important;
     vertical-align: middle !important;
-    width: 18px !important;
-    height: 18px !important;
+    position: static !important;
+    width: 20px !important;
+    height: 20px !important;
     cursor: pointer !important;
     accent-color: #ef4444 !important;
     -webkit-accent-color: #ef4444 !important;
-    border-radius: 4px !important;
+    border-radius: 5px !important;
+}
+
+/* Casilla / Botón de eliminación dinámica (.inline-deletelink) para filas nuevas */
+.tabular td.delete a.inline-deletelink,
+.inline-group td.delete a.inline-deletelink,
+.tabular td.delete .inline-deletelink,
+.inline-group td.delete .inline-deletelink,
+td.delete a.inline-deletelink,
+td.delete .inline-deletelink,
+.inline-deletelink,
+a.inline-deletelink {
+    float: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 auto !important;
     position: static !important;
+    vertical-align: middle !important;
+    width: 24px !important;
+    height: 24px !important;
+    min-width: 24px !important;
+    max-width: 24px !important;
+    background-color: rgba(239, 68, 68, 0.18) !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ef4444' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: 14px 14px !important;
+    border: 1px solid rgba(239, 68, 68, 0.45) !important;
+    border-radius: 6px !important;
+    text-indent: -9999px !important;
+    overflow: hidden !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    box-sizing: border-box !important;
+}
+
+.tabular td.delete a.inline-deletelink:hover,
+.inline-group td.delete a.inline-deletelink:hover,
+td.delete a.inline-deletelink:hover,
+.inline-deletelink:hover,
+a.inline-deletelink:hover {
+    background-color: rgba(239, 68, 68, 0.35) !important;
+    border-color: #ef4444 !important;
+    transform: scale(1.1) !important;
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.4) !important;
 }
 
 /* Filas y celdas del cuerpo */
@@ -8831,27 +8904,6 @@ tr.add-row td,
     border-color: #c084fc !important;
     box-shadow: 0 0 0 3px rgba(192, 132, 252, 0.25) !important;
     outline: none !important;
-}
-
-.inline-deletelink,
-a.inline-deletelink {
-    color: #fca5a5 !important;
-    background: rgba(239, 68, 68, 0.15) !important;
-    border: 1px solid rgba(239, 68, 68, 0.3) !important;
-    border-radius: 9999px !important;
-    padding: 4px 12px !important;
-    font-size: 11.5px !important;
-    font-weight: 600 !important;
-    text-decoration: none !important;
-    transition: all 180ms ease !important;
-}
-
-.inline-deletelink:hover,
-a.inline-deletelink:hover {
-    background: rgba(239, 68, 68, 0.35) !important;
-    color: #ffffff !important;
-    border-color: rgba(239, 68, 68, 0.6) !important;
-    transform: translateY(-1px) !important;
 }
 
 /* --------------------------------------------------------------------------
