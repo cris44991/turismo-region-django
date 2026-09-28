@@ -8653,7 +8653,7 @@ body.change-list ul.object-tools,
 .change-list ul.object-tools,
 .change-list #content-main .object-tools {
     position: absolute !important;
-    top: 2px !important;
+    top: 4px !important;
     right: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
@@ -8677,13 +8677,17 @@ body.change-list:has(#changelist-filter) .object-tools,
 }
 
 /* En vistas donde NO existe barra de búsqueda (#toolbar), asegurar un espacio superior
-   de 50px para que el botón no colisione con el inicio de la tarjeta de la tabla */
-#changelist:not(:has(#toolbar)) .changelist-form-container,
-#changelist:not(:has(#toolbar)) #changelist-form,
+   de 48px exclusivamente sobre la tarjeta de la tabla (#changelist-form) para que el botón no colisione,
+   manteniendo el panel de filtros (#changelist-filter) al tope alineado exactamente a la altura del botón */
+#changelist:not(:has(#toolbar)) #changelist-form {
+    margin-top: 48px !important;
+}
+
 #changelist:not(:has(#toolbar)) #changelist-filter,
 #changelist:not(:has(#toolbar)) search#changelist-filter,
-#changelist:not(:has(#toolbar)) nav#changelist-filter {
-    margin-top: 50px !important;
+#changelist:not(:has(#toolbar)) nav#changelist-filter,
+#changelist:not(:has(#toolbar)) .changelist-form-container {
+    margin-top: 0 !important;
 }
 
 @media (max-width: 1024px) {
@@ -8706,11 +8710,7 @@ body.change-list:has(#changelist-filter) .object-tools,
         width: 100% !important;
     }
 
-    #changelist:not(:has(#toolbar)) .changelist-form-container,
-    #changelist:not(:has(#toolbar)) #changelist-form,
-    #changelist:not(:has(#toolbar)) #changelist-filter,
-    #changelist:not(:has(#toolbar)) search#changelist-filter,
-    #changelist:not(:has(#toolbar)) nav#changelist-filter {
+    #changelist:not(:has(#toolbar)) #changelist-form {
         margin-top: 0 !important;
     }
 }
