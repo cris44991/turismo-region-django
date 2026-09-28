@@ -7248,7 +7248,7 @@ body.vitour-split-login .btn-split-orange:active {
    30. VISTA DE CIERRE DE SESIÓN GLASSMORPHISM (/admin/logout/)
    ═══════════════════════════════════════════════════════════════ */
 
-/* 1. Fondo ambiental unificado para la pantalla de logout */
+/* 1. Fondo ambiental unificado para la pantalla de logout con centrado vertical absoluto */
 body.vitour-logout-body,
 body.logout {
     background:
@@ -7257,27 +7257,89 @@ body.logout {
     background-size: cover !important;
     background-attachment: fixed !important;
     min-height: 100vh !important;
+    height: 100vh !important;
     margin: 0 !important;
     padding: 0 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    overflow-x: hidden !important;
 }
 
 body.vitour-logout-body #container,
-body.logout #container,
-body.vitour-logout-body #content,
-body.logout #content,
-body.vitour-logout-body .main,
-body.vitour-logout-body #main,
-body.vitour-logout-body .logout-page-wrapper {
+body.logout #container {
     background: transparent !important;
     background-color: transparent !important;
     border: none !important;
     box-shadow: none !important;
+    width: 100% !important;
+    min-height: 100vh !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 24px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
 }
 
-/* 2. Tarjeta central de cristal translúcido (Frosted Glass) */
+body.vitour-logout-body .main,
+body.vitour-logout-body #main,
+body.logout .main,
+body.logout #main,
+body.vitour-logout-body main.content,
+body.vitour-logout-body #content-start {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    width: 100% !important;
+    min-height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 1 1 auto !important;
+}
+
+body.vitour-logout-body #content,
+body.logout #content {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+body.vitour-logout-body footer,
+body.vitour-logout-body #footer,
+body.logout #footer {
+    display: none !important;
+}
+
+body.vitour-logout-body .logout-page-wrapper,
+.logout-page-wrapper {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 560px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* 2. Tarjeta central de cristal translúcido (Frosted Glass) con mayor presencia visual */
 .spotlight-card.logout-card,
 body.vitour-logout-body .logout-card,
 body.logout .logout-card {
@@ -7287,10 +7349,10 @@ body.logout .logout-card {
     -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
     border: 1px solid rgba(255, 255, 255, 0.12) !important;
     border-top: 1px solid rgba(255, 255, 255, 0.22) !important;
-    border-radius: 24px !important;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.15) !important;
-    padding: 40px 36px 32px 36px !important;
-    max-width: 440px !important;
+    border-radius: 28px !important;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.15) !important;
+    padding: 48px 44px 38px 44px !important;
+    max-width: 540px !important;
     width: 100% !important;
     box-sizing: border-box !important;
     text-align: center !important;
@@ -7302,6 +7364,9 @@ body.logout .logout-card {
     border: 1px solid rgba(255, 255, 255, 0.12) !important;
     color: #e2e8f0 !important;
     border-radius: 20px !important;
+    font-size: 14px !important;
+    padding: 6px 16px !important;
+    margin-bottom: 22px !important;
 }
 
 .logout-brand-tag strong {
@@ -7309,18 +7374,27 @@ body.logout .logout-card {
 }
 
 /* Badge de icono de seguridad */
+.logout-icon-wrap {
+    margin-bottom: 22px !important;
+}
+
 .logout-icon-badge {
     background: rgba(147, 51, 234, 0.20) !important;
     border: 1.5px solid rgba(192, 132, 252, 0.40) !important;
     color: #c084fc !important;
     box-shadow: 0 0 25px rgba(147, 51, 234, 0.35) !important;
+    width: 62px !important;
+    height: 62px !important;
+    font-size: 28px !important;
 }
 
 .logout-pulse-ring {
     background: rgba(147, 51, 234, 0.15) !important;
+    width: 78px !important;
+    height: 78px !important;
 }
 
-/* 3. Título 'Sesión finalizada' con alto contraste y nitidez */
+/* 3. Título 'Sesión finalizada' con alto contraste y mayor tamaño */
 body.vitour-logout-body #container #content h1,
 body.vitour-logout-body #content h1,
 body.vitour-logout-body .logout-title,
@@ -7330,18 +7404,18 @@ body.logout .logout-title,
     -webkit-text-fill-color: #ffffff !important;
     text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6) !important;
     font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif !important;
-    font-size: 24px !important;
+    font-size: 28px !important;
     font-weight: 700 !important;
     letter-spacing: -0.01em !important;
-    margin: 0 0 8px 0 !important;
+    margin: 0 0 10px 0 !important;
 }
 
 /* 4. Textos secundarios y badge de seguridad */
 .logout-subtitle {
     color: #cbd5e1 !important;
-    font-size: 13.5px !important;
-    line-height: 1.55 !important;
-    margin: 0 0 20px 0 !important;
+    font-size: 15px !important;
+    line-height: 1.6 !important;
+    margin: 0 0 22px 0 !important;
 }
 
 .logout-security-pill {
@@ -7349,27 +7423,35 @@ body.logout .logout-title,
     border: 1px solid rgba(52, 211, 153, 0.25) !important;
     color: #a7f3d0 !important;
     border-radius: 9999px !important;
-    padding: 6px 16px !important;
-    font-size: 12px !important;
+    padding: 7px 18px !important;
+    font-size: 13px !important;
     font-weight: 500 !important;
-    margin-bottom: 26px !important;
+    margin-bottom: 28px !important;
 }
 
 .logout-security-pill i {
     color: #34d399 !important;
 }
 
-/* 5. Botones de acción armonizados */
+/* 5. Botones de acción armonizados y más amplios */
+.logout-action-box {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    margin-bottom: 24px !important;
+}
+
 .btn-logout-relogin {
     background: linear-gradient(135deg, #9333ea, #7e22ce) !important;
     background-color: #9333ea !important;
     color: #ffffff !important;
     border: 1px solid rgba(255, 255, 255, 0.25) !important;
-    border-radius: 12px !important;
+    border-radius: 14px !important;
     box-shadow: 0 4px 18px rgba(147, 51, 234, 0.40) !important;
     font-weight: 600 !important;
-    font-size: 14px !important;
-    padding: 12px 20px !important;
+    font-size: 15px !important;
+    padding: 14px 24px !important;
     transition: all 180ms cubic-bezier(0.16, 1, 0.3, 1) !important;
     text-decoration: none !important;
     display: flex !important;
@@ -7394,16 +7476,16 @@ body.logout .logout-title,
     background: rgba(255, 255, 255, 0.05) !important;
     color: #e2e8f0 !important;
     border: 1px solid rgba(255, 255, 255, 0.12) !important;
-    border-radius: 12px !important;
-    font-size: 13px !important;
+    border-radius: 14px !important;
+    font-size: 14px !important;
     font-weight: 500 !important;
-    padding: 10px 18px !important;
+    padding: 12px 22px !important;
     transition: all 150ms ease !important;
     text-decoration: none !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 6px !important;
+    gap: 8px !important;
 }
 
 .btn-logout-home:hover {
@@ -7413,9 +7495,16 @@ body.logout .logout-title,
     transform: translateY(-1px) !important;
 }
 
+.logout-card-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    padding-top: 16px !important;
+    margin-top: 4px !important;
+}
+
 .logout-card-footer p {
     color: #94a3b8 !important;
-    font-size: 11.5px !important;
+    font-size: 12.5px !important;
+    margin: 0 !important;
 }
 
 /* ═══════════════════════════════════════════════════════════════
