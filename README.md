@@ -1,11 +1,4 @@
-# ViTour Coquimbo — Hub Turístico Regional
-> **Evaluación Sumativa #2 — Programación Back End (TI3041)**  
-> **Carrera:** Ingeniería en Informática / Analista Programador — INACAP Sede La Serena  
-> **Docente:** Alex Díaz Araos  
-> **Estudiante:** Christofer Valencia (cris44991)  
-> **Semestre:** Primavera 2026  
 
----
 
 ## 1. Descripción del Proyecto y Contexto
 **ViTour Coquimbo** es una plataforma web desarrollada con **Django Framework** y **MariaDB / MySQL**, orientada a promover y difundir el patrimonio cultural, gastronómico y los destinos turísticos imperdibles de la Región de Coquimbo (La Serena, Coquimbo, Vicuña, Paihuano, Valle del Elqui y Punta de Choros).
