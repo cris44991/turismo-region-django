@@ -2350,27 +2350,29 @@ fieldset:has(.field-date_joined) .field-date_joined {
 }
 
 .datetimeshortcuts {
-    display: block !important;
-    margin-top: 6px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    margin: 0 0 0 6px !important;
 }
 
 .datetimeshortcuts a {
-    display: inline-block !important;
-    background: #f1f5f9 !important;
-    border: 1px solid #cbd5e1 !important;
-    border-radius: 6px !important;
-    padding: 3px 10px !important;
-    font-size: 11px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: rgba(147, 51, 234, 0.22) !important;
+    border: 1px solid rgba(192, 132, 252, 0.35) !important;
+    border-radius: 9999px !important;
+    padding: 6px 14px !important;
+    font-size: 12px !important;
     font-weight: 600 !important;
-    color: #475569 !important;
+    color: #e9d5ff !important;
     text-decoration: none !important;
     transition: all 0.2s ease !important;
-    margin-right: 6px !important;
 }
 
 .datetimeshortcuts a:hover {
-    background: #ea580c !important;
-    border-color: #ea580c !important;
+    background: linear-gradient(135deg, #a855f7, #9333ea) !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
     color: #ffffff !important;
 }
 
@@ -7956,46 +7958,88 @@ div#id_password,
 }
 
 /* 4. Bloques en 'Fechas Importantes' (Último inicio de sesión & Fecha de alta) */
+fieldset:has(.field-last_login):has(.field-date_joined),
+.change-form fieldset:has(.field-last_login):has(.field-date_joined) {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 1.5rem !important;
+    border-bottom: none !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+fieldset:has(.field-last_login):has(.field-date_joined) > h2,
+.change-form fieldset:has(.field-last_login):has(.field-date_joined) > h2 {
+    width: 100% !important;
+    flex: 1 1 100% !important;
+    margin-bottom: 8px !important;
+}
+
 .form-row.field-last_login,
 .form-row.field-date_joined,
 .field-last_login,
 .field-date_joined,
-.form-row:has(.field-last_login):has(.field-date_joined)>div,
-fieldset:has(.field-last_login) .field-last_login,
-fieldset:has(.field-date_joined) .field-date_joined,
 .change-form .field-last_login,
-.change-form .field-date_joined {
+.change-form .field-date_joined,
+fieldset:has(.field-last_login):has(.field-date_joined) > .form-row.field-last_login,
+fieldset:has(.field-last_login):has(.field-date_joined) > .form-row.field-date_joined,
+fieldset:has(.field-last_login):has(.field-date_joined) > div:not(h2) {
+    flex: 1 1 calc(50% - 0.75rem) !important;
+    min-width: 320px !important;
+    margin: 0 !important;
     background: rgba(30, 12, 42, 0.55) !important;
     background-color: rgba(30, 12, 42, 0.55) !important;
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
     border: 1px solid rgba(255, 255, 255, 0.12) !important;
-    border-radius: 14px !important;
-    padding: 20px !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35) !important;
+    border-radius: 16px !important;
+    padding: 22px 24px !important;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4) !important;
     box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
 }
 
-.field-last_login legend,
-.field-date_joined legend,
+.field-last_login > div > label,
+.field-date_joined > div > label,
 .field-last_login label,
 .field-date_joined label {
+    display: block !important;
+    float: none !important;
+    width: 100% !important;
     color: #ffffff !important;
-    font-weight: 600 !important;
-    font-size: 13.5px !important;
+    font-weight: 700 !important;
+    font-size: 14.5px !important;
+    letter-spacing: -0.01em !important;
+    margin-bottom: 16px !important;
+    padding: 0 !important;
 }
 
 .datetime,
 .form-row p.datetime {
     color: #cbd5e1 !important;
-    margin: 8px 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: grid !important;
+    grid-template-columns: auto auto auto !important;
+    align-items: center !important;
+    justify-content: start !important;
+    row-gap: 14px !important;
+    column-gap: 12px !important;
+    width: 100% !important;
+    font-size: 13.5px !important;
+}
+
+.datetime br,
+.form-row p.datetime br {
+    display: none !important;
 }
 
 .datetime label {
-    color: #e2e8f0 !important;
+    color: #cbd5e1 !important;
     font-weight: 500 !important;
     font-size: 13px !important;
-    margin-right: 6px !important;
+    margin-right: 4px !important;
 }
 
 /* Inputs de fecha y hora */
@@ -8004,41 +8048,78 @@ input.vTimeField,
 .datetime input[type="text"] {
     background: rgba(20, 8, 30, 0.75) !important;
     background-color: rgba(20, 8, 30, 0.75) !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    border-radius: 8px !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    border-radius: 10px !important;
     color: #ffffff !important;
-    padding: 6px 12px !important;
-    font-size: 13px !important;
+    padding: 8px 14px !important;
+    font-size: 13.5px !important;
+    box-sizing: border-box !important;
+    width: auto !important;
+    min-width: 130px !important;
+    transition: all 180ms ease !important;
 }
 
 input.vDateField:focus,
-input.vTimeField:focus {
-    border-color: #a855f7 !important;
-    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.25) !important;
+input.vTimeField:focus,
+.datetime input[type="text"]:focus {
+    border-color: #c084fc !important;
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(192, 132, 252, 0.25) !important;
 }
 
-/* Enlaces 'Hoy' y 'Ahora' (datetimeshortcuts) */
+/* Ocultar iconos de calendario/reloj nativos y separadores */
+.datetimeshortcuts span,
+.datetimeshortcuts a[id*="clocklink"],
+.datetimeshortcuts a[id*="calendarlink"],
+.datetimeshortcuts img {
+    display: none !important;
+}
+
+.datetimeshortcuts {
+    display: inline-flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Enlaces 'Hoy' y 'Ahora' (datetimeshortcuts estilo pastilla interactiva) */
+.datetimeshortcuts a:first-child,
 .datetimeshortcuts a,
 .datetime a {
-    color: #c084fc !important;
-    font-size: 12px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: rgba(147, 51, 234, 0.22) !important;
+    background-color: rgba(147, 51, 234, 0.22) !important;
+    color: #e9d5ff !important;
+    border: 1px solid rgba(192, 132, 252, 0.35) !important;
+    border-radius: 9999px !important;
+    padding: 6px 16px !important;
+    font-size: 12.5px !important;
     font-weight: 600 !important;
+    letter-spacing: 0.02em !important;
     text-decoration: none !important;
-    margin-left: 6px !important;
-    padding: 3px 8px !important;
-    background: rgba(147, 51, 234, 0.18) !important;
-    border: 1px solid rgba(168, 85, 247, 0.3) !important;
-    border-radius: 6px !important;
-    transition: all 150ms ease !important;
+    cursor: pointer !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) !important;
+    white-space: nowrap !important;
 }
 
-.datetimeshortcuts a:hover,
 .datetimeshortcuts a:first-child:hover,
-.datetimeshortcuts a:last-child:hover,
+.datetimeshortcuts a:hover,
 .datetime a:hover {
-    background: linear-gradient(135deg, #9333ea, #7e22ce) !important;
+    background: linear-gradient(135deg, #a855f7, #9333ea) !important;
+    background-color: #9333ea !important;
     color: #ffffff !important;
-    border-color: rgba(255, 255, 255, 0.3) !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 14px rgba(147, 51, 234, 0.45) !important;
+}
+
+.datetimeshortcuts a:first-child:active,
+.datetimeshortcuts a:active,
+.datetime a:active {
+    transform: scale(0.97) !important;
 }
 
 /* 5. Botones y Widgets Relacionados (+ verde/naranja transformado en píldora violeta) */
