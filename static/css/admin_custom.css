@@ -8583,20 +8583,21 @@ fieldset.module table thead th {
     vertical-align: middle !important;
 }
 
-/* Columna original (oculta para no distorsionar el cálculo proporcional de columnas) */
+/* Columna original (0px en el grid de la tabla para mantener la estructura de columnas exacta) */
 .tabular thead th.original,
 .inline-group thead th.original,
 .tabular tbody td.original,
 .inline-group tbody td.original,
 th.original,
 td.original {
-    display: none !important;
+    display: table-cell !important;
     width: 0 !important;
     max-width: 0 !important;
     min-width: 0 !important;
     padding: 0 !important;
     margin: 0 !important;
     border: none !important;
+    background: transparent !important;
     overflow: hidden !important;
     line-height: 0 !important;
     font-size: 0 !important;
