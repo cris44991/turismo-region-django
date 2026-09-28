@@ -8104,14 +8104,6 @@ input.vTimeField:focus,
     box-shadow: 0 0 0 3px rgba(192, 132, 252, 0.25) !important;
 }
 
-/* Ocultar iconos de calendario/reloj nativos y separadores */
-.datetimeshortcuts span,
-.datetimeshortcuts a[id*="clocklink"],
-.datetimeshortcuts a[id*="calendarlink"],
-.datetimeshortcuts img {
-    display: none !important;
-}
-
 .datetimeshortcuts,
 .field-last_login .datetimeshortcuts,
 .field-date_joined .datetimeshortcuts {
@@ -8123,12 +8115,12 @@ input.vTimeField:focus,
     font-size: 0 !important;
 }
 
-/* Enlaces 'Hoy' y 'Ahora' (datetimeshortcuts estilo pastilla interactiva) */
-.datetimeshortcuts a:first-child,
-.datetimeshortcuts a,
-.datetime a,
-.field-last_login .datetimeshortcuts a,
-.field-date_joined .datetimeshortcuts a {
+/* Solo el primer enlace ('Hoy' / 'Ahora') recibe el estilo de botón interactivo */
+.field-last_login .datetimeshortcuts a:first-child,
+.field-date_joined .datetimeshortcuts a:first-child,
+.datetime .datetimeshortcuts a:first-child,
+.form-row p.datetime .datetimeshortcuts a:first-child,
+.datetimeshortcuts a:first-child {
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -8149,11 +8141,11 @@ input.vTimeField:focus,
     margin: 0 !important;
 }
 
-.datetimeshortcuts a:first-child:hover,
-.datetimeshortcuts a:hover,
-.datetime a:hover,
-.field-last_login .datetimeshortcuts a:hover,
-.field-date_joined .datetimeshortcuts a:hover {
+.field-last_login .datetimeshortcuts a:first-child:hover,
+.field-date_joined .datetimeshortcuts a:first-child:hover,
+.datetime .datetimeshortcuts a:first-child:hover,
+.form-row p.datetime .datetimeshortcuts a:first-child:hover,
+.datetimeshortcuts a:first-child:hover {
     background: linear-gradient(135deg, #a855f7, #9333ea) !important;
     background-color: #9333ea !important;
     color: #ffffff !important;
@@ -8162,12 +8154,45 @@ input.vTimeField:focus,
     box-shadow: 0 4px 14px rgba(147, 51, 234, 0.45) !important;
 }
 
-.datetimeshortcuts a:first-child:active,
-.datetimeshortcuts a:active,
-.datetime a:active,
-.field-last_login .datetimeshortcuts a:active,
-.field-date_joined .datetimeshortcuts a:active {
+.field-last_login .datetimeshortcuts a:first-child:active,
+.field-date_joined .datetimeshortcuts a:first-child:active,
+.datetime .datetimeshortcuts a:first-child:active,
+.form-row p.datetime .datetimeshortcuts a:first-child:active,
+.datetimeshortcuts a:first-child:active {
     transform: scale(0.97) !important;
+}
+
+/* Ocultar ABSOLUTAMENTE cualquier enlace secundario, icono, imagen o contenedor residual adyacente */
+.datetimeshortcuts a:not(:first-child),
+.datetimeshortcuts .date-icon,
+.datetimeshortcuts .clock-icon,
+.datetimeshortcuts a[id*="clocklink"],
+.datetimeshortcuts a[id*="calendarlink"],
+.datetimeshortcuts img,
+.datetimeshortcuts svg,
+.datetimeshortcuts span,
+.field-last_login .datetimeshortcuts a:not(:first-child),
+.field-date_joined .datetimeshortcuts a:not(:first-child),
+.field-last_login .datetimeshortcuts .date-icon,
+.field-date_joined .datetimeshortcuts .date-icon,
+.field-last_login .datetimeshortcuts .clock-icon,
+.field-date_joined .datetimeshortcuts .clock-icon,
+.field-last_login .datetimeshortcuts a[id*="link"],
+.field-date_joined .datetimeshortcuts a[id*="link"],
+.field-last_login .datetimeshortcuts a:last-child:not(:first-child),
+.field-date_joined .datetimeshortcuts a:last-child:not(:first-child) {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
 }
 
 /* 5. Botones y Widgets Relacionados (+ verde/naranja transformado en píldora violeta) */
