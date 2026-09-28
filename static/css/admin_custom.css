@@ -2007,21 +2007,18 @@ input[type="checkbox"] {
     float: none !important;
 }
 
-fieldset,
-.inline-group {
-    background: #ffffff !important;
-    border: 1px solid #e2e8f0 !important;
-    border-radius: 14px !important;
-    padding: 28px !important;
+fieldset {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
     margin-bottom: 24px !important;
-    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04) !important;
+    box-shadow: none !important;
     box-sizing: border-box !important;
     width: 100% !important;
 }
 
 /* 1. Cabeceras de Secciones Limpias */
-fieldset h2,
-.inline-group h2 {
+fieldset h2 {
     background: transparent !important;
     background-color: transparent !important;
     color: #0f172a !important;
@@ -8479,36 +8476,51 @@ body.vitour-dashboard .recent-actions-card,
 /* --------------------------------------------------------------------------
    1. INLINES & FORM CONTAINERS (.tabular, .inline-group, .inline-related)
    -------------------------------------------------------------------------- */
-.inline-group,
-.inline-related,
-.tabular,
-.stacked,
-.inline-group fieldset.module,
-.inline-related fieldset.module,
-.tabular fieldset.module {
+.inline-group {
     background: rgba(35, 15, 50, 0.45) !important;
     background-color: rgba(35, 15, 50, 0.45) !important;
-    backdrop-filter: blur(24px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+    backdrop-filter: blur(28px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
     border: 1px solid rgba(255, 255, 255, 0.12) !important;
     border-top: 1px solid rgba(255, 255, 255, 0.22) !important;
-    border-radius: 18px !important;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
     color: #ffffff !important;
     overflow: hidden !important;
-    margin-top: 20px !important;
-    margin-bottom: 24px !important;
+    margin-top: 0 !important;
+    margin-bottom: 2rem !important;
     padding: 0 !important;
     box-sizing: border-box !important;
 }
 
+/* Anular estilos duplicados en contenedores internos anidados */
+.inline-group .tabular,
+.inline-group .stacked,
+.inline-group .inline-related,
+.inline-group fieldset.module,
+.inline-group .wrapper,
+.tabular.inline-related,
+.tabular fieldset.module,
+.tabular .wrapper {
+    background: transparent !important;
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+}
+
 /* Inlines Header H2 / H3 */
-.inline-group>h2,
-.inline-related>h2,
+.inline-group > h2,
+.inline-related > h2,
 .inline-related h2,
 .inline-related h3,
-.tabular fieldset.module>h2,
-.inline-group fieldset.module>h2 {
+.tabular fieldset.module > h2,
+.inline-group fieldset.module > h2 {
     background: rgba(45, 18, 65, 0.75) !important;
     background-color: rgba(45, 18, 65, 0.75) !important;
     color: #f3e8ff !important;
@@ -8517,7 +8529,7 @@ body.vitour-dashboard .recent-actions-card,
     font-size: 15px !important;
     font-weight: 700 !important;
     letter-spacing: -0.01em !important;
-    padding: 14px 20px !important;
+    padding: 16px 24px !important;
     margin: 0 !important;
     box-shadow: none !important;
 }
@@ -8525,16 +8537,17 @@ body.vitour-dashboard .recent-actions-card,
 /* Tabular Inline Table */
 .tabular table,
 .inline-group table {
+    table-layout: fixed !important;
+    width: 100% !important;
     background: transparent !important;
     background-color: transparent !important;
     border-collapse: separate !important;
     border-spacing: 0 !important;
-    width: 100% !important;
     margin: 0 !important;
     border: none !important;
 }
 
-/* Eradicate White Block on Table Header (thead th) */
+/* Cabeceras de tabla thead th */
 .tabular thead,
 .tabular thead tr,
 .tabular thead th,
@@ -8558,11 +8571,106 @@ fieldset.module table thead th {
     font-weight: 700 !important;
     letter-spacing: 0.05em !important;
     text-transform: uppercase !important;
-    padding: 12px 16px !important;
+    padding: 14px 20px !important;
     text-shadow: none !important;
+    vertical-align: middle !important;
 }
 
-/* Tabular Rows & Cells */
+/* Columna original (oculta/sin espacio) */
+.tabular thead th.original,
+.inline-group thead th.original,
+.tabular tbody td.original,
+.inline-group tbody td.original {
+    width: 0 !important;
+    max-width: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    overflow: hidden !important;
+    line-height: 0 !important;
+    font-size: 0 !important;
+}
+
+.tabular tbody td.original p,
+.inline-group tbody td.original p {
+    display: none !important;
+}
+
+/* Columna 'Número de paso' (column-orden) */
+.tabular thead th.column-orden,
+.inline-group thead th.column-orden,
+.tabular tbody td.field-orden,
+.inline-group tbody td.field-orden {
+    width: 170px !important;
+    max-width: 180px !important;
+    box-sizing: border-box !important;
+}
+
+.tabular td.field-orden input,
+.inline-group td.field-orden input {
+    width: 100% !important;
+    max-width: 120px !important;
+    text-align: center !important;
+}
+
+/* Columna 'Texto' / 'Instrucción' (column-texto) */
+.tabular thead th.column-texto,
+.inline-group thead th.column-texto,
+.tabular tbody td.field-texto,
+.inline-group tbody td.field-texto {
+    width: auto !important;
+    box-sizing: border-box !important;
+}
+
+.tabular td.field-texto input[type="text"],
+.inline-group td.field-texto input[type="text"] {
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.tabular td.field-texto textarea,
+.inline-group td.field-texto textarea {
+    width: 100% !important;
+    min-height: 85px !important;
+    box-sizing: border-box !important;
+    resize: vertical !important;
+    line-height: 1.5 !important;
+}
+
+/* Columna '¿ELIMINAR?' alineada vertical y horizontalmente */
+.tabular thead th:last-child,
+.inline-group thead th:last-child,
+.tabular thead th.column-delete,
+.inline-group thead th.column-delete,
+.tabular tbody td.delete,
+.inline-group tbody td.delete {
+    width: 120px !important;
+    min-width: 110px !important;
+    max-width: 130px !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+    box-sizing: border-box !important;
+}
+
+.tabular tbody td.delete,
+.inline-group tbody td.delete {
+    padding: 14px !important;
+}
+
+.tabular td.delete input[type="checkbox"],
+.inline-group td.delete input[type="checkbox"] {
+    accent-color: #ef4444 !important;
+    -webkit-accent-color: #ef4444 !important;
+    cursor: pointer !important;
+    width: 18px !important;
+    height: 18px !important;
+    margin: 0 auto !important;
+    display: block !important;
+    vertical-align: middle !important;
+    border-radius: 4px !important;
+}
+
+/* Filas y celdas del cuerpo */
 .tabular tbody tr,
 .inline-group tbody tr {
     background: transparent !important;
@@ -8584,7 +8692,7 @@ fieldset.module table thead th {
     border-left: none !important;
     border-right: none !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
-    padding: 12px 14px !important;
+    padding: 14px 20px !important;
     vertical-align: middle !important;
 }
 
@@ -8595,7 +8703,7 @@ fieldset.module table thead th {
     background-color: rgba(255, 255, 255, 0.03) !important;
 }
 
-/* Eradicate White Block on "Añadir otro..." Row (tr.add-row td) */
+/* Fila 'Agregar adicional' (tr.add-row td) */
 .tabular tr.add-row,
 .tabular tr.add-row td,
 .inline-group tr.add-row,
@@ -8607,31 +8715,32 @@ tr.add-row td,
 .inline-group .add-row,
 .tabular .add-row,
 .inline-related .add-row {
-    background: rgba(35, 15, 50, 0.40) !important;
-    background-color: rgba(35, 15, 50, 0.40) !important;
+    background: rgba(30, 12, 45, 0.5) !important;
+    background-color: rgba(30, 12, 45, 0.5) !important;
     border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
     border-bottom: none !important;
     border-left: none !important;
     border-right: none !important;
-    padding: 14px 20px !important;
+    padding: 16px 24px !important;
     box-sizing: border-box !important;
 }
 
-/* "Añadir otro..." Button Styling */
+/* Botón 'Agregar adicional' con estilo de pastilla interactiva morada */
 .tabular tr.add-row td a,
 .inline-group tr.add-row td a,
 .inline-group .add-row a,
 .tabular .add-row a,
 .inline-related .add-row a,
 .add-row a {
-    background: rgba(168, 85, 247, 0.22) !important;
-    background-color: rgba(168, 85, 247, 0.22) !important;
-    border: 1px solid rgba(192, 132, 252, 0.45) !important;
+    background: rgba(147, 51, 234, 0.22) !important;
+    background-color: rgba(147, 51, 234, 0.22) !important;
+    border: 1px solid rgba(192, 132, 252, 0.4) !important;
     color: #f3e8ff !important;
     border-radius: 9999px !important;
-    padding: 7px 20px !important;
-    font-size: 12.5px !important;
+    padding: 8px 22px !important;
+    font-size: 13px !important;
     font-weight: 600 !important;
+    letter-spacing: 0.01em !important;
     text-decoration: none !important;
     display: inline-flex !important;
     align-items: center !important;
@@ -8647,15 +8756,21 @@ tr.add-row td,
 .tabular .add-row a:hover,
 .inline-related .add-row a:hover,
 .add-row a:hover {
-    background: rgba(168, 85, 247, 0.45) !important;
-    background-color: rgba(168, 85, 247, 0.45) !important;
-    border-color: rgba(216, 180, 254, 0.8) !important;
+    background: linear-gradient(135deg, #a855f7, #9333ea) !important;
+    background-color: #9333ea !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
     color: #ffffff !important;
     transform: translateY(-2px) !important;
-    box-shadow: 0 6px 22px rgba(168, 85, 247, 0.45) !important;
+    box-shadow: 0 6px 20px rgba(147, 51, 234, 0.5) !important;
 }
 
-/* Inlines Form Controls */
+.tabular tr.add-row td a:active,
+.inline-group tr.add-row td a:active,
+.add-row a:active {
+    transform: scale(0.98) !important;
+}
+
+/* Controles de formulario en Inlines (inputs y textareas) */
 .inline-group input[type="text"],
 .inline-group input[type="number"],
 .inline-group input[type="password"],
@@ -8673,10 +8788,10 @@ tr.add-row td,
     background: rgba(20, 8, 30, 0.85) !important;
     background-color: rgba(20, 8, 30, 0.85) !important;
     border: 1px solid rgba(255, 255, 255, 0.18) !important;
-    border-radius: 8px !important;
+    border-radius: 10px !important;
     color: #ffffff !important;
-    padding: 8px 12px !important;
-    font-size: 13px !important;
+    padding: 0.6rem 0.85rem !important;
+    font-size: 13.5px !important;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35) !important;
     transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
 }
@@ -8689,24 +8804,9 @@ tr.add-row td,
 .tabular select:focus {
     background: rgba(28, 12, 42, 0.95) !important;
     background-color: rgba(28, 12, 42, 0.95) !important;
-    border-color: #a855f7 !important;
-    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.35) !important;
+    border-color: #c084fc !important;
+    box-shadow: 0 0 0 3px rgba(192, 132, 252, 0.25) !important;
     outline: none !important;
-}
-
-/* Inlines Delete Checkbox & Links */
-.tabular td.delete,
-.inline-group td.delete {
-    text-align: center !important;
-    vertical-align: middle !important;
-}
-
-.tabular td.delete input[type="checkbox"],
-.inline-group td.delete input[type="checkbox"] {
-    accent-color: #ef4444 !important;
-    cursor: pointer !important;
-    width: 16px !important;
-    height: 16px !important;
 }
 
 .inline-deletelink,
