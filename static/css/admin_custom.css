@@ -8632,27 +8632,28 @@ nav#changelist-filter,
 }
 
 /* --------------------------------------------------------------------------
-   2.1. OBJECT TOOLS (BOTÓN "+ AÑADIR ...") ALINEADO CON H1 Y PANEL DE FILTROS
+   2.1. OBJECT TOOLS (BOTÓN "+ AÑADIR ...") ALINEADO CON BARRA SUPERIOR / TABLA
    -------------------------------------------------------------------------- */
-.change-list #content {
-    position: relative !important;
-}
-
 .change-list #content > h1,
 .change-list #content h1,
 .change-list #content-main > h1 {
-    margin: 0 0 24px 0 !important;
-    padding-right: 240px !important;
+    margin: 0 0 20px 0 !important;
+    padding-right: 0 !important;
 }
 
+.change-list #content-main {
+    position: relative !important;
+    width: 100% !important;
+}
+
+/* En vistas de lista, posicionar .object-tools a nivel de la barra de búsqueda / tope de tabla */
 body.change-list .object-tools,
 body.change-list ul.object-tools,
 .change-list .object-tools,
 .change-list ul.object-tools,
-.change-list #content .object-tools,
 .change-list #content-main .object-tools {
     position: absolute !important;
-    top: -2px !important;
+    top: 2px !important;
     right: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
@@ -8662,6 +8663,56 @@ body.change-list ul.object-tools,
     list-style: none !important;
     z-index: 25 !important;
     float: none !important;
+}
+
+/* En vistas con panel lateral de filtros (#changelist.filtered o #changelist-filter),
+   la tabla termina antes de la columna de filtros (280px ancho + 24px gap = 304px).
+   El botón de añadir se ancla limpiamente a la esquina superior derecha del contenedor de la tabla. */
+#content-main:has(#changelist.filtered) .object-tools,
+#content-main:has(#changelist-filter) .object-tools,
+body.change-list:has(#changelist.filtered) .object-tools,
+body.change-list:has(#changelist-filter) .object-tools,
+.change-list:has(#changelist-filter) #content-main .object-tools {
+    right: 304px !important;
+}
+
+/* En vistas donde NO existe barra de búsqueda (#toolbar), asegurar un espacio superior
+   de 50px para que el botón no colisione con el inicio de la tarjeta de la tabla */
+#changelist:not(:has(#toolbar)) .changelist-form-container,
+#changelist:not(:has(#toolbar)) #changelist-form,
+#changelist:not(:has(#toolbar)) #changelist-filter,
+#changelist:not(:has(#toolbar)) search#changelist-filter,
+#changelist:not(:has(#toolbar)) nav#changelist-filter {
+    margin-top: 50px !important;
+}
+
+@media (max-width: 1024px) {
+    body.change-list .object-tools,
+    body.change-list ul.object-tools,
+    .change-list .object-tools,
+    .change-list ul.object-tools,
+    .change-list #content .object-tools,
+    .change-list #content-main .object-tools,
+    #content-main:has(#changelist.filtered) .object-tools,
+    #content-main:has(#changelist-filter) .object-tools,
+    body.change-list:has(#changelist.filtered) .object-tools,
+    body.change-list:has(#changelist-filter) .object-tools {
+        position: static !important;
+        right: auto !important;
+        top: auto !important;
+        display: flex !important;
+        justify-content: flex-end !important;
+        margin: 0 0 16px 0 !important;
+        width: 100% !important;
+    }
+
+    #changelist:not(:has(#toolbar)) .changelist-form-container,
+    #changelist:not(:has(#toolbar)) #changelist-form,
+    #changelist:not(:has(#toolbar)) #changelist-filter,
+    #changelist:not(:has(#toolbar)) search#changelist-filter,
+    #changelist:not(:has(#toolbar)) nav#changelist-filter {
+        margin-top: 0 !important;
+    }
 }
 
 @media (max-width: 768px) {
@@ -8680,6 +8731,7 @@ body.change-list ul.object-tools,
         position: static !important;
         justify-content: flex-start !important;
         margin-bottom: 16px !important;
+        width: 100% !important;
     }
 }
 
