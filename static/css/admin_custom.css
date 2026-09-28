@@ -8620,6 +8620,58 @@ nav#changelist-filter,
 }
 
 /* --------------------------------------------------------------------------
+   2.1. OBJECT TOOLS (BOTÓN "+ AÑADIR ...") ALINEADO CON H1 Y PANEL DE FILTROS
+   -------------------------------------------------------------------------- */
+.change-list #content {
+    position: relative !important;
+}
+
+.change-list #content > h1,
+.change-list #content h1,
+.change-list #content-main > h1 {
+    margin: 0 0 24px 0 !important;
+    padding-right: 240px !important;
+}
+
+body.change-list .object-tools,
+body.change-list ul.object-tools,
+.change-list .object-tools,
+.change-list ul.object-tools,
+.change-list #content .object-tools,
+.change-list #content-main .object-tools {
+    position: absolute !important;
+    top: -2px !important;
+    right: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    list-style: none !important;
+    z-index: 25 !important;
+    float: none !important;
+}
+
+@media (max-width: 768px) {
+    .change-list #content > h1,
+    .change-list #content h1 {
+        padding-right: 0 !important;
+        margin-bottom: 14px !important;
+    }
+
+    body.change-list .object-tools,
+    body.change-list ul.object-tools,
+    .change-list .object-tools,
+    .change-list ul.object-tools,
+    .change-list #content .object-tools,
+    .change-list #content-main .object-tools {
+        position: static !important;
+        justify-content: flex-start !important;
+        margin-bottom: 16px !important;
+    }
+}
+
+/* --------------------------------------------------------------------------
    3. FILTER LINKS HOVER STATES & INTERACTIVE CONTRAST REFINEMENT
    -------------------------------------------------------------------------- */
 #changelist-filter ul {
