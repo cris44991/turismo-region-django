@@ -8637,37 +8637,61 @@ fieldset.module table thead th {
     line-height: 1.5 !important;
 }
 
-/* Columna '¿ELIMINAR?' alineada vertical y horizontalmente */
+/* Columna '¿ELIMINAR?' - Ancho fijo, centrado y separación del borde derecho */
 .tabular thead th:last-child,
 .inline-group thead th:last-child,
 .tabular thead th.column-delete,
 .inline-group thead th.column-delete,
-.tabular tbody td.delete,
-.inline-group tbody td.delete {
-    width: 120px !important;
+.tabular th.column-delete,
+.inline-group th.column-delete,
+th.column-delete {
+    width: 110px !important;
     min-width: 110px !important;
-    max-width: 130px !important;
+    max-width: 110px !important;
     text-align: center !important;
     vertical-align: middle !important;
+    padding-top: 14px !important;
+    padding-bottom: 14px !important;
+    padding-left: 0.5rem !important;
+    padding-right: 1.5rem !important;
     box-sizing: border-box !important;
 }
 
 .tabular tbody td.delete,
-.inline-group tbody td.delete {
-    padding: 14px !important;
+.inline-group tbody td.delete,
+.tabular td.delete,
+.inline-group td.delete,
+td.delete {
+    width: 110px !important;
+    min-width: 110px !important;
+    max-width: 110px !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+    padding-top: 14px !important;
+    padding-bottom: 14px !important;
+    padding-left: 0.5rem !important;
+    padding-right: 1.5rem !important;
+    box-sizing: border-box !important;
 }
 
+/* Centrado del Checkbox de eliminación */
 .tabular td.delete input[type="checkbox"],
-.inline-group td.delete input[type="checkbox"] {
-    accent-color: #ef4444 !important;
-    -webkit-accent-color: #ef4444 !important;
-    cursor: pointer !important;
-    width: 18px !important;
-    height: 18px !important;
+.inline-group td.delete input[type="checkbox"],
+td.delete input[type="checkbox"],
+.tabular td.delete input,
+.inline-group td.delete input,
+td.delete input {
     margin: 0 auto !important;
     display: block !important;
+    float: none !important;
     vertical-align: middle !important;
+    width: 18px !important;
+    height: 18px !important;
+    cursor: pointer !important;
+    accent-color: #ef4444 !important;
+    -webkit-accent-color: #ef4444 !important;
     border-radius: 4px !important;
+    position: static !important;
 }
 
 /* Filas y celdas del cuerpo */
